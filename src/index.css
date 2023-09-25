@@ -2,6 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
+.embla {
+  --slide-spacing: 1rem;
+  --slide-size: 100%;
+  --slide-height: 25rem;
+  padding: 0.65rem;
+  margin-block: 2rem;
+  
+}
+.embla__viewport {
+  overflow: hidden;
+}
+.embla__container {
+  backface-visibility: hidden;
+  display: flex;
+  touch-action: pan-y;
+  margin-left: calc(var(--slide-spacing) * -1);
+}
+.embla__slide {
+  flex: 0 0 var(--slide-size);
+  min-width: 0;
+  padding-left: var(--slide-spacing);
+  position: relative;
+}
+.embla__slide__img {
+  display: block;
+  height: var(--slide-height);
+  width: 100%;
+  object-fit: cover;
+  object-position: 0 0;
+  border-radius: 0.86rem;
+}
+
 @media (min-width: 650px) {
   /* Styling scroll bars */
   *::-webkit-scrollbar {
@@ -24,6 +56,18 @@
   *::-webkit-scrollbar-thumb:hover {
     background: #666;
     /* Color of the thumb on hover */
+  }
+
+  .embla {
+    --slide-spacing: 2rem;
+    --slide-size: 100%;
+    --slide-height: 25rem;
+    padding: 2rem;
+    margin-block: 2rem;
+    
+  }
+  .embla__slide__img{
+    border-radius: 2rem;
   }
 }
 

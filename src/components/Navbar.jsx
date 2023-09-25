@@ -36,7 +36,7 @@ function classNames(...classes) {
 const Navbar = ({ children }) => {
   return (
     <>
-      <div className="min-h-full">
+      <div className="min-h-full bg-white">
         <Disclosure as="nav" className="bg-gray-800">
           {({ open }) => (
             <>
