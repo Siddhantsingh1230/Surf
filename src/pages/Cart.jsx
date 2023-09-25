@@ -27,6 +27,30 @@ const products = [
     imageAlt:
       "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
   },
+  {
+    id: 3,
+    name: "Medium Stuff Satchel",
+    href: "#",
+    color: "Blue",
+    price: "$32.00",
+    quantity: 1,
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
+    imageAlt:
+      "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
+  },
+  {
+    id: 4,
+    name: "Medium Stuff Satchel",
+    href: "#",
+    color: "Blue",
+    price: "$32.00",
+    quantity: 1,
+    imageSrc:
+      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
+    imageAlt:
+      "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
+  },
   // More products...
 ];
 const Cart = () => {
@@ -58,7 +82,7 @@ const Cart = () => {
         </div>
         <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
           {/* Sub total */}
-          <div className="mt-6 h-full rounded-lg border z-10 mb-4 bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+          <div className="mt-6 h-full sm:sticky sm:top-9 rounded-lg border z-10 mb-4 bg-white p-6 shadow-md md:mt-0 md:w-1/3">
             <div className="mb-2 flex justify-between">
               <p className="text-gray-700">Subtotal</p>
               <p className="text-gray-700">$129.99</p>
@@ -148,7 +172,7 @@ const Cart = () => {
         </div>
         <Link
           to="/"
-          className="ml-5 sm:ml-32 my-8 font-medium flex items-center "
+          className="sm:sticky sm:bottom-6 ml-5 sm:ml-32 my-8 font-medium flex items-center "
         >
           <img src={arrow} alt="" className="w-8 h-8 rotate-180" />
           &nbsp; <p>Continue shopping</p>
