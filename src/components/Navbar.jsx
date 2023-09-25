@@ -18,11 +18,11 @@ const user = {
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
 const navigation = [
-  { name: "Surf Store", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-  { name: "Reports", href: "#", current: false },
+  { name: "Home", href: "#", current: true },
+  { name: "About", href: "#", current: false },
+  { name: "Products", href: "#", current: false },
+  { name: "Category", href: "#", current: false },
+  { name: "Deals", href: "#", current: false },
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#" },
@@ -142,7 +142,7 @@ const Navbar = ({ children }) => {
                       classProp={"w-60  mr-1"}
                       inputProp={"border-[1.5px]"}
                     />
-                    <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-sky-800 focus:ring-offset-2 focus:ring-offset-gray-800">
+                    <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:text-white ">
                       <span className="absolute -inset-0.5" />
                       <span className="sr-only">Open main menu</span>
 
@@ -162,7 +162,7 @@ const Navbar = ({ children }) => {
                 </div>
               </div>
 
-              <Disclosure.Panel className="md:hidden">
+              <Disclosure.Panel className="md:hidden h-full">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
                   {navigation.map((item) => (
                     <Disclosure.Button
@@ -182,7 +182,8 @@ const Navbar = ({ children }) => {
                   ))}
                 </div>
                 <div className="border-t border-gray-700 pb-3 pt-4">
-                  <div className="flex items-center px-5">
+                  <div className="flex justify-between items-center px-5">
+                    <div className="flex justify-between items-center">
                     <div className="flex-shrink-0">
                       <img
                         className="h-10 w-10 rounded-full"
@@ -198,9 +199,12 @@ const Navbar = ({ children }) => {
                         {user.email}
                       </div>
                     </div>
+                    </div>
+                    <div className="flex justify-between items-center">
+
                     <button
                       type="button"
-                      className="relative ml-16  flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
+                      className="relative   flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
                     >
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">View notifications</span>
@@ -223,6 +227,7 @@ const Navbar = ({ children }) => {
                     <span className="whitespace-nowrap rounded-md bg-purple-100 px-2 py-0.2 text-sm text-purple-500 text-[0.65rem] font-bold dark:bg-red-600 mb-6 -ml-4 z-10 dark:text-purple-100">
                       2
                     </span>
+                    </div>
                   </div>
                   <div className="mt-3 space-y-1 px-2">
                     {userNavigation.map((item) => (

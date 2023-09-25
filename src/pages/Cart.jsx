@@ -57,7 +57,7 @@ const Cart = () => {
   return (
     <>
       <svg
-        className="hidden sm:block fixed z-10 rotate-90 blur-[5px]  animate-pulse duration-1000  top-20 z-0 w-1/6 h-w-1/6 left-10 "
+        className="hidden sm:block fixed z-10 rotate-90 blur-[5px]  animate-pulse duration-1000  top-20  w-1/6 h-w-1/6 left-10 "
         viewBox="0 0 200 200"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -68,21 +68,21 @@ const Cart = () => {
         />
       </svg>
       <div className="h-screen bg-gray-100 pt-5">
-        <div className="flex justify-between mx-5 sm:mx-32 relative z-20">
-          <h1 className="mb-10 text-3xl sm:text-2xl font-bold flex align-middle">
+        <div className="flex sm:sticky backdrop-blur-sm sm:top-5 items-center justify-between mx-5 sm:mx-32  z-20">
+          <h1 className=" text-3xl sm:text-2xl font-bold flex items-center ">
             <span>Cart</span>
             <img className="h-10 w-10" src={cart} alt="" />
           </h1>
-          <h1 className="mb-10 text-2xl font-bold flex align-middle">
-            <span className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">
+          <h1 className=" text-2xl font-bold flex items-center">
+            <span className="inline-flex items-center rounded-lg bg-blue-50 px-2 py-1 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">
               {products.length}
               {products.length > 1 ? " Items" : " Item"}
             </span>
           </h1>
         </div>
-        <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
+        <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 my-10 xl:px-0">
           {/* Sub total */}
-          <div className="mt-6 h-full sm:sticky sm:top-9 rounded-lg border z-10 mb-4 bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+          <div className="mt-6 h-full sm:sticky sm:top-24 rounded-lg border z-10 mb-4 bg-white p-6 shadow-md md:mt-0 md:w-1/3">
             <div className="mb-2 flex justify-between">
               <p className="text-gray-700">Subtotal</p>
               <p className="text-gray-700">$129.99</p>
