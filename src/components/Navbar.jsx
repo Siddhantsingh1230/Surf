@@ -196,7 +196,7 @@ const Navbar = ({ children }) => {
                     </div>
                     <button
                       type="button"
-                      className="relative ml-10  flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
+                      className="relative ml-20  flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
                     >
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">View notifications</span>
