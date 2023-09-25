@@ -137,7 +137,7 @@ const Cart = () => {
         </div>
         <Link
           to="/"
-          className="ml-5 sm:ml-32 my-8 font-medium text-blue-600 flex items-center"
+          className="ml-5 sm:ml-32 my-8 font-medium text-blue-600 flex items-center max-sm:text-center max-sm:bg-blue-500 max-sm:rounded-md p-3"
         >
           <img src={arrow} alt="" className="w-8 h-8 rotate-180" />
           &nbsp; <p>Continue shopping</p>
