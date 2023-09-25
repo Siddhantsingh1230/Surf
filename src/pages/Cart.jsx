@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import rocket from "../assets/images/rocket.gif";
+import cart from "../assets/images/cart.gif";
+import arrow from "../assets/images/arrow.gif";
 const products = [
   {
     id: 1,
@@ -35,7 +36,7 @@ const Cart = () => {
         <div className="flex justify-between mx-5 sm:mx-32 ">
           <h1 className="mb-10 text-3xl sm:text-2xl font-bold flex align-middle">
             <span>Cart</span>
-            <img className="h-5 w-5" src={rocket} alt="" />
+            <img className="h-10 w-10" src={cart} alt="" />
           </h1>
           <h1 className="mb-10 text-2xl font-bold flex align-middle">
             <span className="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">
@@ -134,12 +135,13 @@ const Cart = () => {
             </button>
           </div>
         </div>
-      <Link
-        to="/"
-        className="ml-5 sm:ml-32  font-medium text-blue-600 flex align-middle text-center"
-      >
-        <span className="font-bold">⟵ </span>&nbsp; Continue shopping
-      </Link>
+        <Link
+          to="/"
+          className="ml-5 sm:ml-32 my-8 font-medium text-blue-600 flex items-center"
+        >
+          <img src={arrow} alt="" className="w-8 h-8 rotate-180" />
+          &nbsp; <p>Continue shopping</p>
+        </Link>
       </div>
     </>
   );
