@@ -58,7 +58,7 @@ const Cart = () => {
         </div>
         <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
           {/* Sub total */}
-          <div className="mt-6 h-full rounded-lg border z-10 bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+          <div className="mt-6 h-full rounded-lg border z-10 mb-4 bg-white p-6 shadow-md md:mt-0 md:w-1/3">
             <div className="mb-2 flex justify-between">
               <p className="text-gray-700">Subtotal</p>
               <p className="text-gray-700">$129.99</p>
