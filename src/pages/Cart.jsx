@@ -32,8 +32,19 @@ const products = [
 const Cart = () => {
   return (
     <>
-      <div className="h-screen bg-gray-100 pt-5 ">
-        <div className="flex justify-between mx-5 sm:mx-32 ">
+      <svg
+        className="hidden sm:block fixed z-10 rotate-90 blur-[5px]  animate-pulse duration-1000  top-20 z-0 w-1/6 h-w-1/6 left-10 "
+        viewBox="0 0 200 200"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          fill="#0F62FE"
+          d="M58.5,-68.6C74.4,-56.4,85,-36.6,87.1,-16.6C89.2,3.5,82.8,23.8,72.3,41.4C61.7,59.1,47.1,74.1,28.8,81.8C10.6,89.5,-11.2,90,-29.4,82.6C-47.6,75.1,-62.3,59.8,-72.6,41.9C-82.8,24.1,-88.7,3.7,-86.3,-16.2C-84,-36.1,-73.5,-55.6,-57.7,-67.8C-42,-80.1,-21,-85.2,0.2,-85.4C21.3,-85.6,42.6,-80.8,58.5,-68.6Z"
+          transform="translate(100 100)"
+        />
+      </svg>
+      <div className="h-screen bg-gray-100 pt-5">
+        <div className="flex justify-between mx-5 sm:mx-32 relative z-20">
           <h1 className="mb-10 text-3xl sm:text-2xl font-bold flex align-middle">
             <span>Cart</span>
             <img className="h-10 w-10" src={cart} alt="" />
@@ -47,7 +58,7 @@ const Cart = () => {
         </div>
         <div className="mx-auto max-w-5xl justify-center px-6 md:flex md:space-x-6 xl:px-0">
           {/* Sub total */}
-          <div className="mt-6 h-full rounded-lg border bg-white p-6 shadow-md md:mt-0 md:w-1/3">
+          <div className="mt-6 h-full rounded-lg border z-10 bg-white p-6 shadow-md md:mt-0 md:w-1/3">
             <div className="mb-2 flex justify-between">
               <p className="text-gray-700">Subtotal</p>
               <p className="text-gray-700">$129.99</p>
@@ -134,7 +145,6 @@ const Cart = () => {
               </div>
             ))}
           </div>
-          
         </div>
         <Link
           to="/"
