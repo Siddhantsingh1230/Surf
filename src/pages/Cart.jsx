@@ -133,7 +133,7 @@ const Cart = () => {
             </button>
           </div>
         </div>
-        <Link to ="/" className="ml-32  font-medium text-blue-600">
+        <Link to ="/" className="ml-20 sm:ml-32  font-medium text-blue-600">
         <span className="text-xl font-bold">⟵</span> Continue Shopping
         </Link>
       </div>
