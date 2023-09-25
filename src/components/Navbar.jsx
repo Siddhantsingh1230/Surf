@@ -135,7 +135,7 @@ const Navbar = ({ children }) => {
                   <div className="-mr-2 flex md:hidden">
                     {/* Mobile menu button */}
                     <SearchBar
-                      classProp={"w-40  mr-1"}
+                      classProp={"w-60  mr-1"}
                       inputProp={"border-[1.5px]"}
                     />
                     <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
@@ -204,7 +204,7 @@ const Navbar = ({ children }) => {
                     </button>
                     <button
                       type="button"
-                      className="relative ml-2 flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
+                      className="relative ml-5 flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
                     >
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">View Cart</span>
