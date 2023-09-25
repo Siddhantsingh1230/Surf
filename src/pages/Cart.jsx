@@ -31,8 +31,7 @@ const products = [
 const Cart = () => {
   return (
     <>
-      <div className="h-screen bg-gray-100 pt-5 mb-10">
-        
+      <div className="h-screen bg-gray-100 pt-5 ">
         <div className="flex justify-between mx-5 sm:mx-32 ">
           <h1 className="mb-10 text-3xl sm:text-2xl font-bold flex align-middle">
             <span>Cart</span>
@@ -135,12 +134,12 @@ const Cart = () => {
             </button>
           </div>
         </div>
-        <Link to="/" className="ml-5 sm:ml-32 mb-40  font-medium text-blue-600">
-        <span className="inline-flex items-center rounded-md bg-cyan-50 px-2 py-1 text-xs font-medium text-cyan-700 ring-1 ring-inset ring-cuyan-600/20">
-        <span className="text-xl font-bold">⟵</span> Continue Shopping
-            </span>
-          
-        </Link>
+      <Link
+        to="/"
+        className="ml-5 sm:ml-32  font-medium text-blue-600 flex align-middle text-center"
+      >
+        <span className="font-bold">⟵ </span>&nbsp; Continue shopping
+      </Link>
       </div>
     </>
   );
