@@ -9,6 +9,8 @@ import {
 } from "@heroicons/react/24/outline";
 import Logo from "../assets/images/logo.svg";
 import SearchBar from "./SearchBar";
+import { Link } from "react-router-dom";
+
 const user = {
   name: "Tom Cook",
   email: "tom@example.com",
@@ -75,17 +77,19 @@ const Navbar = ({ children }) => {
                         <span className="sr-only">View notifications</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
+                      <Link to="/cart">
                       <button
                         type="button"
                         className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white"
                       >
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">View Cart</span>
-                        <ShoppingCartIcon
-                          className="h-6 w-6"
-                          aria-hidden="true"
-                        />
+                          <ShoppingCartIcon
+                            className="h-6 w-6"
+                            aria-hidden="true"
+                          />
                       </button>
+                        </Link>
                       <span className="whitespace-nowrap rounded-md bg-purple-100 px-2 py-0.35 text-sm text-purple-500 font-bold text-[0.75rem] dark:bg-red-600 mb-5 -ml-3 z-10 dark:text-purple-100">
                         2
                       </span>
@@ -202,17 +206,20 @@ const Navbar = ({ children }) => {
                       <span className="sr-only">View notifications</span>
                       <BellIcon className="h-6 w-6" aria-hidden="true" />
                     </button>
+                    <Link to="/cart">
                     <button
                       type="button"
                       className="relative ml-2 flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
                     >
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">View Cart</span>
-                      <ShoppingCartIcon
-                        className="h-6 w-6"
-                        aria-hidden="true"
-                      />
+                      
+                          <ShoppingCartIcon
+                            className="h-6 w-6"
+                            aria-hidden="true"
+                          />
                     </button>
+                        </Link>
                     <span className="whitespace-nowrap rounded-md bg-purple-100 px-2 py-0.2 text-sm text-purple-500 text-[0.65rem] font-bold dark:bg-red-600 mb-6 -ml-4 z-10 dark:text-purple-100">
                       2
                     </span>
