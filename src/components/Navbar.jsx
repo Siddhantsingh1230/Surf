@@ -196,7 +196,7 @@ const Navbar = ({ children }) => {
                     </div>
                     <button
                       type="button"
-                      className="relative ml-2  flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
+                      className="relative ml-10  flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
                     >
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">View notifications</span>
@@ -204,7 +204,7 @@ const Navbar = ({ children }) => {
                     </button>
                     <button
                       type="button"
-                      className="relative ml-5 flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
+                      className="relative ml-2 flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
                     >
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">View Cart</span>
