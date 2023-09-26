@@ -99,9 +99,11 @@ const Cart = () => {
                 <p className="text-sm text-gray-700">including VAT</p>
               </div>
             </div>
+            <Link to="/checkout">
             <button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">
               Check out
             </button>
+            </Link>
           </div>
           <div className="rounded-lg md:w-2/3">
             {products.map((item) => (

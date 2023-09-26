@@ -8,6 +8,7 @@ import About from './pages/About';
 import Deals from './pages/Deals';
 import Category from './pages/Category';
 import PageNotFound from './pages/PageNotFound';
+import Checkout from './pages/Checkout';
 
 const App = () => {
   return (
@@ -21,6 +22,7 @@ const App = () => {
           <Route exact path="/about" element={<About/>}/>
           <Route exact path="/deals" element={<Deals/>}/>
           <Route exact path="/category" element={<Category/>}/>
+          <Route exact path="/checkout" element={<Checkout/>}/>
           <Route exact path="*" element={<PageNotFound/>}/>
         </Routes>
       </Router>
