@@ -1,6 +1,7 @@
 import React from "react";
 import coin from "../assets/images/coin.gif";
 import truck from "../assets/images/truck.gif";
+import logo from "../assets/images/logo.svg";
 
 const Checkout = () => {
   const products = [
@@ -57,6 +58,7 @@ const Checkout = () => {
   return (
     <>
       <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
+        <img className="w-6 h-6" src={logo} alt="" />
         <a href="#" className="text-2xl font-bold text-gray-800">
           Checkout
         </a>
