@@ -43,8 +43,8 @@ const ProductList = () => {
         <div className="mx-auto max-w-2xl px-4 py-0 sm:px-6 sm:py-0 lg:max-w-7xl lg:px-8">
           <div className="mt-6 grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
             {products.map((product) => (
-              <Link to={`/product/${product.id}`}>
-                <div key={product.id} className="group relative">
+              <Link key={product.id} to={`/product/${product.id}`}>
+                <div className="group relative">
                   <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                     <img
                       src={product.thumbnail}
@@ -63,17 +63,28 @@ const ProductList = () => {
                           {product.title}
                         </a>
                       </h3>
-                      <p className="mt-1 text-sm text-gray-500">
-                        {product.category}
-                      </p>
+                     
+                        <p className=" text-sm text-gray-500">
+                          {product.category}
+                        </p>
+                        
+                      
                     </div>
+                    <div className="flex flex-col">
                     <p className="text-sm font-medium text-gray-900">
-                      {product.price}
+                    ₹{Math.round(product.price*(1-product.discountPercentage/100))}
                     </p>
+                    <p className="line-through text-sm text-gray-500">
+                    ₹{product.price}
+                        </p>
+
+                    </div>
                   </div>
                   <p className="flex  align-middle">
-                    <img className="h-5 w-5 inline" src={star} alt="" />
-                    <span className="text-sm  text-gray-800">{product.rating}</span>
+                    <img className="h-4 w-4 inline" src={star} alt="" />
+                    <span className="text-xs  text-gray-800">
+                      {product.rating}
+                    </span>
                   </p>
                 </div>
               </Link>
