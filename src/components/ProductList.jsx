@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { products } from "../api/DummyProducts";
+import star from "../assets/images/star.png";
 
 const oldproducts = [
   {
@@ -70,6 +71,10 @@ const ProductList = () => {
                       {product.price}
                     </p>
                   </div>
+                  <p className="flex  align-middle">
+                    <img className="h-5 w-5 inline" src={star} alt="" />
+                    <span className="text-sm  text-gray-800">{product.rating}</span>
+                  </p>
                 </div>
               </Link>
             ))}
