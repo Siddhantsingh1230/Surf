@@ -1,42 +1,16 @@
-import React from "react";
+import React ,{useEffect} from "react";
 import { Link } from "react-router-dom";
-import { products } from "../api/DummyProducts";
 import star from "../assets/images/star.png";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllProductsAsync } from "../slices/ProductListSlice";
 
-const oldproducts = [
-  {
-    id: 1,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-  {
-    id: 2,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-  {
-    id: 3,
-    name: "Basic Tee",
-    href: "#",
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg",
-    imageAlt: "Front of men's Basic Tee in black.",
-    price: "$35",
-    color: "Black",
-  },
-  // More products...
-];
 const ProductList = () => {
+  const dispatch = useDispatch();
+  const products = useSelector((state)=>state.productList.products);
+  // fetching product list and dispatching fetch actions here
+  useEffect(()=>{
+    dispatch(fetchAllProductsAsync());
+  },[dispatch]);
   return (
     <>
       <div className="bg-white">

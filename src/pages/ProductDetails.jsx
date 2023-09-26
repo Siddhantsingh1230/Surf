@@ -234,7 +234,7 @@ const ProductDetails = () => {
                         Size
                       </h3>
                       <a
-                        href="#"
+                        href="no-referer"
                         className="text-sm font-medium text-indigo-600 hover:text-indigo-500"
                       >
                         Size guide
