@@ -9,6 +9,7 @@ import Deals from './pages/Deals';
 import Category from './pages/Category';
 import PageNotFound from './pages/PageNotFound';
 import Checkout from './pages/Checkout';
+import ProductDetails from './pages/ProductDetails';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route exact path="/deals" element={<Deals/>}/>
           <Route exact path="/category" element={<Category/>}/>
           <Route exact path="/checkout" element={<Checkout/>}/>
+          <Route exact path="/product/:id" element={<ProductDetails/>}/>
           <Route exact path="*" element={<PageNotFound/>}/>
         </Routes>
       </Router>
