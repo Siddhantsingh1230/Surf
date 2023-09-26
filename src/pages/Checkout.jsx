@@ -2,6 +2,7 @@ import React from "react";
 import coin from "../assets/images/coin.gif";
 import truck from "../assets/images/truck.gif";
 import logo from "../assets/images/logo.svg";
+import { Link } from "react-router-dom";
 
 const Checkout = () => {
   const products = [
@@ -167,24 +168,28 @@ const Checkout = () => {
               <p>Empty Cart Shop</p>
             )}
             {products.length > 2 ? (
-              <span class="inline-flex items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700">
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke-width="1.5"
-                  stroke="currentColor"
-                  class="-ms-1 me-1.5 h-4 w-4"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
+              <Link to="/cart">
+                <span class="inline-flex items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke-width="1.5"
+                    stroke="currentColor"
+                    class="-ms-1 me-1.5 h-4 w-4"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                  </svg>
 
-                <p class="whitespace-nowrap text-sm">+{products.length - 2} more </p>
-              </span>
+                  <p class="whitespace-nowrap text-sm">
+                    +{products.length - 2} more{" "}
+                  </p>
+                </span>
+              </Link>
             ) : null}
           </div>
 
@@ -202,11 +207,7 @@ const Checkout = () => {
                 className="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-2"
                 htmlFor="radio_1"
               >
-                <img
-                  className="w-14 object-contain"
-                  src={truck}
-                  alt=""
-                />
+                <img className="w-14 object-contain" src={truck} alt="" />
                 <div className="ml-5">
                   <span className="mt-2 font-semibold">Cash On Delivery</span>
                   <p className="text-slate-500 text-sm leading-6">
