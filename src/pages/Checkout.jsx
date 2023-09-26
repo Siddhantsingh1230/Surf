@@ -148,13 +148,13 @@ const Checkout = () => {
               products
                 .filter((item, index) => index < 2)
                 .map((item) => (
-                  <div className="flex flex-col rounded-lg bg-white sm:flex-row">
+                  <div className="flex overflow-hidden rounded-lg bg-white sm:flex-row">
                     <img
                       className="m-2 h-24 w-28 rounded-md border object-cover object-center"
                       src={item.imageSrc}
                       alt=""
                     />
-                    <div className="flex w-full flex-col px-4 py-4">
+                    <div className="flex w-full  overflow-hidden flex-col px-4 py-4">
                       <span className="font-semibold">{item.name}</span>
                       <span className="float-right text-gray-400">
                         {item.color}
