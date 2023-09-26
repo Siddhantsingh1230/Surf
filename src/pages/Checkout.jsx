@@ -2,6 +2,7 @@ import React from "react";
 import coin from "../assets/images/coin.gif";
 import truck from "../assets/images/truck.gif";
 import logo from "../assets/images/logo.svg";
+import india from "../assets/images/india.png";
 import { Link } from "react-router-dom";
 
 const Checkout = () => {
@@ -11,7 +12,7 @@ const Checkout = () => {
       name: "Throwback Hip Bag",
       href: "#",
       color: "Salmon",
-      price: "$90.00",
+      price: "₹90.00",
       quantity: 1,
       imageSrc:
         "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg",
@@ -23,7 +24,7 @@ const Checkout = () => {
       name: "Medium Stuff Satchel",
       href: "#",
       color: "Blue",
-      price: "$32.00",
+      price: "₹32.00",
       quantity: 1,
       imageSrc:
         "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
@@ -35,7 +36,7 @@ const Checkout = () => {
       name: "Medium Stuff Satchel",
       href: "#",
       color: "Blue",
-      price: "$32.00",
+      price: "₹32.00",
       quantity: 1,
       imageSrc:
         "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
@@ -47,7 +48,7 @@ const Checkout = () => {
       name: "Medium Stuff Satchel",
       href: "#",
       color: "Blue",
-      price: "$32.00",
+      price: "₹32.00",
       quantity: 1,
       imageSrc:
         "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
@@ -149,7 +150,7 @@ const Checkout = () => {
               products
                 .filter((item, index) => index < 2)
                 .map((item) => (
-                  <div className="flex overflow-hidden rounded-lg bg-white sm:flex-row">
+                  <div key={item.id} className="flex overflow-hidden rounded-lg bg-white sm:flex-row">
                     <img
                       className="m-2 h-24 w-28 rounded-md border object-cover object-center"
                       src={item.imageSrc}
@@ -169,23 +170,23 @@ const Checkout = () => {
             )}
             {products.length > 2 ? (
               <Link to="/cart">
-                <span class="inline-flex items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700">
+                <span className="inline-flex items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     fill="none"
                     viewBox="0 0 24 24"
-                    stroke-width="1.5"
+                    strokeWidth="1.5"
                     stroke="currentColor"
-                    class="-ms-1 me-1.5 h-4 w-4"
+                    className="-ms-1 me-1.5 h-4 w-4"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                       d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
 
-                  <p class="whitespace-nowrap text-sm">
+                  <p className="whitespace-nowrap text-sm">
                     +{products.length - 2} more{" "}
                   </p>
                 </span>
@@ -367,7 +368,7 @@ const Checkout = () => {
                 <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
                   <img
                     className="h-4 w-4 object-contain"
-                    src="https://flagpack.xyz/_nuxt/4c829b6c0131de7162790d2f897a90fd.svg"
+                    src={india}
                     alt=""
                   />
                 </div>
@@ -389,16 +390,16 @@ const Checkout = () => {
             <div className="mt-6 border-t border-b py-2">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-medium text-gray-900">Subtotal</p>
-                <p className="font-semibold text-gray-900">$399.00</p>
+                <p className="font-semibold text-gray-900">₹399.00</p>
               </div>
               <div className="flex items-center justify-between">
                 <p className="text-sm font-medium text-gray-900">Shipping</p>
-                <p className="font-semibold text-gray-900">$8.00</p>
+                <p className="font-semibold text-gray-900">₹8.00</p>
               </div>
             </div>
             <div className="mt-6 flex items-center justify-between">
               <p className="text-sm font-medium text-gray-900">Total</p>
-              <p className="text-2xl font-semibold text-gray-900">$408.00</p>
+              <p className="text-2xl font-semibold text-gray-900">₹408.00</p>
             </div>
           </div>
           <button className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">
