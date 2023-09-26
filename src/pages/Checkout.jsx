@@ -357,7 +357,7 @@ const Checkout = () => {
               Billing Address
             </label>
             <div className="flex flex-col sm:flex-row">
-              <div className="relative flex-shrink-0 sm:w-7/12">
+              <div className="relative my-2 flex-shrink-0 sm:w-7/12">
                 <input
                   type="text"
                   id="billing-address"
@@ -376,14 +376,14 @@ const Checkout = () => {
               <select
                 type="text"
                 name="billing-state"
-                className="w-full rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                className="w-full rounded-md my-2 border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
               >
                 <option value="State">State</option>
               </select>
               <input
                 type="text"
                 name="billing-zip"
-                className="flex-shrink-0 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none sm:w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500"
+                className="flex-shrink-0 my-2 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none sm:w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="ZIP"
               />
             </div>
