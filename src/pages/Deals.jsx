@@ -7,8 +7,8 @@ const Deals = () => {
   return (
     <>
       <Link to="/">
-        <RippleBtn classes={"fixed left-5 top-3 bg-white w-auto px-2 max-sm:px-3"}>
-          <img src={HomeGif} className="max-sm:w-5 max-sm:h-5 w-6 h-6" alt="" />
+        <RippleBtn classes={"fixed left-5 top-3 bg-white w-auto px-2 max-sm:px-5 z-20"}>
+          <img src={HomeGif} className="max-sm:w-5 max-sm:h-5 w-6 h-6 " alt="" />
         </RippleBtn>
       </Link>
       <section className="overflow-hidden  shadow-2xl md:grid md:grid-cols-3 p-16">
