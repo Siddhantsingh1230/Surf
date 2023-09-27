@@ -11,12 +11,15 @@ import PageNotFound from "./pages/PageNotFound";
 import Checkout from "./pages/Checkout";
 import ProductDetails from "./pages/ProductDetails";
 import ScrollToTop from "./components/ScrollToTop";
+import ScrollTopBtn from "react-scroll-to-top";
+import ScrollUpBtn from "./components/ScrollUpBtn";
 
 const App = () => {
   return (
     <>
       <Router>
         <ScrollToTop />
+        <ScrollTopBtn  smooth style={{borderRadius:".45rem",overflow:"hidden",outline:"none",boxShadow:"none"}} component={<ScrollUpBtn/>}	 />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/login" element={<Login />} />
