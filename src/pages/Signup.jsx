@@ -1,20 +1,16 @@
 import React from 'react';
 import bg from "../assets/images/bg.jpg";
-import shopping from "../assets/images/shopping.jpg"
+import shopping from "../assets/images/shopping.jpg";
+import {Link} from "react-router-dom";
 
 const Signup = () => {
   return (
     <>
       <div className="h-screen bg-blue-100 text-gray-900 flex justify-center overflow-y-hidden ">
       <div
-        className="max-w-screen-xl m-0 sm:my-10 sm:mx-40 bg-white shadow sm:rounded-xl flex justify-center flex-1 h-fi">
+        className="max-w-screen-xl max-sm:items-center m-0 sm:my-10 sm:mx-40 bg-white shadow sm:rounded-xl flex justify-center flex-1 h-fi">
         <div className="lg:w-1/2 p-6 sm:p-6 justify-center items-center">
-          <div>
-            <img
-              src="https://storage.googleapis.com/devitary-image-host.appspot.com/15846435184459982716-LogoMakr_7POjrN.png"
-              className="w-32 mx-auto"
-            />
-          </div>
+          
           <div className="mt-4 flex flex-col items-center">
             <h1 className="text-xl xl:text-2xl font-bold text-purple-600">
               Create Account
@@ -27,7 +23,7 @@ const Signup = () => {
                     type="text"
                     id="UserName"
                     placeholder="First and last name"
-                    className="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm"
+                    className="w-full rounded-md focus:border-red-600  border-gray-200 pe-10 shadow-sm sm:text-sm"
                   />
 
                   <span
@@ -54,7 +50,7 @@ const Signup = () => {
                     type="tel"
                     id="phoneNumber"
                     placeholder="Mobile number"
-                    className="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm"
+                    className="w-full rounded-md focus:border-red-600 border-gray-200 pe-10 shadow-sm sm:text-sm"
                   />
 
                   <span
@@ -80,8 +76,8 @@ const Signup = () => {
                   <input
                     type="email"
                     id="UserEmail"
-                    placeholder="flea@rhcp.com"
-                    className="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm"
+                    placeholder="Email"
+                    className="w-full rounded-md focus:border-red-600 border-gray-200 pe-10 shadow-sm sm:text-sm"
                   />
 
                   <span
@@ -107,8 +103,8 @@ const Signup = () => {
                   <input
                     type="password"
                     id="password"
-                    placeholder="password"
-                    className="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm" />
+                    placeholder="Password"
+                    className="w-full rounded-md focus:border-red-600 border-gray-200 pe-10 shadow-sm sm:text-sm" />
                   <span
                     className="pointer-events-none absolute inset-y-0 end-0 grid w-10 place-content-center text-gray-500"
                   >
@@ -145,7 +141,7 @@ const Signup = () => {
                     Sign Up
                   </span>
                 </button>
-                <p className="mt-4 text-sm text-gray-600 text-center">Already have an account ? <a href="/login" className="text-purple-600 font-bold">LogIn</a></p>
+                <p className="mt-4 text-sm text-gray-600 text-center">Already have an account ? <Link to="/login" className="text-purple-600 font-bold">LogIn</Link></p>
                 <p className="mt-4 text-xs text-gray-600 text-center">
                   I agree to abide by surf's <a href="#" className="text-purple-600 font-bold">Terms of Service </a>
                   and its <a href="#" className="text-purple-600 font-bold">

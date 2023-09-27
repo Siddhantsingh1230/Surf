@@ -13,17 +13,12 @@ const Login = () => {
 
   
   return (
-    <div className="h-screen bg-blue-100 text-gray-900 flex justify-center overflow-y-hidden ">
+    <div className="h-screen bg-blue-100 text-gray-900 flex  justify-center overflow-y-hidden ">
       <div
-        className="max-w-screen-xl m-0 sm:my-10 sm:mx-20 xl:mx-40 bg-white shadow sm:rounded-xl flex justify-center flex-1 h-fi">
+        className="max-w-screen-xl max-sm:items-center m-0 sm:my-10 sm:mx-20 xl:mx-40 bg-white shadow sm:rounded-xl flex justify-center flex-1 h-fi">
         <div className="lg:w-1/2 p-6 sm:p-6">
-          <div>
-            <img
-              src="https://storage.googleapis.com/devitary-image-host.appspot.com/15846435184459982716-LogoMakr_7POjrN.png"
-              className="w-32 mx-auto"
-            />
-          </div>
-          <div className="mt-4 flex flex-col items-center">
+          
+          <div className="mt-4 flex flex-col  items-center">
             <h1 className="text-xl xl:text-2xl font-bold text-purple-600">
               Login
             </h1>
@@ -55,9 +50,9 @@ const Login = () => {
                     type="email"
                     id="UserEmail"
                     value= {email}
-                    placeholder="flea@rhcp.com"
+                    placeholder="Email"
                     onChange={(e)=>{setEmail(e.target.value)}}
-                    className="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm "
+                    className="w-full rounded-md focus:border-red-600 border-gray-200 pe-10 shadow-sm sm:text-sm "
                   />
 
                   <span
@@ -82,10 +77,10 @@ const Login = () => {
                   <input
                     type="password"
                     id="password"
-                    placeholder="password"
+                    placeholder="Password"
                     value={pwd}
                     onChange={(e)=>{setPassword(e.target.value)}}
-                    className="w-full rounded-md border-gray-200 pe-10 shadow-sm sm:text-sm" />
+                    className="w-full rounded-md focus:border-red-600 border-gray-200 pe-10 shadow-sm sm:text-sm" />
                   <span
                     className="pointer-events-none absolute inset-y-0 end-0 grid w-10 place-content-center text-gray-500"
                   >
@@ -122,12 +117,9 @@ const Login = () => {
                   </span>
                 </button>
                 <p className="mt-6 text-xs text-gray-600 text-center">
-                  I agree to abide by templatana's
-                  <a href="#" className="text-purple-600 font-bold">
-                    Terms of Service
-                  </a>
-                  and its
-                  <a href="#" className="text-purple-600 font-bold">
+                  I agree to abide by Surf's <a href="#" className="text-purple-600 font-bold">
+                    Terms of Service </a>
+                  and its <a href="#" className="text-purple-600 font-bold">
                     Privacy Policy
                   </a>
                 </p>
