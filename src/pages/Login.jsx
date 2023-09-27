@@ -127,9 +127,9 @@ const Login = () => {
             </div>
           </div>
         </div>
-        <div className="flex-1 text-center hidden lg:flex shadow-sm rounded-r-xl" style={{ backgroundImage: `url(${bg})` }}>
+        <div className="flex-1 p-12 text-center hidden lg:flex shadow-sm rounded-r-xl" style={{ backgroundImage: `url(${bg})` }}>
           <img src={shopping}
-            className="m-12 xl:m-12
+            className="
            w-full bg-contain bg-center bg-no-repeat rounded-xl shadow-sm border-purple-300 "
 
           ></img>
