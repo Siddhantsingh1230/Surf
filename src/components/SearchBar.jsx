@@ -14,13 +14,13 @@ const SearchBar = ({classProp ,inputProp}) => {
           type="text"
           id="Search"
           placeholder="Search"
-          className={`w-full rounded-md border-[1.5px] border-gray-200 py-2.5 pe-10 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white sm:text-sm ${inputProp}`}
+          className={`w-full rounded-md border-[1.5px] hover:border-white py-2.5 pe-10 shadow-sm dark:border-purple-500 dark:bg-purple-800 dark:text-white sm:text-sm ${inputProp}`}
         />
 
         <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
           <button
             type="button"
-            className="text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
+            className="text-purple-700 hover:text-purple-800 dark:text-purple-400 dark:hover:text-purple-300"
           >
             <span className="sr-only">Search</span>
 

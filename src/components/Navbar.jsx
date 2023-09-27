@@ -36,8 +36,8 @@ function classNames(...classes) {
 const Navbar = ({ children }) => {
   return (
     <>
-      <div className="min-h-full bg-white">
-        <Disclosure as="nav" className="bg-gray-800">
+      <div className="min-h-full bg-white ">
+        <Disclosure as="nav" className="bg-purple-700">
           {({ open }) => (
             <>
               <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -54,8 +54,8 @@ const Navbar = ({ children }) => {
                             href={item.href}
                             className={classNames(
                               item.current
-                                ? "bg-gray-900 text-white"
-                                : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                                ? "bg-purple-800 text-white font-bold"
+                                : "text-purple-300 hover:bg-purple-500 hover:text-white hover:font-bold",
                               "rounded-md px-3 py-2 text-sm font-medium"
                             )}
                             aria-current={item.current ? "page" : undefined}
@@ -71,7 +71,7 @@ const Navbar = ({ children }) => {
                       <SearchBar classProp={"w-72 mr-2 hidden sm:block"} />
                       <button
                         type="button"
-                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
+                        className="relative rounded-full bg-purple-800 p-1 text-purple-400 hover:text-white "
                       >
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">View notifications</span>
@@ -80,7 +80,7 @@ const Navbar = ({ children }) => {
                       <Link to="/cart">
                       <button
                         type="button"
-                        className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white"
+                        className="relative ml-auto flex-shrink-0 rounded-full bg-purple-700 p-1 text-purple-400 hover:text-white"
                       >
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">View Cart</span>
@@ -142,7 +142,7 @@ const Navbar = ({ children }) => {
                       classProp={"w-60  mr-1"}
                       inputProp={"border-[1.5px]"}
                     />
-                    <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:text-white ">
+                    <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-purple-700 p-2 text-gray-400 hover:text-white ">
                       <span className="absolute -inset-0.5" />
                       <span className="sr-only">Open main menu</span>
 
@@ -171,8 +171,8 @@ const Navbar = ({ children }) => {
                       href={item.href}
                       className={classNames(
                         item.current
-                          ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          ? "bg-purple-900 text-white"
+                          : "text-gray-300 hover:bg-purple-500 hover:text-white",
                         "block rounded-md px-3 py-2 text-base font-medium"
                       )}
                       aria-current={item.current ? "page" : undefined}
@@ -204,7 +204,7 @@ const Navbar = ({ children }) => {
 
                     <button
                       type="button"
-                      className="relative   flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
+                      className="relative   flex-shrink-0 rounded-full bg-purple-700 p-1 text-gray-400 hover:text-white "
                     >
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">View notifications</span>
@@ -213,7 +213,7 @@ const Navbar = ({ children }) => {
                     <Link to="/cart">
                     <button
                       type="button"
-                      className="relative ml-2 flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
+                      className="relative ml-2 flex-shrink-0 rounded-full bg-purple-700 p-1 text-gray-400 hover:text-white "
                     >
                       <span className="absolute -inset-1.5" />
                       <span className="sr-only">View Cart</span>
@@ -235,7 +235,7 @@ const Navbar = ({ children }) => {
                         key={item.name}
                         as="a"
                         href={item.href}
-                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-purple-600 hover:text-white"
                       >
                         {item.name}
                       </Disclosure.Button>

@@ -74,7 +74,8 @@ const Cart = () => {
             <img className="h-10 w-10" src={cart} alt="" />
           </h1>
           <h1 className=" text-2xl font-bold flex items-center">
-            <span className="inline-flex items-center rounded-lg bg-blue-50 px-2 py-1 text-sm font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20">
+            <span className="inline-flex items-center rounded-lg bg-purple
+            -50 px-2 py-1 text-sm font-medium text-purple-700 ring-1 ring-inset ring-blue-600/20">
               {products.length}
               {products.length > 1 ? " Items" : " Item"}
             </span>
@@ -100,7 +101,7 @@ const Cart = () => {
               </div>
             </div>
             <Link to="/checkout">
-            <button className="mt-6 w-full rounded-md bg-blue-500 py-1.5 font-medium text-blue-50 hover:bg-blue-600">
+            <button className="mt-6 w-full rounded-md bg-purple-600 py-1.5 font-medium text-blue-50 hover:bg-purple-700">
               Check out
             </button>
             </Link>
