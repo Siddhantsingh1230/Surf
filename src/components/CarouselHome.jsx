@@ -1,14 +1,13 @@
 import React from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import Banner1 from "../assets/images/banner1.jpg";
+import Banner2 from "../assets/images/banner2.jpeg";
+import Banner3 from "../assets/images/banner3.jpg";
+import Banner4 from "../assets/images/banner4.jpg";
 
 const EmblaCarousel = () => {
   const [emblaRef] = useEmblaCarousel({ loop: true });
-  const slides = [
-    "https://picsum.photos/203/320?grayscale",
-    "https://picsum.photos/200/300?grayscale",
-    "https://picsum.photos/210/300?grayscale",
-    "https://picsum.photos/230/310?grayscale",
-  ];
+  const slides = [Banner1, Banner2, Banner3, Banner4];
   const imageByIndex = (index) => slides[index % slides.length];
   return (
     <>

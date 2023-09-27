@@ -30,11 +30,12 @@
   height: var(--slide-height);
   width: 100%;
   object-fit: cover;
-  object-position: 0 0;
+  object-position: center center;
   border-radius: 0.86rem;
 }
 
 @media (min-width: 650px) {
+  /* change pc styles here */
   /* Styling scroll bars */
   *::-webkit-scrollbar {
     width: 12px;
@@ -60,14 +61,15 @@
 
   .embla {
     --slide-spacing: 2rem;
-    --slide-size: 100%;
-    --slide-height: 25rem;
+    --slide-size: 22rem;
+    --slide-height: 20rem;
     padding: 2rem;
     margin-block: 2rem;
     
   }
   .embla__slide__img{
     border-radius: 2rem;
+    object-fit: cover;
   }
 }
 
