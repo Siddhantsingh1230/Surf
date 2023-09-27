@@ -9,7 +9,7 @@ const Home = () => {
     <>
       <Navbar>
         <Promo />
-        <CarouselHome/>
+        <CarouselHome />
         <Product />
       </Navbar>
     </>

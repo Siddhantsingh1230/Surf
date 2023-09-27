@@ -262,7 +262,7 @@ const Product = () => {
                       {({ open }) => (
                         <>
                           <h3 className="-my-3 flow-root">
-                            <Disclosure.Button className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500">
+                            <Disclosure.Button className="flex w-full items-center justify-between bg-white rounded-md px-2 hover:bg-gray-100 py-3 text-sm text-gray-400 hover:text-gray-500">
                               <span className="font-medium text-gray-900">
                                 {section.name}
                               </span>

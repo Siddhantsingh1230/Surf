@@ -14,7 +14,7 @@ const SearchBar = ({classProp ,inputProp}) => {
           type="text"
           id="Search"
           placeholder="Search"
-          className={`w-full rounded-md border-2 border-gray-200 py-2.5 pe-10 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white sm:text-sm ${inputProp}`}
+          className={`w-full rounded-md border-[1.5px] border-gray-200 py-2.5 pe-10 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white sm:text-sm ${inputProp}`}
         />
 
         <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
