@@ -1,8 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import RippleBtn from "../components/RippleBtn";
+import HomeGif from "../assets/images/home.gif";
 
 const About = () => {
   return (
     <>
+      <Link to="/">
+        <RippleBtn classes={"fixed left-5 top-3 bg-white w-auto px-2 max-sm:px-2"}>
+          <img src={HomeGif} className="max-sm:w-5 max-sm:h-5 w-6 h-6" alt="" />
+        </RippleBtn>
+      </Link>
       <section className="bg-gray-900 w-full overflow-hidden text-white">
         <div className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:h-screen lg:items-center">
           <div className="mx-auto max-w-3xl text-center">
@@ -297,7 +305,7 @@ const About = () => {
             <div className="flex flex-col sm:flex-row">
               <h1 className="max-w-sm text-3xl font-bold text-blue-900">
                 What people think <br />
-                about Surf 
+                about Surf
               </h1>
               <div className="my-4 rounded-xl bg-white py-2 px-4 shadow-lg sm:my-0 sm:ml-auto">
                 <div className="flex h-16 items-center text-2xl font-bold text-blue-900">
