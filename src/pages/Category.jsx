@@ -1,8 +1,16 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import RippleBtn from "../components/RippleBtn";
+import HomeGif from "../assets/images/home.gif";
 
 const Category = () => {
   return (
     <>
+      <Link to="/">
+        <RippleBtn classes={"fixed left-5 top-3 bg-white w-auto px-2"}>
+          <img src={HomeGif} className=" w-6 h-6" alt="" />
+        </RippleBtn>
+      </Link>
       <section>
         <div class="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
           <header class="text-center">

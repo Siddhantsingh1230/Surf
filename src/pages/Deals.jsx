@@ -1,13 +1,21 @@
 import React from "react";
+import { Link } from "react-router-dom";
+import RippleBtn from "../components/RippleBtn";
+import HomeGif from "../assets/images/home.gif";
 
 const Deals = () => {
   return (
     <>
-      <section className="overflow-hidden rounded-lg shadow-2xl md:grid md:grid-cols-3 p-11">
+      <Link to="/">
+        <RippleBtn classes={"fixed left-5 top-3 bg-white w-auto px-2"}>
+          <img src={HomeGif} className=" w-6 h-6" alt="" />
+        </RippleBtn>
+      </Link>
+      <section className="overflow-hidden  shadow-2xl md:grid md:grid-cols-3 p-16">
         <img
           alt="Trainer"
           src="https://images.unsplash.com/photo-1611510338559-2f463335092c?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=928&q=80"
-          className="h-32 w-full object-cover md:h-full"
+          className="h-32 w-full object-cover md:h-full rounded-lg"
         />
 
         <div className="p-4 text-center sm:p-6 md:col-span-2 lg:p-8">
