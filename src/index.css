@@ -60,7 +60,7 @@
   }
 
   .embla {
-    --slide-spacing: 2rem;
+    --slide-spacing: 1rem;
     --slide-size: 22rem;
     --slide-height: 20rem;
     padding: 2rem;
@@ -68,7 +68,7 @@
     
   }
   .embla__slide__img{
-    border-radius: 2rem;
+    border-radius: 1rem;
     object-fit: cover;
   }
 }
