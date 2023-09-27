@@ -8,7 +8,7 @@ const Signup = () => {
       <div className="h-screen bg-blue-100 text-gray-900 flex justify-center overflow-y-hidden ">
       <div
         className="max-w-screen-xl m-0 sm:my-10 sm:mx-40 bg-white shadow sm:rounded-xl flex justify-center flex-1 h-fi">
-        <div className="lg:w-1/2 p-6 sm:p-6">
+        <div className="lg:w-1/2 p-6 sm:p-6 justify-center items-center">
           <div>
             <img
               src="https://storage.googleapis.com/devitary-image-host.appspot.com/15846435184459982716-LogoMakr_7POjrN.png"
