@@ -4,7 +4,15 @@
 *{
   scroll-behavior: smooth;
 }
+::-moz-selection { /* Code for Firefox */
+  color: #4F46E5;
+  background: yellow;
+}
 
+::selection {
+  color: #443cdd;
+  background: #7ebfdb;
+}
 /* Ripple btn and confetti styles here */
 .mui-button {
   position: relative;
