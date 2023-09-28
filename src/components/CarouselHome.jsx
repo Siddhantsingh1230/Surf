@@ -12,13 +12,13 @@ const EmblaCarousel = () => {
   const imageByIndex = (index) => slides[index % slides.length];
   return (
     <>
-      <div className="embla cursor-pointer">
+      <div className="embla cursor-grab">
         <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">
             {slides.map((image, index) => (
               <div className="embla__slide" key={index}>
                 <img
-                  className="embla__slide__img"
+                  className="embla__slide__img cursor-pointer"
                   src={imageByIndex(index)}
                   alt="Your alt text"
                 />
