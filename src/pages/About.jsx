@@ -7,7 +7,7 @@ const About = () => {
   return (
     <>
       <Link to="/">
-        <RippleBtn classes={"fixed left-5 top-3 bg-white w-auto max-sm:h-auto  px-2 max-sm:px-[.5rem] max-sm:py-[.5rem] z-20"}>
+        <RippleBtn classes={"sm:hidden fixed left-5 top-3 bg-white w-auto max-sm:h-auto  px-2 max-sm:px-[.5rem] max-sm:py-[.5rem] z-20"}>
           <img src={HomeGif} className="max-sm:w-4 max-sm:h-4 w-6 h-6" alt="" />
         </RippleBtn>
       </Link>
