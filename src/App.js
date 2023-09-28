@@ -13,6 +13,8 @@ import ProductDetails from "./pages/ProductDetails";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollTopBtn from "react-scroll-to-top";
 import ScrollUpBtn from "./components/ScrollUpBtn";
+import { Settings } from "react-feather";
+import Setting from "./pages/Setting";
 
 const App = () => {
   return (
@@ -31,6 +33,7 @@ const App = () => {
           <Route exact path="/checkout" element={<Checkout />} />
           <Route exact path="/product/:id" element={<ProductDetails />} />
           <Route exact path="*" element={<PageNotFound />} />
+          <Route exact path="/setting" element={<Setting />} />
         </Routes>
       </Router>
     </>
