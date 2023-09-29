@@ -9,7 +9,8 @@ import {
 } from "@heroicons/react/24/outline";
 import Logo from "../assets/images/logo.svg";
 import SearchBar from "./SearchBar";
-import { Link } from "react-router-dom";import card from "../assets/images/card.png";
+import { Link } from "react-router-dom";
+
 
 const user = {
   name: "Tom Cook",
