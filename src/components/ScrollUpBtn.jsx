@@ -1,5 +1,4 @@
 import React from "react";
-import icon from "../assets/images/arrow.gif";
 
 const ScrollUpBtn = () => {
   //bg-[#4F46E5]

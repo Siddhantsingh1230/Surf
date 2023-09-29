@@ -17,11 +17,9 @@ import { fetchAllBrandsAsync } from "../slices/BrandListSlice";
 import { filterProductsAsync } from "../slices/ProductListSlice";
 
 const sortOptions = [
-  { name: "Most Popular", href: "#", current: true },
-  { name: "Best Rating", href: "#", current: false },
-  { name: "Newest", href: "#", current: false },
-  { name: "Price: Low to High", href: "#", current: false },
-  { name: "Price: High to Low", href: "#", current: false },
+  { name: "Best Rating", sort:"rating",order:"desc", current: false },
+  { name: "Price: Low to High", sort:"price",order:"asc", current: false },
+  { name: "Price: High to Low", sort:"price",order:"desc", current: false },
 ];
 
 function classNames(...classes) {
@@ -53,11 +51,23 @@ const Product = () => {
   }, [dispatch]);
 
   //Filter Logic
-  const handleFilter = (section,option) =>{
-    const tempFilter = {...filterTags,[section.id]:option.value};
+  const handleFilter = (e,section,option) =>{
+    let tempFilter = {...filterTags};
+    if(e.target.checked){
+      tempFilter[section.id]=option.value;
+
+    }else{
+      delete tempFilter[section.id];
+    }
     setFilterTags(tempFilter);
     dispatch(filterProductsAsync(tempFilter));
     // console.log(tempFilter)
+  }
+  //Sort Logic
+  const handleSort = (e,option)=>{
+    const newSort = {...filterTags,_sort:option.sort,_order:option.order};
+    setFilterTags(newSort);
+    dispatch(filterProductsAsync(newSort));
   }
   return (
     <>
@@ -151,6 +161,7 @@ const Product = () => {
                                         defaultValue={option.value}
                                         type="checkbox"
                                         defaultChecked={option.checked}
+                                        onChange={(e)=>(handleFilter(e,section,option))}
                                         className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                       />
                                       <label
@@ -206,18 +217,18 @@ const Product = () => {
                         {sortOptions.map((option) => (
                           <Menu.Item key={option.name}>
                             {({ active }) => (
-                              <a
-                                href={option.href}
+                              <p
+                                onClick={(e)=>handleSort(e,option)}
                                 className={classNames(
                                   option.current
-                                    ? "font-medium text-gray-900"
+                                    ? "font-medium text-gray-900 cursor-pointer"
                                     : "text-gray-500",
-                                  active ? "bg-gray-100" : "",
-                                  "block px-4 py-2 text-sm"
+                                  active ? "bg-gray-100 cursor-pointer" : "",
+                                  "block px-4 py-2 text-sm cursor-pointer"
                                 )}
                               >
                                 {option.name}
-                              </a>
+                              </p>
                             )}
                           </Menu.Item>
                         ))}
@@ -294,7 +305,7 @@ const Product = () => {
                                     defaultValue={option.value}
                                     type="checkbox"
                                     defaultChecked={option.checked}
-                                    onChange={()=>(handleFilter(section,option))}
+                                    onChange={(e)=>(handleFilter(e,section,option))}
                                     className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                   />
                                   <label

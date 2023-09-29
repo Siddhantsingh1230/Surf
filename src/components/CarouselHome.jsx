@@ -7,7 +7,7 @@ import Banner4 from "../assets/images/banner4.jpg";
 import Autoplay from 'embla-carousel-autoplay'
 
 const EmblaCarousel = () => {
-  const [emblaRef] = useEmblaCarousel({ loop: true ,dragFree: true }, [Autoplay({ delay: 7500 })]);
+  const [emblaRef] = useEmblaCarousel({ loop: true ,dragFree: true }, [Autoplay({ delay: 5500 })]);
   const slides = [Banner3, Banner4 , Banner1, Banner2 ];
   const imageByIndex = (index) => slides[index % slides.length];
   return (
