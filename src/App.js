@@ -24,7 +24,7 @@ const App = () => {
     <>
       <Router>
         <ScrollToTop />
-        <ScrollTopBtn className="max-sm:right-5 max-sm:bottom-9 "  smooth={true} style={{borderRadius:"50%",overflow:"hidden",outline:"none",boxShadow:"none",scale:"0.85"}} component={<ScrollUpBtn/>}	 />
+        <ScrollTopBtn className="max-sm:right-5 max-sm:bottom-9 scale=[.85] max-sm:scale-100"  smooth={true} style={{borderRadius:"50%",overflow:"hidden",outline:"none",boxShadow:"none"}} component={<ScrollUpBtn/>}	 />
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route exact path="/login" element={<Login />} />
