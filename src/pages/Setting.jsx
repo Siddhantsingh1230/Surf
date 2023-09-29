@@ -26,7 +26,7 @@ const Setting = () => {
       <div className="mx-4 min-h-screen max-w-screen-xl sm:mx-8 xl:mx-10 ">
         <h1 className="border-b py-6 text-4xl font-semibold">Settings</h1>
         <div className="grid grid-cols-8 pt-3 pb-8 sm:grid-cols-10">
-          <div className="relative my-4 w-72 sm:hidden">
+          <div className="relative my-4 col-span-8 sm:hidden">
             <input
               className="peer hidden"
               type="checkbox"
