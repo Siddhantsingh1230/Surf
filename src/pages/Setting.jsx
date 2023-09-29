@@ -32,8 +32,7 @@ const Setting = () => {
             <div className="mx-4 min-h-screen max-w-screen-xl sm:mx-8 xl:mx-10 ">
                 <h1 className="border-b py-6 text-4xl font-semibold">Settings</h1>
                 <div className="grid grid-cols-8 pt-3 pb-8 sm:grid-cols-10">
-                    <div className="relative my-4 w-5
-            6 sm:hidden">
+                    <div className="relative my-4 w-56 sm:hidden">
                         <input className="peer hidden" type="checkbox" name="select-1" id="select-1" />
                         <label htmlFor="select-1" className="flex w-full cursor-pointer select-none rounded-lg border p-2 px-3 text-sm text-gray-700 ring-blue-700 peer-checked:ring">Accounts </label>
                         <svg xmlns="http://www.w3.org/2000/svg" className="pointer-events-none absolute right-0 top-3 ml-auto mr-5 h-4 text-slate-700 transition peer-checked:rotate-180" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
