@@ -11,6 +11,7 @@ import Logo from "../assets/images/logo.svg";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 
+
 const user = {
   name: "Tom Cook",
   email: "tom@example.com",
@@ -26,7 +27,7 @@ const navigation = [
 ];
 const userNavigation = [
   { name: "Your Profile", href: "#" },
-  { name: "Settings", href: "#" },
+  { name: "Settings", href: "/setting" },
   { name: "Sign out", href: "#" },
 ];
 
