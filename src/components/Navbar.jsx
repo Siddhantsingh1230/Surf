@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import {
@@ -11,6 +12,7 @@ import Logo from "../assets/images/logo.svg";
 import SearchBar from "./SearchBar";
 import { Link } from "react-router-dom";
 import Notification from "./Notification";
+import { getAllNotificationsAsync } from "../slices/NotificationSlice";
 
 const user = {
   name: "Tom Cook",
@@ -35,6 +37,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 const Navbar = ({ children }) => {
+  const dispatch = useDispatch();
+  const notiItem = useSelector((state) => state.notificationList.notifications);
   const [notify, setNotify] = useState(false);
   const openNoti = () => {
     if (!notify) {
@@ -43,6 +47,9 @@ const Navbar = ({ children }) => {
       setNotify(false);
     }
   };
+  useEffect(()=>{
+    dispatch(getAllNotificationsAsync());
+  },[]);
   return (
     <>
       <div className="min-h-full bg-white">
@@ -89,6 +96,9 @@ const Navbar = ({ children }) => {
                         <span className="sr-only">View notifications</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
+                      <span className="whitespace-nowrap rounded-md bg-purple-100 px-2 py-0.35 text-sm text-purple-500 font-bold text-[0.75rem] dark:bg-blue-700 mb-5 -ml-3 z-10 dark:text-white">
+                      {notiItem.filter(obj => obj.read === false).length}
+                      </span>
                       <Link to="/cart">
                         <button
                           type="button"
@@ -225,6 +235,9 @@ const Navbar = ({ children }) => {
                         <span className="sr-only">View notifications</span>
                         <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
+                      <span className="whitespace-nowrap rounded-md bg-purple-100 px-2 py-0.2 text-sm text-purple-500 text-[0.65rem] font-bold dark:bg-blue-700 mb-6 -ml-4 z-10 dark:text-white">
+                      {notiItem.filter(obj => obj.read === false).length}
+                      </span>
                       <Link to="/cart">
                         <button
                           type="button"
