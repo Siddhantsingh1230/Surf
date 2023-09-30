@@ -145,6 +145,19 @@
     object-fit: cover;
   }
 }
+.notification::-webkit-scrollbar {
+  width: 8px;
+}
+
+.notification::-webkit-scrollbar-track {
+  background: white;
+  border-radius: 5px;
+}
+.notification::-webkit-scrollbar-thumb {
+  background-color: #1F2937;
+  border-radius: 14px;
+  border: 1px solid white;
+}
 
 @layer utilities {
   input[type="number"]::-webkit-inner-spin-button,
