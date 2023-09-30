@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import {
@@ -35,14 +35,14 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 const Navbar = ({ children }) => {
-  const[notify,setNotify]=useState(false);
-  const openNoti=()=>{
-    if(!notify)
-    {setNotify(true)}
-    else{
-      setNotify(false)
+  const [notify, setNotify] = useState(false);
+  const openNoti = () => {
+    if (!notify) {
+      setNotify(true);
+    } else {
+      setNotify(false);
     }
-  }
+  };
   return (
     <>
       <div className="min-h-full bg-white">
@@ -83,12 +83,11 @@ const Navbar = ({ children }) => {
                       <button
                         type="button"
                         className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
-                        onClick={openNoti}>
+                        onClick={openNoti}
+                      >
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">View notifications</span>
-                        <BellIcon 
-                          className="h-6 w-6" 
-                          aria-hidden="true" />
+                        <BellIcon className="h-6 w-6" aria-hidden="true" />
                       </button>
                       <Link to="/cart">
                         <button
@@ -217,6 +216,10 @@ const Navbar = ({ children }) => {
                       <button
                         type="button"
                         className="relative   flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
+                        onClick={() => {
+                          openNoti();
+                          document.body.classList.add("h-100vh", "w-100vh", "overflow-hidden")
+                        }}
                       >
                         <span className="absolute -inset-1.5" />
                         <span className="sr-only">View notifications</span>
@@ -262,11 +265,9 @@ const Navbar = ({ children }) => {
             {children}
           </div>
         </main>
-        
       </div>
-      {notify && <Notification notify={openNoti}/>}
+      {notify && <Notification notify={openNoti} />}
     </>
-    
   );
 };
 
