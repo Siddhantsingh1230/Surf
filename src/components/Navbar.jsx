@@ -89,7 +89,7 @@ const Navbar = ({ children }) => {
                       <SearchBar classProp={"w-72 mr-2 hidden sm:block"} />
                       <button
                         type="button"
-                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
+                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white outline-none"
                         onClick={openNoti}
                       >
                         <span className="absolute -inset-1.5" />
@@ -102,7 +102,7 @@ const Navbar = ({ children }) => {
                       <Link to="/cart">
                         <button
                           type="button"
-                          className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white"
+                          className="relative ml-auto flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white outline-none"
                         >
                           <span className="absolute -inset-1.5" />
                           <span className="sr-only">View Cart</span>
@@ -164,7 +164,7 @@ const Navbar = ({ children }) => {
                       classProp={"w-60  mr-1"}
                       inputProp={"border-[1.5px]"}
                     />
-                    <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:text-white ">
+                    <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:text-white outline-none">
                       <span className="absolute -inset-0.5" />
                       <span className="sr-only">Open main menu</span>
 
