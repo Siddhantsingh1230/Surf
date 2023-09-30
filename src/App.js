@@ -15,6 +15,7 @@ import ScrollTopBtn from "react-scroll-to-top";
 import ScrollUpBtn from "./components/ScrollUpBtn";
 import { Settings } from "react-feather";
 import Setting from "./pages/Setting";
+import Profile from "./pages/Profile";
 
 const App = () => {
   return (
@@ -34,6 +35,7 @@ const App = () => {
           <Route exact path="/product/:id" element={<ProductDetails />} />
           <Route exact path="*" element={<PageNotFound />} />
           <Route exact path="/setting" element={<Setting />} />
+          <Route exact path="/profile" element={<Profile/>}/>
         </Routes>
       </Router>
     </>
