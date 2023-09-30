@@ -5,11 +5,14 @@ const fetchAllProducts = async () => {
   return data;
 };
 
-export const filterProducts = async (filterObj) => {
+export const filterProducts = async (filterObjArray) => {
   let queryString = "";
-  for (let key in filterObj) {
-    queryString += `${key}=${encodeURIComponent(filterObj[key])}&`;
-  }
+  filterObjArray.forEach((element) => {
+    for (let key in element) {
+      queryString += `${encodeURIComponent(key)}=${encodeURIComponent(element[key])}&`;
+    }
+  });
+
   const { data } = await axios.get(
     "http://localhost:8080/products?" + queryString
   );

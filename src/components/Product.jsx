@@ -30,11 +30,11 @@ function classNames(...classes) {
 const Product = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const dispatch = useDispatch();
-  const categories = useSelector((state) => state.categoryList.categories);
+  let categories = useSelector((state) => state.categoryList.categories);
   const categoriesStatus = useSelector((state) => state.categoryList.status);
-  const brands = useSelector((state) => state.brandList.brands);
+  let brands = useSelector((state) => state.brandList.brands);
   const brandsStatus = useSelector((state) => state.brandList.status);
-  const [filterTags, setFilterTags] = useState({});
+  const [filterTags, setFilterTags] = useState([]);
   let filters = [
     {
       id: "brand",
@@ -55,11 +55,17 @@ const Product = () => {
 
   //Filter Logic
   const handleFilter = (e, section, option) => {
-    let tempFilter = { ...filterTags };
+    let tempFilter = [ ...filterTags] ;
     if (e.target.checked) {
-      tempFilter[section.id] = option.value;
+      let optionVal = option.value;
+      tempFilter.push({[section.id]:optionVal});
+      
     } else {
-      delete tempFilter[section.id];
+      tempFilter = tempFilter.filter((item)=>{
+        for (const key in item) {
+          return item[key]!==option.value;
+        }
+      });
     }
     setFilterTags(tempFilter);
     dispatch(filterProductsAsync(tempFilter));
@@ -67,10 +73,28 @@ const Product = () => {
   };
   //Sort Logic
   const handleSort = (e, option) => {
-    const newSort = { ...filterTags, _sort: option.sort, _order: option.order };
+    const filteredArray = filterTags.filter(obj => !('_sort' in obj || '_order' in obj));
+    const newSort = [ ...filteredArray, {_sort: option.sort, _order: option.order} ];
     setFilterTags(newSort);
     dispatch(filterProductsAsync(newSort));
   };
+  //Clear Filters
+  const clearFilter = (e,section)=>{
+    let tempFilter = [ ...filterTags] ;
+    tempFilter = tempFilter.filter((item)=>{
+      for (const key in item) {
+        return key!==section.id;
+      }
+    });
+    setFilterTags(tempFilter);
+    dispatch(filterProductsAsync(tempFilter));
+  }
+  //Clear Sort 
+  const clearSort = () =>{
+    const filteredArray = filterTags.filter(obj => !('_sort' in obj || '_order' in obj));
+    setFilterTags(filteredArray);
+    dispatch(filterProductsAsync(filteredArray));
+  }
   return (
     <>
       <div className="bg-white">
@@ -141,6 +165,7 @@ const Product = () => {
                                       <MinusIcon
                                         className="h-5 w-5"
                                         aria-hidden="true"
+                                        onClick={(e)=>clearFilter(e,section)}
                                       />
                                     ) : (
                                       <PlusIcon
@@ -252,7 +277,7 @@ const Product = () => {
                   className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7"
                 >
                   <span className="sr-only">View grid</span>
-                  <Squares2X2Icon className="h-5 w-5" aria-hidden="true" />
+                  <Squares2X2Icon onClick={()=>clearSort()} className="h-5 w-5" aria-hidden="true" />
                 </button>
                 <button
                   type="button"
@@ -279,6 +304,7 @@ const Product = () => {
                       as="div"
                       key={section.id}
                       className="border-b border-gray-200 py-6"
+                      
                     >
                       {({ open }) => (
                         <>
@@ -292,6 +318,7 @@ const Product = () => {
                                   <MinusIcon
                                     className="h-5 w-5"
                                     aria-hidden="true"
+                                    onClick={(e)=>clearFilter(e,section)}
                                   />
                                 ) : (
                                   <PlusIcon
