@@ -185,7 +185,7 @@ const Product = () => {
                                     section.options.map((option, optionIdx) => (
                                       <div
                                         key={option.value}
-                                        className="flex items-center"
+                                        className="flex items-center cursor-pointer"
                                       >
                                         <input
                                           id={`filter-mobile-${section.id}-${optionIdx}`}
@@ -196,11 +196,11 @@ const Product = () => {
                                           onChange={(e) =>
                                             handleFilter(e, section, option)
                                           }
-                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                          className="cursor-pointer h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                         />
                                         <label
                                           htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                                          className="ml-3 min-w-0 flex-1 text-gray-500"
+                                          className="ml-3 min-w-0 flex-1 text-gray-500 cursor-pointer"
                                         >
                                           {option.label}
                                         </label>
@@ -338,7 +338,7 @@ const Product = () => {
                                 section.options.map((option, optionIdx) => (
                                   <div
                                     key={option.value}
-                                    className="flex items-center"
+                                    className="flex items-center cursor-pointer"
                                   >
                                     <input
                                       id={`filter-${section.id}-${optionIdx}`}
@@ -349,11 +349,11 @@ const Product = () => {
                                       onChange={(e) =>
                                         handleFilter(e, section, option)
                                       }
-                                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                      className="cursor-pointer h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
                                     />
                                     <label
                                       htmlFor={`filter-${section.id}-${optionIdx}`}
-                                      className="ml-3 text-sm text-gray-600"
+                                      className="cursor-pointer ml-3 text-sm text-gray-600"
                                     >
                                       {option.label}
                                     </label>
