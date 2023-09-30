@@ -725,7 +725,7 @@
   "notifications": [
     {
       "id": 1,
-      "msg": "hellod",
+      "msg": "hello",
       "date": "01-02-03",
       "read": true
     },
@@ -761,12 +761,6 @@
     },
     {
       "id": 7,
-      "msg": "hello",
-      "date": "01-02-03",
-      "read": false
-    },
-    {
-      "id": 8,
       "msg": "hello",
       "date": "01-02-03",
       "read": false

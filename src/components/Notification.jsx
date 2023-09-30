@@ -14,14 +14,15 @@ const Notification = ({notify}) => {
   }
   const close=(e)=>{
     notify(false);
+    document.body.classList.remove("h-100vh", "w-100vh", "overflow-hidden")
   }
   //fetching all notifications
   useEffect(()=>{
     dispatch(getAllNotificationsAsync());
   },[dispatch]);
   return (
-    <div className="notidiv absolute bg-white border-1 rounded-md shadow-2xl  w-80 h-72 top-[3.5rem] right-28">
-      <div className="header flex justify-between px-3 py-1 items-center text-gray-600 font-semibold">
+    <div className="notidiv absolute bg-white border-1 rounded-md shadow-2xl  w-80 h-72 max-sm:w-screen max-sm:h-screen top-[3.5rem] max-sm:top-0 right-28 max-sm:right-0 max-sm:z-30">
+      <div className="header flex justify-between px-3 py-1 items-center text-gray-600 font-semibold max-sm:text-xl">
         <p>Notifications</p>
         <button
           type="button"
