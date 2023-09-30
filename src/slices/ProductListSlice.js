@@ -4,6 +4,7 @@ import { filterProducts } from "../api/ProductList_api";
 
 const initialState = {
   products: [],
+  totalItems: 0,
   status: "loading",
 };
 
@@ -38,14 +39,16 @@ export const productListSlice = createSlice({
       })
       .addCase(fetchAllProductsAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.products = action.payload;
+        state.products = action.payload.data;
+        state.totalItems = action.payload.totalItems;
       })
       .addCase(filterProductsAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(filterProductsAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.products = action.payload;
+        state.products = action.payload.data;
+        state.totalItems = action.payload.totalItems;
       });
   },
 });

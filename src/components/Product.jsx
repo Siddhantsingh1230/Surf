@@ -14,8 +14,12 @@ import Pagination from "./Pagination";
 import ProductList from "./ProductList";
 import { fetchAllCategoriesAsync } from "../slices/CategoryListSlice";
 import { fetchAllBrandsAsync } from "../slices/BrandListSlice";
-import { filterProductsAsync } from "../slices/ProductListSlice";
+import {
+  fetchAllProductsAsync,
+  filterProductsAsync,
+} from "../slices/ProductListSlice";
 import Spinner from "./Spinner";
+import { PAGE_LIMIT } from "../app/constants";
 
 const sortOptions = [
   { name: "Best Rating", sort: "rating", order: "desc", current: false },
@@ -30,11 +34,14 @@ function classNames(...classes) {
 const Product = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const dispatch = useDispatch();
+  const totalItems = useSelector((state) => state.productList.totalItems);
   let categories = useSelector((state) => state.categoryList.categories);
   const categoriesStatus = useSelector((state) => state.categoryList.status);
   let brands = useSelector((state) => state.brandList.brands);
   const brandsStatus = useSelector((state) => state.brandList.status);
   const [filterTags, setFilterTags] = useState([]);
+  let pages = 1;
+  const [page, setPage] = useState(pages);
   let filters = [
     {
       id: "brand",
@@ -55,46 +62,74 @@ const Product = () => {
 
   //Filter Logic
   const handleFilter = (e, section, option) => {
-    let tempFilter = [ ...filterTags] ;
+    const filteredArray = filterTags.filter(
+      (obj) => !("_page" in obj || "_limit" in obj)
+    );
+    let tempFilter = [...filteredArray];
     if (e.target.checked) {
       let optionVal = option.value;
-      tempFilter.push({[section.id]:optionVal});
-      
+      tempFilter.push({ [section.id]: optionVal });
     } else {
-      tempFilter = tempFilter.filter((item)=>{
+      tempFilter = tempFilter.filter((item) => {
         for (const key in item) {
-          return item[key]!==option.value;
+          return item[key] !== option.value;
         }
       });
     }
+    tempFilter = [...tempFilter, { _page: pages, _limit: PAGE_LIMIT }];
     setFilterTags(tempFilter);
     dispatch(filterProductsAsync(tempFilter));
     // console.log(tempFilter)
   };
   //Sort Logic
   const handleSort = (e, option) => {
-    const filteredArray = filterTags.filter(obj => !('_sort' in obj || '_order' in obj));
-    const newSort = [ ...filteredArray, {_sort: option.sort, _order: option.order} ];
+    const filteredArray = filterTags.filter(
+      (obj) => !("_sort" in obj || "_order" in obj)
+    );
+    const newSort = [
+      ...filteredArray,
+      { _sort: option.sort, _order: option.order },
+    ];
     setFilterTags(newSort);
     dispatch(filterProductsAsync(newSort));
   };
   //Clear Filters
-  const clearFilter = (e,section)=>{
-    let tempFilter = [ ...filterTags] ;
-    tempFilter = tempFilter.filter((item)=>{
+  const clearFilter = (e, section) => {
+    let tempFilter = [...filterTags];
+    tempFilter = tempFilter.filter((item) => {
       for (const key in item) {
-        return key!==section.id;
+        return key !== section.id;
       }
     });
     setFilterTags(tempFilter);
     dispatch(filterProductsAsync(tempFilter));
-  }
-  //Clear Sort 
-  const clearSort = () =>{
-    const filteredArray = filterTags.filter(obj => !('_sort' in obj || '_order' in obj));
+  };
+  //Clear Sort
+  const clearSort = () => {
+    const filteredArray = filterTags.filter(
+      (obj) => !("_sort" in obj || "_order" in obj)
+    );
     setFilterTags(filteredArray);
     dispatch(filterProductsAsync(filteredArray));
-  }
+  };
+  //handlePAgeChange
+  const pageChange = (page) => {
+    //for removing old page and limit from tags
+    const filteredArray = filterTags.filter(
+      (obj) => !("_page" in obj || "_limit" in obj)
+    );
+    // adding new page and limit into tags
+    let tempFilter = [...filteredArray, { _page: page, _limit: PAGE_LIMIT }];
+    setFilterTags(tempFilter);
+    pages = page;
+    setPage(page);
+    dispatch(filterProductsAsync(tempFilter));
+  };
+  // reset page when filter  is applied so that it again move to 1st page instead of any current page
+  useEffect(() => {
+    pages = 1;
+    setPage(1);
+  }, [totalItems]);
   return (
     <>
       <div className="bg-white">
@@ -165,7 +200,7 @@ const Product = () => {
                                       <MinusIcon
                                         className="h-5 w-5"
                                         aria-hidden="true"
-                                        onClick={(e)=>clearFilter(e,section)}
+                                        onClick={(e) => clearFilter(e, section)}
                                       />
                                     ) : (
                                       <PlusIcon
@@ -277,7 +312,11 @@ const Product = () => {
                   className="-m-2 ml-5 p-2 text-gray-400 hover:text-gray-500 sm:ml-7"
                 >
                   <span className="sr-only">View grid</span>
-                  <Squares2X2Icon onClick={()=>clearSort()} className="h-5 w-5" aria-hidden="true" />
+                  <Squares2X2Icon
+                    onClick={() => clearSort()}
+                    className="h-5 w-5"
+                    aria-hidden="true"
+                  />
                 </button>
                 <button
                   type="button"
@@ -304,7 +343,6 @@ const Product = () => {
                       as="div"
                       key={section.id}
                       className="border-b border-gray-200 py-6"
-                      
                     >
                       {({ open }) => (
                         <>
@@ -318,7 +356,7 @@ const Product = () => {
                                   <MinusIcon
                                     className="h-5 w-5"
                                     aria-hidden="true"
-                                    onClick={(e)=>clearFilter(e,section)}
+                                    onClick={(e) => clearFilter(e, section)}
                                   />
                                 ) : (
                                   <PlusIcon
@@ -374,7 +412,11 @@ const Product = () => {
               </div>
             </section>
           </main>
-          <Pagination />
+          <Pagination
+            page={page}
+            totalItems={totalItems}
+            pageChange={pageChange}
+          />
         </div>
       </div>
     </>
