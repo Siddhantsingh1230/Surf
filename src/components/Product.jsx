@@ -15,11 +15,12 @@ import ProductList from "./ProductList";
 import { fetchAllCategoriesAsync } from "../slices/CategoryListSlice";
 import { fetchAllBrandsAsync } from "../slices/BrandListSlice";
 import { filterProductsAsync } from "../slices/ProductListSlice";
+import Spinner from "./Spinner";
 
 const sortOptions = [
-  { name: "Best Rating", sort:"rating",order:"desc", current: false },
-  { name: "Price: Low to High", sort:"price",order:"asc", current: false },
-  { name: "Price: High to Low", sort:"price",order:"desc", current: false },
+  { name: "Best Rating", sort: "rating", order: "desc", current: false },
+  { name: "Price: Low to High", sort: "price", order: "asc", current: false },
+  { name: "Price: High to Low", sort: "price", order: "desc", current: false },
 ];
 
 function classNames(...classes) {
@@ -30,8 +31,10 @@ const Product = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const dispatch = useDispatch();
   const categories = useSelector((state) => state.categoryList.categories);
+  const categoriesStatus = useSelector((state) => state.categoryList.status);
   const brands = useSelector((state) => state.brandList.brands);
-  const [filterTags,setFilterTags]=useState({});
+  const brandsStatus = useSelector((state) => state.brandList.status);
+  const [filterTags, setFilterTags] = useState({});
   let filters = [
     {
       id: "brand",
@@ -51,24 +54,23 @@ const Product = () => {
   }, [dispatch]);
 
   //Filter Logic
-  const handleFilter = (e,section,option) =>{
-    let tempFilter = {...filterTags};
-    if(e.target.checked){
-      tempFilter[section.id]=option.value;
-
-    }else{
+  const handleFilter = (e, section, option) => {
+    let tempFilter = { ...filterTags };
+    if (e.target.checked) {
+      tempFilter[section.id] = option.value;
+    } else {
       delete tempFilter[section.id];
     }
     setFilterTags(tempFilter);
     dispatch(filterProductsAsync(tempFilter));
     // console.log(tempFilter)
-  }
+  };
   //Sort Logic
-  const handleSort = (e,option)=>{
-    const newSort = {...filterTags,_sort:option.sort,_order:option.order};
+  const handleSort = (e, option) => {
+    const newSort = { ...filterTags, _sort: option.sort, _order: option.order };
     setFilterTags(newSort);
     dispatch(filterProductsAsync(newSort));
-  }
+  };
   return (
     <>
       <div className="bg-white">
@@ -120,6 +122,7 @@ const Product = () => {
                     {/* Filters */}
                     <form className="mt-4 border-t border-gray-200">
                       <h3 className="sr-only">Categories</h3>
+
                       {filters.map((section) => (
                         <Disclosure
                           as="div"
@@ -150,28 +153,35 @@ const Product = () => {
                               </h3>
                               <Disclosure.Panel className="pt-6">
                                 <div className="space-y-6">
-                                  {section.options.map((option, optionIdx) => (
-                                    <div
-                                      key={option.value}
-                                      className="flex items-center"
-                                    >
-                                      <input
-                                        id={`filter-mobile-${section.id}-${optionIdx}`}
-                                        name={`${section.id}[]`}
-                                        defaultValue={option.value}
-                                        type="checkbox"
-                                        defaultChecked={option.checked}
-                                        onChange={(e)=>(handleFilter(e,section,option))}
-                                        className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                      />
-                                      <label
-                                        htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
-                                        className="ml-3 min-w-0 flex-1 text-gray-500"
+                                  {categoriesStatus === "loading" ||
+                                  brandsStatus === "loading" ? (
+                                    <Spinner />
+                                  ) : (
+                                    section.options.map((option, optionIdx) => (
+                                      <div
+                                        key={option.value}
+                                        className="flex items-center"
                                       >
-                                        {option.label}
-                                      </label>
-                                    </div>
-                                  ))}
+                                        <input
+                                          id={`filter-mobile-${section.id}-${optionIdx}`}
+                                          name={`${section.id}[]`}
+                                          defaultValue={option.value}
+                                          type="checkbox"
+                                          defaultChecked={option.checked}
+                                          onChange={(e) =>
+                                            handleFilter(e, section, option)
+                                          }
+                                          className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                        />
+                                        <label
+                                          htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
+                                          className="ml-3 min-w-0 flex-1 text-gray-500"
+                                        >
+                                          {option.label}
+                                        </label>
+                                      </div>
+                                    ))
+                                  )}
                                 </div>
                               </Disclosure.Panel>
                             </>
@@ -218,7 +228,7 @@ const Product = () => {
                           <Menu.Item key={option.name}>
                             {({ active }) => (
                               <p
-                                onClick={(e)=>handleSort(e,option)}
+                                onClick={(e) => handleSort(e, option)}
                                 className={classNames(
                                   option.current
                                     ? "font-medium text-gray-900 cursor-pointer"
@@ -294,28 +304,35 @@ const Product = () => {
                           </h3>
                           <Disclosure.Panel className="pt-6">
                             <div className="space-y-4">
-                              {section.options.map((option, optionIdx) => (
-                                <div
-                                  key={option.value}
-                                  className="flex items-center"
-                                >
-                                  <input
-                                    id={`filter-${section.id}-${optionIdx}`}
-                                    name={`${section.id}[]`}
-                                    defaultValue={option.value}
-                                    type="checkbox"
-                                    defaultChecked={option.checked}
-                                    onChange={(e)=>(handleFilter(e,section,option))}
-                                    className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                                  />
-                                  <label
-                                    htmlFor={`filter-${section.id}-${optionIdx}`}
-                                    className="ml-3 text-sm text-gray-600"
+                              {categoriesStatus === "loading" ||
+                              brandsStatus === "loading" ? (
+                                <Spinner />
+                              ) : (
+                                section.options.map((option, optionIdx) => (
+                                  <div
+                                    key={option.value}
+                                    className="flex items-center"
                                   >
-                                    {option.label}
-                                  </label>
-                                </div>
-                              ))}
+                                    <input
+                                      id={`filter-${section.id}-${optionIdx}`}
+                                      name={`${section.id}[]`}
+                                      defaultValue={option.value}
+                                      type="checkbox"
+                                      defaultChecked={option.checked}
+                                      onChange={(e) =>
+                                        handleFilter(e, section, option)
+                                      }
+                                      className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                                    />
+                                    <label
+                                      htmlFor={`filter-${section.id}-${optionIdx}`}
+                                      className="ml-3 text-sm text-gray-600"
+                                    >
+                                      {option.label}
+                                    </label>
+                                  </div>
+                                ))
+                              )}
                             </div>
                           </Disclosure.Panel>
                         </>
