@@ -172,6 +172,7 @@
   margin: 2px 0 0 2px;
   animation: goog-te-spinner-rotator 1.4s linear infinite;
   transform: translateY(-50%);
+  background: transparent;
 }
 .goog-te-spinner-path {
   stroke-dasharray: 187;
@@ -179,6 +180,7 @@
   stroke: #4285f4;
   transform-origin: center;
   animation: goog-te-spinner-dash 1.4s ease-in-out infinite;
+  background: transparent;
 }
 @keyframes goog-te-spinner-rotator {
   0% {
@@ -199,5 +201,21 @@
   100% {
     stroke-dashoffset: 187;
     transform: rotate(450deg);
+  }
+}
+
+/* for hiding scroll bar custom class */
+@layer utilities {
+  @variants responsive {
+    /* Hide scrollbar for Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Hide scrollbar for IE, Edge and Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+    }
   }
 }

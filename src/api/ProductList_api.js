@@ -25,4 +25,9 @@ export const filterProducts = async (filterObjArray) => {
   return { data: response.data, totalItems };
 };
 
+export const getProductById = async (id) => {
+  const { data } = await axios.get("http://localhost:8080/products/" + id);
+  return data;
+};
+
 export default fetchAllProducts;
