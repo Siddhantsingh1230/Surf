@@ -1,29 +1,26 @@
-import React from "react";
-import { useState } from "react";
+import {useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { deleteteNotificationAsync, getAllNotificationsAsync } from "../slices/NotificationSlice";
+import Spinner from "./Spinner";
 
-const Notification = (prop) => {
-  const notiItem = [
-    { id:1, msg: "hello", date: "01-02-03", read: true },
-    { id:2, msg: "hello", date: "01-02-03", read: true },
-    { id:3, msg: "hello", date: "01-02-03", read: true },
-    { id:4, msg: "hello", date: "01-02-03", read: false },
-    { id:5, msg: "hello", date: "01-02-03", read: false },
-    { id:6, msg: "hello", date: "01-02-03", read: false },
-    { id:7, msg: "hello", date: "01-02-03", read: false },
-    { id:8, msg: "hello", date: "01-02-03", read: false },
-    { id:9, msg: "hello", date: "01-02-03", read: false },
-    { id:10, msg: "hello", date: "01-02-03", read: false },
-  ];
-  const [notilist,setList] = useState(notiItem);
+const Notification = ({notify}) => {
+  const dispatch = useDispatch();
+  let notiItem = useSelector((state) => state.notificationList.notifications);
+  let notiStatus = useSelector((state) => state.notificationList.status);
   const deleteItem =(id)=>{
-    let list = notilist.filter((item)=>item.id!=id)
-    setList(list);
+    dispatch(deleteteNotificationAsync(id));
+    dispatch(getAllNotificationsAsync()); 
+    
   }
   const close=(e)=>{
-    prop.notify(false);
+    notify(false);
   }
+  //fetching all notifications
+  useEffect(()=>{
+    dispatch(getAllNotificationsAsync());
+  },[dispatch]);
   return (
-    <div className="notidiv absolute bg-white border-1 rounded-md shadow-sm shadow-gray-300 w-80 h-72 top-[3.5rem] right-28">
+    <div className="notidiv absolute bg-white border-1 rounded-md shadow-2xl  w-80 h-72 top-[3.5rem] right-28">
       <div className="header flex justify-between px-3 py-1 items-center text-gray-600 font-semibold">
         <p>Notifications</p>
         <button
@@ -40,19 +37,19 @@ const Notification = (prop) => {
             aria-hidden="true"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M6 18L18 6M6 6l12 12"
             />
           </svg>
         </button>
       </div>
-      <hr className="my-0 h-0.5 m-1 border-t-0 bg-gray-600 opacity-100 dark:opacity-50" />
+      <hr className="my-0 h-[1px] m-1 border-t-0 bg-gray-600 opacity-40 " />
       <div className="notification content p-1 m-1 rounded-b-lg h-[80%] overflow-y-auto overflow-x-hidden ">
-        {notilist.map((item) => (
-          <div className="content-item m-1 p-1 flex items-center justify-between">
-            {item.read === true ? (
+        {notiStatus==="loading"?<Spinner/>:notiItem.length>0?notiItem.map((item) => (
+          <div key={item.id} className="content-item m-1 p-1 flex items-center justify-between">
+            {item.read === !true ? (  
               <div className="p-0.5">
                 <button className="w-2 h-2 rounded-full bg-red-600"></button>
               </div>
@@ -71,20 +68,20 @@ const Notification = (prop) => {
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  stroke-width="1.5"
+                  strokeWidth="1.5"
                   stroke="currentColor"
                   className="w-4 h-4"
                 >
                   <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0"
                   />
                 </svg>
               </span>
             </button>
           </div>
-        ))}
+        )):<p>No notifications</p>}
       </div>
     </div>
   );

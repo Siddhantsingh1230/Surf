@@ -48,7 +48,9 @@
       "brand": "Samsung",
       "category": "smartphones",
       "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-      "images": ["https://i.dummyjson.com/data/products/3/1.jpg"]
+      "images": [
+        "https://i.dummyjson.com/data/products/3/1.jpg"
+      ]
     },
     {
       "id": 4,
@@ -552,18 +554,38 @@
     }
   ],
   "category": [
-    { "value": "smartphones", "label": "smartphones", "checked": false },
-    { "value": "laptops", "label": "laptops", "checked": false },
-    { "value": "fragrances", "label": "fragrances", "checked": false },
-    { "value": "skincare", "label": "skincare", "checked": false },
-    { "value": "groceries", "label": "groceries", "checked": false },
+    {
+      "value": "smartphones",
+      "label": "smartphones",
+      "checked": false
+    },
+    {
+      "value": "laptops",
+      "label": "laptops",
+      "checked": false
+    },
+    {
+      "value": "fragrances",
+      "label": "fragrances",
+      "checked": false
+    },
+    {
+      "value": "skincare",
+      "label": "skincare",
+      "checked": false
+    },
+    {
+      "value": "groceries",
+      "label": "groceries",
+      "checked": false
+    },
     {
       "value": "home-decoration",
       "label": "home decoration",
       "checked": false
     }
   ],
-  "brands" : [
+  "brands": [
     {
       "value": "Apple",
       "label": "Apple",
@@ -698,6 +720,68 @@
       "value": "Golden",
       "label": "Golden",
       "checked": false
+    }
+  ],
+  "notifications": [
+    {
+      "id": 1,
+      "msg": "hellod",
+      "date": "01-02-03",
+      "read": true
+    },
+    {
+      "id": 2,
+      "msg": "hello",
+      "date": "01-02-03",
+      "read": true
+    },
+    {
+      "id": 3,
+      "msg": "hello",
+      "date": "01-02-03",
+      "read": true
+    },
+    {
+      "id": 4,
+      "msg": "hello",
+      "date": "01-02-03",
+      "read": false
+    },
+    {
+      "id": 5,
+      "msg": "hello",
+      "date": "01-02-03",
+      "read": false
+    },
+    {
+      "id": 6,
+      "msg": "hello",
+      "date": "01-02-03",
+      "read": false
+    },
+    {
+      "id": 7,
+      "msg": "hello",
+      "date": "01-02-03",
+      "read": false
+    },
+    {
+      "id": 8,
+      "msg": "hello",
+      "date": "01-02-03",
+      "read": false
+    },
+    {
+      "id": 9,
+      "msg": "hello",
+      "date": "01-02-03",
+      "read": false
+    },
+    {
+      "id": 10,
+      "msg": "hello",
+      "date": "01-02-03",
+      "read": false
     }
   ]
 }
