@@ -264,7 +264,7 @@ const Navbar = ({ children }) => {
         </main>
         
       </div>
-      {notify && <Notification/>}
+      {notify && <Notification notify={openNoti}/>}
     </>
     
   );

@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 
-const Notification = () => {
+const Notification = (prop) => {
   const notiItem = [
     { id:1, msg: "hello", date: "01-02-03", read: true },
     { id:2, msg: "hello", date: "01-02-03", read: true },
@@ -20,10 +20,7 @@ const Notification = () => {
     setList(list);
   }
   const close=(e)=>{
-    const notificationDiv = e.target.closest(".notidiv");
-    if (notificationDiv) {
-      notificationDiv.classList.add("hidden");
-    }
+    prop.notify(false);
   }
   return (
     <div className="notidiv absolute bg-white border-1 rounded-md shadow-sm shadow-gray-300 w-80 h-72 top-[3.5rem] right-28">
