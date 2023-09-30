@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment, useState } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
@@ -33,6 +33,7 @@ function classNames(...classes) {
 
 const Product = () => {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+  const productTop = useRef(null);
   const dispatch = useDispatch();
   const totalItems = useSelector((state) => state.productList.totalItems);
   let categories = useSelector((state) => state.categoryList.categories);
@@ -257,7 +258,10 @@ const Product = () => {
 
           <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="flex items-baseline justify-between border-b border-gray-200 pb-6 pt-24">
-              <h1 className="text-4xl font-bold tracking-tight text-gray-900">
+              <h1
+                className="text-4xl font-bold tracking-tight text-gray-900"
+                ref={productTop}
+              >
                 Trending
               </h1>
 
@@ -414,6 +418,7 @@ const Product = () => {
           </main>
           <Pagination
             page={page}
+            productTop={productTop}
             totalItems={totalItems}
             pageChange={pageChange}
           />
