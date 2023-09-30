@@ -2,6 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import cart from "../assets/images/cart.gif";
 import arrow from "../assets/images/arrow.gif";
+import RippleBtn from "../components/RippleBtn";
+import HomeGif from "../assets/images/home.gif";
+
 const products = [
   {
     id: 1,
@@ -174,12 +177,17 @@ const Cart = () => {
         </div>
         <Link
           to="/"
-          className="sm:sticky sm:bottom-6 ml-5 sm:ml-32 my-8 font-medium flex items-center "
+          className="hidden   sm:sticky sm:bottom-6 ml-5 sm:ml-32 my-8 font-medium sm:flex items-center "
         >
           <img src={arrow} alt="" className="w-8 h-8 rotate-180" />
           &nbsp; <p>Continue shopping</p>
         </Link>
       </div>
+      <Link to="/">
+        <RippleBtn classes={"sm:hidden block fixed left-5 bottom-8 bg-white w-auto max-sm:h-auto  px-2 max-sm:px-[.5rem] max-sm:py-[.5rem] z-20"}>
+          <img src={HomeGif} className=" max-sm:w-4 max-sm:h-4 w-6 h-6" alt="" />
+        </RippleBtn>
+      </Link>
     </>
   );
 };

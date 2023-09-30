@@ -20,7 +20,7 @@ const EmblaCarousel = () => {
                 <img
                   className="embla__slide__img cursor-pointer"
                   src={imageByIndex(index)}
-                  alt="Your alt text"
+                  alt=""
                 />
               </div>
             ))}
