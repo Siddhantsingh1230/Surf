@@ -135,8 +135,8 @@ const Profile = () => {
                       onClick={changeImage}
                     />
 
-                    <div className="z-10 opacity-0 hover:opacity-100 duration-300 absolute inset-0 flex justify-center items-center  text-md text-white font-bold">
-                      Click to change
+                    <div onClick={changeImage} className="rounded-full -mt-32 z-10 opacity-0 hover:opacity-80 duration-300 absolute inset-0  flex justify-center items-center  text-md text-white   bg-black font-bold">
+                      Change <i className="font-light ri-landscape-fill"></i>
                     </div>
                   </div>
                 </div>
