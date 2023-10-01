@@ -1,11 +1,13 @@
 import React , { Fragment, useRef, useState } from "react";
 import bgimg from"../assets/images/bgim.jpg";
 import { Dialog, Transition } from '@headlessui/react';
+import { useSelector } from "react-redux";
 
 
 const Popup = (props)=>{
   const [open, setOpen] = useState(true)
   const cancelButtonRef = useRef(null)
+  
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={()=>{setOpen(false); props.pop(false)}}>
@@ -78,6 +80,8 @@ const Profile = () => {
   const [url,seturl]=useState("https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80");
   const [newurl,setnewurl] = useState(url)
   const [pop,setpop] = useState(false);
+  const user = useSelector((state) => state.auth.user);
+
   const changeImage=()=>{
       let input = document.createElement('input');
       input.type ='file';
@@ -106,9 +110,9 @@ const Profile = () => {
       <section className="relative py-4 bg-blueGray-200 ">
         <div className="container mx-auto px-32 max-sm:px-0">
           <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg -mt-72 max-sm:-mt-48">
-            <div className="px-12">
+            <div className="px-12 ">
               <div className="flex flex-wrap justify-center">
-                <div className="px-12 flex justify-center">
+                <div className="px-12 flex justify-center max-sm:px-0">
                   <div className="relative">
                     <img
                       alt="..."
@@ -121,16 +125,16 @@ const Profile = () => {
                 
               </div>
               <div className="text-center mt-2">
-                <h3 className="text-4xl font-semibold leading-normal text-blueGray-700 mb-2">
-                  Jenna Stones
+                <h3 className="text-4xl font-semibold leading-normal text-blueGray-700 mb-2 max-sm:text-3xl">
+                 {user[0].username}
                 </h3>
                 <div className="text-sm leading-normal mt-0 mb-4 text-blueGray-400 font-bold uppercase">
                 < i class="ri-smartphone-line mr-2"/>
-                  99093-29029
+                  {user[0].phone}
                 </div>
                 <div className="mt-0 mb-4 text-blueGray-500 flex items-center justify-center ">
                 < i class="ri-mail-line mr-2"/>
-                  jennastones@gmail.com
+                  {user[0].email}
                 </div>
                 <div className="text-sm leading-normal mt-0 text-blueGray-400 font-bold uppercase mb-32 ">
                 < i class="ri-home-4-fill mr-2"/>
