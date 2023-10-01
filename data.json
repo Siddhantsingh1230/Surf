@@ -778,5 +778,13 @@
       "read": false
     }
   ],
-  "users":[]
+  "users": [
+    {
+      "id": "2023-10-01T05:28:37.235Z",
+      "username": "siddhantsingh1230",
+      "phone": "9023134084",
+      "email": "siddhant@mail.com",
+      "password": "Siddhant12@"
+    }
+  ]
 }
