@@ -70,7 +70,15 @@ const App = () => {
           />
           <Route exact path="/product/:id" element={<ProductDetails />} />
           <Route exact path="*" element={<PageNotFound />} />
-          <Route exact path="/setting" element={<Setting />} />
+          <Route
+            exact
+            path="/setting"
+            element={
+              <Protected>
+                <Setting />
+              </Protected>
+            }
+          />
           <Route
             exact
             path="/profile"
