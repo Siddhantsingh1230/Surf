@@ -3,7 +3,7 @@ import { addToCart, getCart ,updateCartProduct ,removeFromCart } from "../api/Ca
 
 const initialState = {
   cart: [],
-  status: "loading",
+  status: "idle",
   error: null,
 };
 

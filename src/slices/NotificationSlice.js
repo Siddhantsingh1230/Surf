@@ -3,7 +3,7 @@ import getAllNotifications, { deleteteNotification } from "../api/Notification_a
 
 const initialState = {
   notifications:[],
-  status: 'loading',
+  status: 'idle',
 };
 
 export const getAllNotificationsAsync = createAsyncThunk(

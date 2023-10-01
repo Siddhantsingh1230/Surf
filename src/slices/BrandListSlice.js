@@ -3,7 +3,7 @@ import fetchAllBrands from "../api/BrandList_api";
 
 const initialState = {
   brands:[],
-  status: 'loading',
+  status: 'idle',
 };
 
 export const fetchAllBrandsAsync = createAsyncThunk(
