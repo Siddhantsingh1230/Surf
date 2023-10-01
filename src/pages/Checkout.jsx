@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import coin from "../assets/images/coin.gif";
 import truck from "../assets/images/truck.gif";
 import logo from "../assets/images/logo.svg";
 import india from "../assets/images/india.png";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartAsync } from "../slices/CartSlice";
 
 const Checkout = () => {
+  const dispatch = useDispatch();
+  const cart = useSelector(state=>state.cart.cart);
+  const user = useSelector(state=>state.auth.user);
   const products = [
     {
       id: 1,
@@ -57,6 +62,11 @@ const Checkout = () => {
     },
     // More products...
   ];
+useEffect(()=>{
+  if(user){
+    dispatch(getCartAsync(user.id));
+  }
+},[dispatch]);
   return (
     <>
       <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
@@ -146,20 +156,23 @@ const Checkout = () => {
             Check your items. And select a suitable shipping method.
           </p>
           <div className="mt-8 space-y-3 rounded-lg border bg-white px-2 py-4 sm:px-6">
-            {products.length > 0 ? (
-              products
+            {cart.length > 0 ? (
+              cart
                 .filter((item, index) => index < 2)
                 .map((item) => (
-                  <div key={item.id} className="flex overflow-hidden rounded-lg bg-white sm:flex-row">
+                  <div
+                    key={item.id}
+                    className="flex overflow-hidden rounded-lg bg-white sm:flex-row"
+                  >
                     <img
                       className="m-2 h-24 w-28 rounded-md border object-cover object-center"
-                      src={item.imageSrc}
+                      src={item.thumbnail}
                       alt=""
                     />
                     <div className="flex w-full  overflow-hidden flex-col px-4 py-4">
-                      <span className="font-semibold">{item.name}</span>
+                      <span className="font-semibold">{item.title}</span>
                       <span className="float-right text-gray-400">
-                        {item.color}
+                        {item.category}
                       </span>
                       <p className="text-lg font-bold">{item.price}</p>
                     </div>
@@ -186,9 +199,9 @@ const Checkout = () => {
                     />
                   </svg>
 
-                  <p className="whitespace-nowrap text-sm">
-                    +{products.length - 2} more{" "}
-                  </p>
+                  {cart.length>2?<p className="whitespace-nowrap text-sm">
+                    +{cart.length - 2} more{" "}
+                  </p>:<p className="whitespace-nowrap text-sm">Cart</p>}
                 </span>
               </Link>
             ) : null}
@@ -203,9 +216,9 @@ const Checkout = () => {
                 type="radio"
                 name="radio"
               />
-              <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+              <span className="peer-checked :border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
               <label
-                className="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-2"
+                className="group  peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-2"
                 htmlFor="radio_1"
               >
                 <img className="w-14 object-contain" src={truck} alt="" />
@@ -366,11 +379,7 @@ const Checkout = () => {
                   placeholder="Street Address"
                 />
                 <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
-                  <img
-                    className="h-4 w-4 object-contain"
-                    src={india}
-                    alt=""
-                  />
+                  <img className="h-4 w-4 object-contain" src={india} alt="" />
                 </div>
               </div>
               <select
