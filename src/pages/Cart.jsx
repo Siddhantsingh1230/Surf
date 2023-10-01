@@ -1,62 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import cart from "../assets/images/cart.gif";
 import arrow from "../assets/images/arrow.gif";
 import RippleBtn from "../components/RippleBtn";
 import HomeGif from "../assets/images/home.gif";
+import { useDispatch,useSelector } from "react-redux";
+import { getCartAsync } from "../slices/CartSlice";
 
-const products = [
-  {
-    id: 1,
-    name: "Throwback Hip Bag",
-    href: "#",
-    color: "Salmon",
-    price: "$90.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg",
-    imageAlt:
-      "Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.",
-  },
-  {
-    id: 2,
-    name: "Medium Stuff Satchel",
-    href: "#",
-    color: "Blue",
-    price: "$32.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
-    imageAlt:
-      "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
-  },
-  {
-    id: 3,
-    name: "Medium Stuff Satchel",
-    href: "#",
-    color: "Blue",
-    price: "$32.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
-    imageAlt:
-      "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
-  },
-  {
-    id: 4,
-    name: "Medium Stuff Satchel",
-    href: "#",
-    color: "Blue",
-    price: "$32.00",
-    quantity: 1,
-    imageSrc:
-      "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
-    imageAlt:
-      "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
-  },
-  // More products...
-];
+
 const Cart = () => {
+  const dispatch = useDispatch();
+  const products = useSelector(state=>state.cart.cart);
+  const user = useSelector(state=>state.auth.user);
+  useEffect(()=>{
+    dispatch(getCartAsync(user[0].id));
+  },[dispatch]);
   return (
     <>
       <svg
@@ -114,21 +72,21 @@ const Cart = () => {
                 key={item.id}
                 className="justify-between mb-6 rounded-lg bg-white p-6 shadow-md sm:flex sm:justify-start "
               >
-                <Link to={item.href}>
+                <Link to={`/product/${item.id}`}>
                   <img
-                    src={item.imageSrc}
-                    alt={item.imageAlt}
+                    src={item.thumbnail}
+                    alt={item.title}
                     className="w-full rounded-lg sm:w-40 cursor-pointer"
                   />
                 </Link>
                 <div className="sm:ml-4 sm:flex sm:w-full sm:justify-between">
                   <div className="mt-5 sm:mt-0">
                     <h2 className="text-lg sm:text-2xl  font-bold text-gray-900">
-                      {item.name}
+                      {item.title}
                     </h2>
                     <p className="mt-1 text-xs text-gray-700">
                       <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
-                        {item.color}
+                        {item.category}
                       </span>
                     </p>
                   </div>
@@ -151,7 +109,7 @@ const Cart = () => {
                     <div className="flex items-center space-x-4 ">
                       <p className="text-sm">
                         <span className="inline-flex items-center rounded-md bg-purple-50 px-2 py-1 text-xs font-medium text-purple-700 ring-1 ring-inset ring-purple-700/10">
-                          {item.price}
+                        ₹ {item.price}
                         </span>
                       </p>
                       <svg

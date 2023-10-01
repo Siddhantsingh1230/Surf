@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
+import { getCartAsync } from "../slices/CartSlice";
 import RippleBtn from "./RippleBtn";
 import {
   Bars3Icon,
@@ -40,6 +41,7 @@ function classNames(...classes) {
 const Navbar = ({ children }) => {
   const dispatch = useDispatch();
   const notiItem = useSelector((state) => state.notificationList.notifications);
+  const cartItems= useSelector((state) => state.cart.cart);
   const [notify, setNotify] = useState(false);
   const openNoti = () => {
     if (!notify) {
@@ -51,6 +53,9 @@ const Navbar = ({ children }) => {
   const LoggedUser = useSelector((state) => state.auth.user);
   useEffect(() => {
     dispatch(getAllNotificationsAsync());
+    if(LoggedUser){
+      dispatch(getCartAsync(LoggedUser[0].id));
+    }
   }, [dispatch]);
   return (
     <>
@@ -120,7 +125,7 @@ const Navbar = ({ children }) => {
                             </button>
                           </Link>
                           <span className="whitespace-nowrap rounded-md bg-purple-100 px-2 py-0.35 text-sm text-purple-500 font-bold text-[0.75rem] dark:bg-red-600 mb-5 -ml-3 z-10 dark:text-purple-100">
-                            <Link to="/cart">2</Link>
+                            <Link to="/cart">{cartItems.length}</Link>
                           </span>
                           {/* Profile dropdown */}
                           <Menu as="div" className="relative ml-3">
@@ -280,7 +285,7 @@ const Navbar = ({ children }) => {
                             </button>
                           </Link>
                           <span className="whitespace-nowrap rounded-md bg-purple-100 px-2 py-0.2 text-sm text-purple-500 text-[0.65rem] font-bold dark:bg-red-600 mb-6 -ml-4 z-10 dark:text-purple-100">
-                            <Link to="/cart">2</Link>
+                            <Link to="/cart">{cartItems.length}</Link>
                           </span>
                         </div>
                       </div>
