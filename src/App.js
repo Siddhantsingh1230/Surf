@@ -50,15 +50,7 @@ const App = () => {
           />
           <Route exact path="/about" element={<About />} />
           <Route exact path="/deals" element={<Deals />} />
-          <Route
-            exact
-            path="/category"
-            element={
-              <Protected>
-                <Category />
-              </Protected>
-            }
-          />
+          <Route exact path="/category" element={<Category />} />
           <Route
             exact
             path="/checkout"
