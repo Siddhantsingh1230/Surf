@@ -891,5 +891,23 @@
       "quantity": 1,
       "userId": "2023-10-01T05:28:37.235Z"
     }
+  ],
+  "orderState":[
+    {
+      "value":"gujarat",
+      "title":"Gujarat"
+    },
+    {
+      "value":"bihar",
+      "title":"Bihar"
+    },
+    {
+      "value":"rajasthan",
+      "title":"Rajasthan"
+    },
+    {
+      "value":"orissa",
+      "title":"Orissa"
+    }
   ]
 }

@@ -3,7 +3,7 @@ import fetchAllCategories from "../api/CategoryList_api";
 
 const initialState = {
   categories:[],
-  status: 'loading',
+  status: 'idle',
 };
 
 export const fetchAllCategoriesAsync = createAsyncThunk(

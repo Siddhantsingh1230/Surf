@@ -7,7 +7,7 @@ import fetchAllProducts, {
 const initialState = {
   products: [],
   totalItems: 0,
-  status: "loading",
+  status: "idle",
   selectedProduct: null,
 };
 
