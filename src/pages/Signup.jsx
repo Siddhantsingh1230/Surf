@@ -1,8 +1,10 @@
 import React from "react";
 import bg from "../assets/images/bg.jpg";
 import shopping from "../assets/images/shopping.jpg";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { createUserAsync } from "../slices/AuthSlice";
+import { useDispatch, useSelector } from "react-redux";
 
 const Signup = () => {
   const {
@@ -11,11 +13,15 @@ const Signup = () => {
     watch,
     formState: { errors },
   } = useForm();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
   return (
-    <>
+    <>{user && <Navigate to="/" replace={true} />}
       <form
         noValidate
-        onSubmit={handleSubmit((data) => console.log(data))}
+        onSubmit={handleSubmit((data) => {
+          dispatch(createUserAsync(data));
+        })}
         className="h-screen bg-blue-100 text-gray-900 flex justify-center overflow-y-hidden "
       >
         <div className="max-w-screen-xl max-sm:items-center m-0 sm:my-10 sm:mx-40 bg-white shadow sm:rounded-xl flex justify-center flex-1 h-fi">
@@ -58,7 +64,7 @@ const Signup = () => {
                     </span>
                   </div>
                   {errors.username && (
-                    <p class="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
+                    <p className="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
                       {errors.username.message}
                     </p>
                   )}
@@ -98,7 +104,7 @@ const Signup = () => {
                     </span>
                   </div>
                   {errors.phone && (
-                    <p class="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
+                    <p className="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
                       {errors.phone.message}
                     </p>
                   )}
@@ -138,7 +144,7 @@ const Signup = () => {
                     </span>
                   </div>
                   {errors.email && (
-                    <p class="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
+                    <p className="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
                       {errors.email.message}
                     </p>
                   )}
@@ -179,7 +185,7 @@ const Signup = () => {
                     </span>
                   </div>
                   {errors.password && (
-                    <p class="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
+                    <p className="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
                       {errors.password.message}
                     </p>
                   )}

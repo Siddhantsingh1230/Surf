@@ -7,6 +7,9 @@ import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getProductByIdAsync } from "../slices/ProductListSlice";
 import Spinner from "../components/Spinner";
+import { addToCartAsync } from "../slices/CartSlice";
+import { toast } from "react-toastify";
+import Modal from "../components/Modal";
 
 // const product = {
 //   name: "Basic Tee 6-Pack",
@@ -86,13 +89,24 @@ function classNames(...classes) {
 }
 const ProductDetails = () => {
   const [selectedColor, setSelectedColor] = useState(colors[0]);
+  const [openModal,setOpenModal] = useState(false);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const product = useSelector((state) => state.productList.selectedProduct);
+  const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const { id } = useParams();
   useEffect(() => {
     dispatch(getProductByIdAsync(id));
   }, [dispatch, id]);
+
+  const addToCart = (e) =>{
+    if(user){
+      dispatch(addToCartAsync({...product,quantity:1,userId:user.id}));
+    }else{
+      setOpenModal(true);
+    }
+  }
+
   return (
     <>
       <Navbar>
@@ -217,7 +231,7 @@ const ProductDetails = () => {
                     </div>
                   </div>
 
-                  <form className="mt-10">
+                  <div className="mt-10">
                     {/* Colors */}
                     <div>
                       <h3 className="text-sm font-medium text-gray-900">
@@ -347,11 +361,12 @@ const ProductDetails = () => {
 
                     <button
                       type="submit"
+                      onClick={(e)=>{addToCart(e)}}
                       className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Add to Cart
                     </button>
-                  </form>
+                  </div>
                 </div>
 
                 <div className="py-10 lg:col-span-2 lg:col-start-1 lg:border-r lg:border-gray-200 lg:pb-16 lg:pr-8 lg:pt-6">
@@ -401,6 +416,7 @@ const ProductDetails = () => {
         ) : (
           <Spinner />
         )}
+        <Modal open={openModal} setOpen={setOpenModal}/>
       </Navbar>
     </>
   );

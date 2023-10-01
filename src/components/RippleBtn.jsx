@@ -5,7 +5,6 @@ const RippleBtn = ({ text, children ,classes }) => {
   useEffect(() => {
     function createRipple(y, x) {
       const ripple = `<div class="circle" style="top:${y}px;left:${x}px;"></div>`;
-      console.log(x);
       const _ripple = $(ripple);
       $(".ripple").append(_ripple);
       setTimeout(() => _ripple.remove(), 900);
@@ -18,7 +17,7 @@ const RippleBtn = ({ text, children ,classes }) => {
   }, []);
   return (
     <>
-      <button className={`mui-button flex justify-center items-center rounded-lg ${classes}`}>
+      <button className={`mui-button flex justify-center items-center cursor-pointer rounded-lg ${classes}`}>
         <div className="ripple"></div>
         {children?children:<p className="text-white font-medium">{text}</p>}
       </button>
