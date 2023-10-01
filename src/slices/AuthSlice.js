@@ -39,6 +39,16 @@ export const authSlice = createSlice({
         state.status = "idle";
         state.user = action.payload;
         state.error = null;
+        toast.success('🦄 Account created', {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
       })
       .addCase(loginAsync.pending, (state) => {
         state.status = "loading";

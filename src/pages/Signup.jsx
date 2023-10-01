@@ -1,10 +1,10 @@
 import React from "react";
 import bg from "../assets/images/bg.jpg";
 import shopping from "../assets/images/shopping.jpg";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { createUserAsync } from "../slices/AuthSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Signup = () => {
   const {
@@ -14,8 +14,9 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.auth.user);
   return (
-    <>
+    <>{user && <Navigate to="/" replace={true} />}
       <form
         noValidate
         onSubmit={handleSubmit((data) => {

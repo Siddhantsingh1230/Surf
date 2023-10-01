@@ -784,7 +784,15 @@
       "username": "siddhantsingh1230",
       "phone": "9023134084",
       "email": "siddhant@mail.com",
-      "password": "Siddhant12@"
+      "password": "Admin12@"
+    },
+    {
+      "id": "2023-10-01T10:01:46.913Z",
+      "username": "Siddhant Singh",
+      "phone": "9023134084",
+      "email": "admin@mail.com",
+      "password": "Admin12@"
     }
-  ]
+  ],
+  "cart":[]
 }
