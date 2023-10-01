@@ -1,11 +1,33 @@
 import axios from "axios";
+import { getProductById } from "./ProductList_api";
 
 export const getCart = async (userID) => {
-  const { data } = await axios.get(
-    "http://localhost:8080/cart?userId=" + userID
-  );
-  return data;
+  try {
+    const { data } = await axios.get(
+      "http://localhost:8080/cart?userId=" + userID
+    );
+
+    if (data) {
+      const products = await Promise.all(data.map(async (item) => {
+      const product = await getProductById(item.id);
+      // console.log(product);
+      return product;
+      }));
+      const detailedData = data.map((item,index)=>({
+        ...item,product:products[index]
+      }));
+      console.log(detailedData);
+    } else {
+      console.log("error");
+    }
+
+    return data;
+  } catch (error) {
+    console.error("Error fetching cart:", error);
+    throw error;
+  }
 };
+
 export const addToCart = async (Data) => {
   const { data } = await axios.post("http://localhost:8080/cart/", {
     ...Data,

@@ -118,9 +118,9 @@ const ProductDetails = ({setProgress}) => {
 
   const addToCart = (e) =>{
     if(user){
-      dispatch(addToCartAsync({...product,quantity:1,userId:user.id}));
-      // console.log({...product,quantity:1,userId:user.id})
-      console.log(user);
+      dispatch(addToCartAsync({id:product.id,quantity:1,userId:user.id}));
+      // console.log({productId:product.id,quantity:1,userId:user.id})
+      // console.log(user);
       toast.success(product.title+" added",{pauseOnHover:false,theme:"dark"});
     }else{
       setOpenModal(true);
