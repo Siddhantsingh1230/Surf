@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const PageNotFound = () => {
+  //changing title of page
+  useEffect(() => {
+    const originalTitle = document.title;
+    document.title = "404 💔";
+    return ()=>{
+      document.title = originalTitle;
+    };
+  });
   return (
     <>
       <div className="grid h-screen px-4 bg-white place-content-center dark:bg-gray-900">
