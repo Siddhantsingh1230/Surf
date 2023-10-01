@@ -1,5 +1,5 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { addToCart, getCart } from "../api/Cart_api";
+import { createAsyncThunk, createSlice  } from "@reduxjs/toolkit";
+import { addToCart, getCart ,updateCartProduct ,removeFromCart } from "../api/Cart_api";
 
 const initialState = {
   cart: [],
@@ -13,6 +13,14 @@ export const addToCartAsync = createAsyncThunk("Cart/add", async (Data) => {
 });
 export const getCartAsync = createAsyncThunk("Cart/get", async (userid) => {
   const data = await getCart(userid);
+  return data;
+});
+export const updateCartProductAsync = createAsyncThunk("Cart/update", async (product_cart) => {
+  const data = await updateCartProduct(product_cart);
+  return data;
+});
+export const removeFromCartAsync = createAsyncThunk("Cart/delete", async (product_cart_id) => {
+  const data = await removeFromCart(product_cart_id);
   return data;
 });
 
@@ -43,6 +51,25 @@ export const cartSlice = createSlice({
       .addCase(getCartAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.cart = action.payload;
+        state.error = null;
+      })
+      .addCase(updateCartProductAsync.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(updateCartProductAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        const idx = state.cart.findIndex((item)=>item.id===action.payload.id);
+        state.cart[idx]=action.payload;
+        state.error = null;
+      })
+      .addCase(removeFromCartAsync.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(removeFromCartAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.cart = state.cart.filter((elem)=>elem.id!==action.payload);
         state.error = null;
       });
   },
