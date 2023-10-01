@@ -11,57 +11,10 @@ const Checkout = () => {
   const dispatch = useDispatch();
   const cart = useSelector(state=>state.cart.cart);
   const user = useSelector(state=>state.auth.user);
-  const products = [
-    {
-      id: 1,
-      name: "Throwback Hip Bag",
-      href: "#",
-      color: "Salmon",
-      price: "₹90.00",
-      quantity: 1,
-      imageSrc:
-        "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg",
-      imageAlt:
-        "Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.",
-    },
-    {
-      id: 2,
-      name: "Medium Stuff Satchel",
-      href: "#",
-      color: "Blue",
-      price: "₹32.00",
-      quantity: 1,
-      imageSrc:
-        "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
-      imageAlt:
-        "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
-    },
-    {
-      id: 3,
-      name: "Medium Stuff Satchel",
-      href: "#",
-      color: "Blue",
-      price: "₹32.00",
-      quantity: 1,
-      imageSrc:
-        "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
-      imageAlt:
-        "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
-    },
-    {
-      id: 4,
-      name: "Medium Stuff Satchel",
-      href: "#",
-      color: "Blue",
-      price: "₹32.00",
-      quantity: 1,
-      imageSrc:
-        "https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg",
-      imageAlt:
-        "Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.",
-    },
-    // More products...
-  ];
+  const totalAmount = cart.reduce(
+    (amount, item) => item.price * item.quantity + amount,
+    0
+  );
 useEffect(()=>{
   if(user){
     dispatch(getCartAsync(user.id));
@@ -181,7 +134,7 @@ useEffect(()=>{
             ) : (
               <p>Empty Cart Shop</p>
             )}
-            {products.length > 2 ? (
+            {cart.length > 2 ? (
               <Link to="/cart">
                 <span className="inline-flex items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700">
                   <svg
@@ -215,8 +168,9 @@ useEffect(()=>{
                 id="radio_1"
                 type="radio"
                 name="radio"
+                checked
               />
-              <span className="peer-checked :border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
+              <span className="peer-checked:border-gray-700 absolute right-4 top-1/2 box-content block h-3 w-3 -translate-y-1/2 rounded-full border-8 border-gray-300 bg-white"></span>
               <label
                 className="group  peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-2"
                 htmlFor="radio_1"
@@ -399,16 +353,16 @@ useEffect(()=>{
             <div className="mt-6 border-t border-b py-2">
               <div className="flex items-center justify-between">
                 <p className="text-sm font-medium text-gray-900">Subtotal</p>
-                <p className="font-semibold text-gray-900">₹399.00</p>
+                <p className="font-semibold text-gray-900">₹ {totalAmount}</p>
               </div>
               <div className="flex items-center justify-between">
                 <p className="text-sm font-medium text-gray-900">Shipping</p>
-                <p className="font-semibold text-gray-900">₹8.00</p>
+                <p className="font-semibold text-gray-900">₹ 9.99</p>
               </div>
             </div>
             <div className="mt-6 flex items-center justify-between">
               <p className="text-sm font-medium text-gray-900">Total</p>
-              <p className="text-2xl font-semibold text-gray-900">₹408.00</p>
+              <p className="text-2xl font-semibold text-gray-900">₹ {totalAmount>0 ?totalAmount + 9.99:0}</p>
             </div>
           </div>
           <button className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">
