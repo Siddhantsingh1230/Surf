@@ -1,8 +1,98 @@
-import React from "react";
+import React , { Fragment, useRef, useState } from "react";
 import bgimg from"../assets/images/bgim.jpg";
+import { Dialog, Transition } from '@headlessui/react';
 
+
+const Popup = (props)=>{
+  const [open, setOpen] = useState(true)
+  const cancelButtonRef = useRef(null)
+  return (
+    <Transition.Root show={open} as={Fragment}>
+      <Dialog as="div" className="relative z-10" initialFocus={cancelButtonRef} onClose={()=>{setOpen(false); props.pop(false)}}>
+        <Transition.Child
+          as={Fragment}
+          enter="ease-out duration-300"
+          enterFrom="opacity-0"
+          enterTo="opacity-100"
+          leave="ease-in duration-200"
+          leaveFrom="opacity-100"
+          leaveTo="opacity-0"
+        >
+          <div className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity" />
+        </Transition.Child>
+
+        <div className="fixed inset-0 z-10 w-screen overflow-y-auto" >
+          <div className="flex min-h-full justify-center text-center items-center  " >
+            <Transition.Child
+              as={Fragment}
+              enter="ease-out duration-300"
+              enterFrom="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+              enterTo="opacity-100 translate-y-0 sm:scale-100"
+              leave="ease-in duration-200"
+              leaveFrom="opacity-100 translate-y-0 sm:scale-100"
+              leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
+            >
+              <Dialog.Panel className="relative transform overflow-hidden rounded-xl bg-gray-200 shadow-2xl transition-all  sm:max-w-lg">
+                <div className="bg-indigo-200 px-16 sm:p-6 max-sm:p-0" >
+                  <div className="sm:flex">
+                    <div className=" mt-2 text-center max-sm:mt-0 max-sm:p-6">
+                      <div className=" mx-16 relative flex justify-center items-center max-sm:mx-2">
+                        <img 
+                        alt="..."
+                        src={props.newurl}
+                        className="shadow-xl rounded-full h-64 w-64 max-sm:h-48 max-sm:w-48"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="bg-indigo-100 px-4 py-3 sm:flex justify-between sm:flex-row-reverse sm:px-6">
+                  <button
+                    type="button"
+                    className="inline-flex w-full justify-center rounded-md bg-[#4F46E5] px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-[#6d67de] border-none outline-none sm:ml-3 sm:w-auto"
+                    onClick={() => 
+                    {props.url(props.newurl);
+                      setOpen(false);
+                      props.pop(false)
+                    }}>
+                    Change
+                  </button>
+                  <button
+                    type="button"
+                    className="mt-3 inline-flex w-full justify-center rounded-md bg-indigo-50 px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset border-none outline-none ring-indigo-200 hover:bg-indigo-100 hover:ring-indigo-300 sm:mt-0 sm:w-auto"
+                    onClick={() => {setOpen(false);
+                      props.pop(false)}}
+                    ref={cancelButtonRef}>
+                    Cancel
+                  </button>
+                </div>
+              </Dialog.Panel>
+            </Transition.Child>
+          </div>
+        </div>
+      </Dialog>
+    </Transition.Root>
+  )
+}
 
 const Profile = () => {
+  const [url,seturl]=useState("https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80");
+  const [newurl,setnewurl] = useState(url)
+  const [pop,setpop] = useState(false);
+  const changeImage=()=>{
+      let input = document.createElement('input');
+      input.type ='file';
+      input.accept="image/*"
+      input.click();
+      input.onchange = (e) => {
+        const selectedFile = e.target.files[0];
+        if (selectedFile) {
+          const newUrl = URL.createObjectURL(selectedFile);
+          setnewurl(newUrl);
+          setpop(true);
+        }
+      };
+  } 
+
   return (
     <main className="profile-page overflow-hidden">
       <section className="relative block h-500-px">
@@ -22,9 +112,10 @@ const Profile = () => {
                   <div className="relative">
                     <img
                       alt="..."
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                      className="shadow-xl rounded-full h-auto align-middle -mt-32 w-80"
-                    />
+                      src={url}
+                      className="shadow-xl rounded-full h-72 align-middle -mt-32 w-72"
+                      onClick={changeImage}/>
+                      
                   </div>
                 </div>
                 
@@ -56,6 +147,7 @@ const Profile = () => {
                 </div>
         </footer>
       </section>
+      {pop && <Popup newurl={newurl} url={seturl} pop={setpop} />}
     </main>
   );
 };
