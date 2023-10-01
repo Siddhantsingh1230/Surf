@@ -12,7 +12,25 @@ import {
 } from "../slices/CartSlice";
 import { INC, DEC } from "../app/constants";
 
-const Cart = () => {
+const Cart = ({ setProgress }) => {
+  useEffect(() => {
+    // callback function to call when event triggers
+    const onPageLoad = () => {
+      setProgress(100);
+    };
+
+    // Check if the page has already loaded
+    if (document.readyState === "complete") {
+      onPageLoad();
+    } else {
+      window.addEventListener("load", onPageLoad, false);
+      // Remove the event listener when component unmounts
+      return () => {
+        window.removeEventListener("load", onPageLoad);
+        setProgress(0);
+      };
+    }
+  }, []);
   const dispatch = useDispatch();
   const products = useSelector((state) => state.cart.cart);
   const user = useSelector((state) => state.auth.user);

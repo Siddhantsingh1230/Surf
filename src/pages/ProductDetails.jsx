@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { RadioGroup } from "@headlessui/react";
 import Navbar from "../components/Navbar";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getProductByIdAsync } from "../slices/ProductListSlice";
 import Spinner from "../components/Spinner";
@@ -87,7 +86,25 @@ const highlights = [
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-const ProductDetails = () => {
+const ProductDetails = ({setProgress}) => {
+  useEffect(() => {
+    // callback function to call when event triggers
+    const onPageLoad = () => {
+      setProgress(100);
+    };
+
+    // Check if the page has already loaded
+    if (document.readyState === "complete") {
+      onPageLoad();
+    } else {
+      window.addEventListener("load", onPageLoad, false);
+      // Remove the event listener when component unmounts
+      return () => {
+        window.removeEventListener("load", onPageLoad);
+        setProgress(0);
+      };
+    }
+  }, []);
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [openModal,setOpenModal] = useState(false);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);

@@ -1,9 +1,27 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import Accounts from "../components/AccountSetting";
 import BillingSetting from "../components/BillingSetting";
 import NotificationSetting from "../components/NotificationSetting";
 
-const Setting = () => {
+const Setting = ({setProgress}) => {
+  useEffect(() => {
+    // callback function to call when event triggers
+    const onPageLoad = () => {
+      setProgress(100);
+    };
+
+    // Check if the page has already loaded
+    if (document.readyState === "complete") {
+      onPageLoad();
+    } else {
+      window.addEventListener("load", onPageLoad, false);
+      // Remove the event listener when component unmounts
+      return () => {
+        window.removeEventListener("load", onPageLoad);
+        setProgress(0);
+      };
+    }
+  }, []);
   //border-l-blue-700 text-blue-700
   const [active, setActive] = useState("Accounts");
   const [checked, setChecked] = useState(false);

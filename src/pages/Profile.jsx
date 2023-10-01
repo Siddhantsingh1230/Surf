@@ -1,4 +1,4 @@
-import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useRef, useState,useEffect } from "react";
 import bgimg from "../assets/images/bgim.jpg";
 import { Dialog, Transition } from "@headlessui/react";
 import { useSelector } from "react-redux";
@@ -88,7 +88,25 @@ const Popup = (props) => {
   );
 };
 
-const Profile = () => {
+const Profile = ({setProgress}) => {
+  useEffect(() => {
+    // callback function to call when event triggers
+    const onPageLoad = () => {
+      setProgress(100);
+    };
+
+    // Check if the page has already loaded
+    if (document.readyState === "complete") {
+      onPageLoad();
+    } else {
+      window.addEventListener("load", onPageLoad, false);
+      // Remove the event listener when component unmounts
+      return () => {
+        window.removeEventListener("load", onPageLoad);
+        setProgress(0);
+      };
+    }
+  }, []);
   const [url, seturl] = useState(
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
   );
