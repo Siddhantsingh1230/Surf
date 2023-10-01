@@ -4,7 +4,7 @@ import { toast } from "react-toastify";
 
 const initialState = {
   user: null,
-  status: "loading",
+  status: "idle",
   error: null,
 };
 

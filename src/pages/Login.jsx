@@ -16,7 +16,6 @@ const Login = ({ setProgress }) => {
     const onPageLoad = () => {
       setProgress(100);
     };
-
     // Check if the page has already loaded
     if (document.readyState === "complete") {
       onPageLoad();
