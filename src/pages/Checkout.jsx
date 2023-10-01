@@ -9,17 +9,17 @@ import { getCartAsync } from "../slices/CartSlice";
 
 const Checkout = () => {
   const dispatch = useDispatch();
-  const cart = useSelector(state=>state.cart.cart);
-  const user = useSelector(state=>state.auth.user);
+  const cart = useSelector((state) => state.cart.cart);
+  const user = useSelector((state) => state.auth.user);
   const totalAmount = cart.reduce(
     (amount, item) => item.price * item.quantity + amount,
     0
   );
-useEffect(()=>{
-  if(user){
-    dispatch(getCartAsync(user.id));
-  }
-},[dispatch]);
+  useEffect(() => {
+    if (user) {
+      dispatch(getCartAsync(user.id));
+    }
+  }, [dispatch]);
   return (
     <>
       <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
@@ -134,30 +134,33 @@ useEffect(()=>{
             ) : (
               <p>Empty Cart Shop</p>
             )}
-            {cart.length > 2 ? (
-              <Link to="/cart">
-                <span className="inline-flex items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    strokeWidth="1.5"
-                    stroke="currentColor"
-                    className="-ms-1 me-1.5 h-4 w-4"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                    />
-                  </svg>
 
-                  {cart.length>2?<p className="whitespace-nowrap text-sm">
+            <Link to="/cart">
+              <span className="inline-flex items-center justify-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-emerald-700">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="1.5"
+                  stroke="currentColor"
+                  className="-ms-1 me-1.5 h-4 w-4"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
+                  />
+                </svg>
+
+                {cart.length > 2 ? (
+                  <p className="whitespace-nowrap text-sm">
                     +{cart.length - 2} more{" "}
-                  </p>:<p className="whitespace-nowrap text-sm">Cart</p>}
-                </span>
-              </Link>
-            ) : null}
+                  </p>
+                ) : (
+                  <p className="whitespace-nowrap text-sm">Cart</p>
+                )}
+              </span>
+            </Link>
           </div>
 
           <p className="mt-8 text-lg font-medium">Shipping Methods</p>
@@ -362,7 +365,9 @@ useEffect(()=>{
             </div>
             <div className="mt-6 flex items-center justify-between">
               <p className="text-sm font-medium text-gray-900">Total</p>
-              <p className="text-2xl font-semibold text-gray-900">₹ {totalAmount>0 ?totalAmount + 9.99:0}</p>
+              <p className="text-2xl font-semibold text-gray-900">
+                ₹ {totalAmount > 0 ? totalAmount + 9.99 : 0}
+              </p>
             </div>
           </div>
           <button className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">
