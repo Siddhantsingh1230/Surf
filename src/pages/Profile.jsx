@@ -132,7 +132,7 @@ const Profile = () => {
                       alt="..."
                       src={url}
                       className="shadow-xl rounded-full h-72 align-middle -mt-32 w-72"
-                      onClick={changeImage}
+                     
                     />
 
                     <div onClick={changeImage} className="rounded-full -mt-32 z-10 opacity-0 hover:opacity-80 duration-300 absolute inset-0  flex justify-center items-center  text-md text-white   bg-black font-bold">
