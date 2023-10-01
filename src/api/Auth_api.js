@@ -5,7 +5,7 @@ export const createUser = async (userData) => {
     id: new Date(),
     ...userData,
   });
-  console.log(data);
+  // console.log(data);
   return data;
 };
 
