@@ -89,7 +89,7 @@ const Login = () => {
                     </span>
                   </div>
                   {errors.email && (
-                    <p class="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
+                    <p className="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
                       {errors.email.message}
                     </p>
                   )}
@@ -130,7 +130,7 @@ const Login = () => {
                     </span>
                   </div>
                   {errors.password && (
-                    <p class="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
+                    <p className="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
                       {errors.password.message}
                     </p>
                   )}

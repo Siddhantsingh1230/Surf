@@ -8,8 +8,8 @@ import { useParams } from "react-router-dom";
 import { getProductByIdAsync } from "../slices/ProductListSlice";
 import Spinner from "../components/Spinner";
 import { addToCartAsync } from "../slices/CartSlice";
-import { toast } from "react-toastify";
 import Modal from "../components/Modal";
+import { toast } from "react-toastify";
 
 // const product = {
 //   name: "Basic Tee 6-Pack",
@@ -101,7 +101,10 @@ const ProductDetails = () => {
 
   const addToCart = (e) =>{
     if(user){
-      dispatch(addToCartAsync({...product,quantity:1,userId:user.id}));
+      dispatch(addToCartAsync({...product,quantity:1,userId:user[0].id}));
+      // console.log({...product,quantity:1,userId:user.id})
+      console.log(user);
+      toast.success(product.title+" added",{pauseOnHover:false,theme:"dark"});
     }else{
       setOpenModal(true);
     }
