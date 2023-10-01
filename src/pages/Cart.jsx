@@ -17,7 +17,7 @@ const Cart = () => {
   const products = useSelector((state) => state.cart.cart);
   const user = useSelector((state) => state.auth.user);
   useEffect(() => {
-    dispatch(getCartAsync(user[0].id));
+    dispatch(getCartAsync(user.id));
   }, [dispatch]);
   const totalAmount = products.reduce(
     (amount, item) => item.price * item.quantity + amount,

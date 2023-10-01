@@ -101,7 +101,7 @@ const ProductDetails = () => {
 
   const addToCart = (e) =>{
     if(user){
-      dispatch(addToCartAsync({...product,quantity:1,userId:user[0].id}));
+      dispatch(addToCartAsync({...product,quantity:1,userId:user.id}));
       // console.log({...product,quantity:1,userId:user.id})
       console.log(user);
       toast.success(product.title+" added",{pauseOnHover:false,theme:"dark"});

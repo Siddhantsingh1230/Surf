@@ -143,15 +143,15 @@ const Profile = () => {
               </div>
               <div className="text-center mt-2">
                 <h3 className="text-4xl font-semibold leading-normal text-blueGray-700 mb-2 max-sm:text-3xl">
-                  {user[0].username}
+                  {user.username}
                 </h3>
                 <div className="text-sm leading-normal mt-0 mb-4 text-blueGray-400 font-bold uppercase">
                   <i className="ri-smartphone-line mr-2" />
-                  {user[0].phone}
+                  {user.phone}
                 </div>
                 <div className="mt-0 mb-4 text-blueGray-500 flex items-center justify-center ">
                   <i className="ri-mail-line mr-2" />
-                  {user[0].email}
+                  {user.email}
                 </div>
                 <div className="text-sm leading-normal mt-0 text-blueGray-400 font-bold uppercase mb-32 ">
                   <i className="ri-home-4-fill mr-2" />

@@ -5,6 +5,7 @@ export const createUser = async (userData) => {
     id: new Date(),
     ...userData,
   });
+  console.log(data);
   return data;
 };
 
@@ -13,7 +14,7 @@ export const login = async (userInput) => {
     if (
      data.length!=0
     ) {
-      return data;
+      return data[0];
     }
     return Promise.reject("Error");
   

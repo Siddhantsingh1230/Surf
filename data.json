@@ -792,6 +792,20 @@
       "phone": "9023134084",
       "email": "admin@mail.com",
       "password": "Admin12@"
+    },
+    {
+      "id": "2023-10-01T17:14:33.341Z",
+      "username": "admin",
+      "phone": "9023134084",
+      "email": "admin@mail.com",
+      "password": "Admin12@"
+    },
+    {
+      "id": "2023-10-01T17:28:11.759Z",
+      "username": "khushi",
+      "phone": "9023134084",
+      "email": "khushi@mail.com",
+      "password": "Admin12@"
     }
   ],
   "cart": [

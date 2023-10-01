@@ -54,7 +54,7 @@ const Navbar = ({ children }) => {
   useEffect(() => {
     dispatch(getAllNotificationsAsync());
     if (LoggedUser) {
-      dispatch(getCartAsync(LoggedUser[0].id));
+      dispatch(getCartAsync(LoggedUser.id));
     }
   }, [dispatch]);
   return (
