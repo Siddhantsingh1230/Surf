@@ -222,74 +222,90 @@ const Navbar = ({ children }) => {
                   ))}
                 </div>
                 <div className="border-t border-gray-700 pb-3 pt-4">
-                  <div className="flex justify-between items-center px-5">
-                    <div className="flex justify-between items-center">
-                      <div className="flex-shrink-0">
-                        <img
-                          className="h-10 w-10 rounded-full"
-                          src={user.imageUrl}
-                          alt=""
-                        />
-                      </div>
-                      <div className="ml-3">
-                        <div className="text-base font-medium leading-none text-white">
-                          {user.name}
+                  {LoggedUser ? (
+                    <>
+                      <div className="flex justify-between items-center  px-5">
+                        <div className="flex justify-between items-center">
+                          <div className="flex-shrink-0">
+                            <img
+                              className="h-10 w-10 rounded-full"
+                              src={user.imageUrl}
+                              alt=""
+                            />
+                          </div>
+                          <div className="ml-3">
+                            <div className="text-base font-medium leading-none text-white">
+                              {user.name}
+                            </div>
+                            <div className="text-sm font-medium leading-none text-gray-400">
+                              {user.email}
+                            </div>
+                          </div>
                         </div>
-                        <div className="text-sm font-medium leading-none text-gray-400">
-                          {user.email}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="flex justify-between items-center">
-                      <button
-                        type="button"
-                        className="relative   flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
-                        onClick={() => {
-                          openNoti();
-                          document.body.classList.add(
-                            "h-100vh",
-                            "w-100vh",
-                            "overflow-hidden"
-                          );
-                        }}
-                      >
-                        <span className="absolute -inset-1.5" />
-                        <span className="sr-only">View notifications</span>
-                        <BellIcon className="h-6 w-6" aria-hidden="true" />
-                      </button>
-                      <span className="whitespace-nowrap rounded-md bg-purple-100 px-2 py-0.2 text-sm text-purple-500 text-[0.65rem] font-bold dark:bg-blue-700 mb-6 -ml-4 z-10 dark:text-white">
-                        {notiItem.filter((obj) => obj.read === false).length}
-                      </span>
-                      <Link to="/cart">
-                        <button
-                          type="button"
-                          className="relative ml-2 flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
-                        >
-                          <span className="absolute -inset-1.5" />
-                          <span className="sr-only">View Cart</span>
+                        <div className="flex justify-between items-center">
+                          <button
+                            type="button"
+                            className="relative   flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
+                            onClick={() => {
+                              openNoti();
+                              document.body.classList.add(
+                                "h-100vh",
+                                "w-100vh",
+                                "overflow-hidden"
+                              );
+                            }}
+                          >
+                            <span className="absolute -inset-1.5" />
+                            <span className="sr-only">View notifications</span>
+                            <BellIcon className="h-6 w-6" aria-hidden="true" />
+                          </button>
+                          <span className="whitespace-nowrap rounded-md bg-purple-100 px-2 py-0.2 text-sm text-purple-500 text-[0.65rem] font-bold dark:bg-blue-700 mb-6 -ml-4 z-10 dark:text-white">
+                            {
+                              notiItem.filter((obj) => obj.read === false)
+                                .length
+                            }
+                          </span>
+                          <Link to="/cart">
+                            <button
+                              type="button"
+                              className="relative ml-2 flex-shrink-0 rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
+                            >
+                              <span className="absolute -inset-1.5" />
+                              <span className="sr-only">View Cart</span>
 
-                          <ShoppingCartIcon
-                            className="h-6 w-6"
-                            aria-hidden="true"
+                              <ShoppingCartIcon
+                                className="h-6 w-6"
+                                aria-hidden="true"
+                              />
+                            </button>
+                          </Link>
+                          <span className="whitespace-nowrap rounded-md bg-purple-100 px-2 py-0.2 text-sm text-purple-500 text-[0.65rem] font-bold dark:bg-red-600 mb-6 -ml-4 z-10 dark:text-purple-100">
+                            <Link to="/cart">2</Link>
+                          </span>
+                        </div>
+                      </div>
+                      <div className="mt-3 space-y-1 px-2">
+                        {userNavigation.map((item) => (
+                          <Link
+                            key={item.name}
+                            to={item.href}
+                            className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
+                          >
+                            {item.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </>
+                  ) : (
+                    <Link to="/login">
+                          <RippleBtn
+                            text={"Login"}
+                            classes={
+                              "bg-[#4F46E5] border-none w-[90%] mx-[5%]"
+                            }
                           />
-                        </button>
-                      </Link>
-                      <span className="whitespace-nowrap rounded-md bg-purple-100 px-2 py-0.2 text-sm text-purple-500 text-[0.65rem] font-bold dark:bg-red-600 mb-6 -ml-4 z-10 dark:text-purple-100">
-                        <Link to="/cart">2</Link>
-                      </span>
-                    </div>
-                  </div>
-                  <div className="mt-3 space-y-1 px-2">
-                    {userNavigation.map((item) => (
-                      <Link
-                        key={item.name}
-                        to={item.href}
-                        className="block rounded-md px-3 py-2 text-base font-medium text-gray-400 hover:bg-gray-700 hover:text-white"
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </div>
+                        </Link>
+                  )}
                 </div>
               </Disclosure.Panel>
             </>
