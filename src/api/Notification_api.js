@@ -1,7 +1,7 @@
 import axios from "axios"
 
-const getAllNotifications = async ()=>{
-    const {data} = await axios.get("http://localhost:8080/notifications");
+const getAllNotifications = async (userId)=>{
+    const {data} = await axios.get("http://localhost:8080/notifications?userId="+userId);
     return data;
 }
 export const deleteteNotification = async(id) =>{
