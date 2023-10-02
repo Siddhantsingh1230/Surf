@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import { StarIcon } from "@heroicons/react/20/solid";
+import { CheckBadgeIcon, StarIcon } from "@heroicons/react/20/solid";
 import { RadioGroup } from "@headlessui/react";
 import Navbar from "../components/Navbar";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,6 +9,8 @@ import Spinner from "../components/Spinner";
 import { addToCartAsync } from "../slices/CartSlice";
 import Modal from "../components/Modal";
 import { toast } from "react-toastify";
+import { getAllReviewsByProductIdAsync,createReviewAsync } from "../slices/ReviewSlice";
+import shopping from "../assets/images/shopping.jpg"
 
 // const product = {
 //   name: "Basic Tee 6-Pack",
@@ -62,6 +64,62 @@ import { toast } from "react-toastify";
 //   details:
 //     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
 // };
+
+// const people = [
+//   {
+//     name: 'Leslie Alexander',
+//     email: 'leslie.alexander@example.com',
+//     role: 'Co-Founder / CEO',
+//     imageUrl:
+//       'https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+//     lastSeen: '3h ago',
+//     lastSeenDateTime: '2023-01-23T13:23Z',
+//   },
+//   {
+//     name: 'Michael Foster',
+//     email: 'michael.foster@example.com',
+//     role: 'Co-Founder / CTO',
+//     imageUrl:
+//       'https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+//     lastSeen: '3h ago',
+//     lastSeenDateTime: '2023-01-23T13:23Z',
+//   },
+//   {
+//     name: 'Dries Vincent',
+//     email: 'dries.vincent@example.com',
+//     role: 'Business Relations',
+//     imageUrl:
+//       'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+//     lastSeen: null,
+//   },
+//   {
+//     name: 'Lindsay Walton',
+//     email: 'lindsay.walton@example.com',
+//     role: 'Front-end Developer',
+//     imageUrl:
+//       'https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+//     lastSeen: '3h ago',
+//     lastSeenDateTime: '2023-01-23T13:23Z',
+//   },
+//   {
+//     name: 'Courtney Henry',
+//     email: 'courtney.henry@example.com',
+//     role: 'Designer',
+//     imageUrl:
+//       'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+//     lastSeen: '3h ago',
+//     lastSeenDateTime: '2023-01-23T13:23Z',
+//   },
+//   {
+//     name: 'Tom Cook',
+//     email: 'tom.cook@example.com',
+//     role: 'Director of Product',
+//     imageUrl:
+//       'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80',
+//     lastSeen: null,
+//   },
+// ]
+
 const colors = [
   { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
   { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
@@ -110,10 +168,12 @@ const ProductDetails = ({setProgress}) => {
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const product = useSelector((state) => state.productList.selectedProduct);
   const user = useSelector((state) => state.auth.user);
+  const reviews = useSelector((state) => state.reviewList.reviews);
   const dispatch = useDispatch();
   const { id } = useParams();
   useEffect(() => {
     dispatch(getProductByIdAsync(id));
+    dispatch(getAllReviewsByProductIdAsync(id));
   }, [dispatch, id]);
 
   const addToCart = (e) =>{
@@ -123,6 +183,19 @@ const ProductDetails = ({setProgress}) => {
       // console.log(user);
       toast.success(product.title+" added",{pauseOnHover:false,theme:"dark"});
     }else{
+      setOpenModal(true);
+    }
+  }
+  const createReview =(e)=>{
+    if(user){
+      const msg=document.getElementById("reviewMsg").value;
+      console.log(msg,product.id,user.id);
+      const date = new Date();
+      let currentDate = String(`${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth()+1).padStart(2,"0")}/${date.getFullYear()}`);
+      dispatch(createReviewAsync({userId:user.id,productId:product.id,content:msg,createdAt:currentDate}))
+      toast.success("Review added",{pauseOnHover:false,theme:"dark"});
+    }
+    else{
       setOpenModal(true);
     }
   }
@@ -221,37 +294,8 @@ const ProductDetails = ({setProgress}) => {
                   <p className="text-3xl tracking-tight text-gray-900">₹ {product.price}
                   </p>
 
-                  {/* Reviews */}
+                  
                   <div className="mt-6">
-                    <h3 className="sr-only">Reviews</h3>
-                    <div className="flex items-center">
-                      <div className="flex items-center">
-                        {[0, 1, 2, 3, 4].map((rating) => (
-                          <StarIcon
-                            key={rating}
-                            className={classNames(
-                              product.rating > rating
-                                ? "text-gray-900"
-                                : "text-gray-200",
-                              "h-5 w-5 flex-shrink-0"
-                            )}
-                            aria-hidden="true"
-                          />
-                        ))}
-                      </div>
-                      <p className="sr-only">
-                        {product.rating} out of 5 stars
-                      </p>
-                      <a
-                        href={"#"}
-                        className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                      >
-                        {117} reviews
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="mt-10">
                     {/* Colors */}
                     <div>
                       <h3 className="text-sm font-medium text-gray-900">
@@ -421,10 +465,93 @@ const ProductDetails = ({setProgress}) => {
                   </div>
 
                   <div className="mt-10">
-                    <h2 className="text-sm font-medium text-gray-900">
-                      Details
+                    <h2 className="text-sm font-medium text-gray-900 mb-2">
+                      Write a Review
                     </h2>
+                    <div>
+                      <label htmlFor="OrderNotes" className="sr-only">Order notes</label>
+                      <div
+                        className="overflow-hidden rounded-lg border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
+                        <textarea
+                          id="reviewMsg"
+                          className="w-full resize-none border-none align-top focus:ring-0 sm:text-sm"
+                          rows="2"
+                          placeholder="Enter any additional order notes..."
+                        ></textarea>
 
+                        <div className="flex items-center justify-end gap-2 bg-white p-3">
+                          <button
+                            type="button"
+                            className="rounded bg-gray-200 px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-gray-600"
+                          >
+                            Clear
+                          </button>
+
+                          <button
+                            type="button"
+                            className="rounded bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700"
+                            onClick={(e)=>{createReview(e)}}
+                          >
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <h2 className="text-sm font-medium text-gray-900 mt-6">
+                      Ratings and Reviews
+                    </h2>
+                    {/* Reviews */}
+                  <div className="mt-4 mb-4">
+                    <h3 className="sr-only">Reviews</h3>
+                    <div className="flex items-center">
+                      <div className="flex items-center">
+                        {[0, 1, 2, 3, 4].map((rating) => (
+                          <StarIcon
+                            key={rating}
+                            className={classNames(
+                              product.rating > rating
+                                ? "text-gray-900"
+                                : "text-gray-200",
+                              "h-5 w-5 flex-shrink-0"
+                            )}
+                            aria-hidden="true"
+                          />
+                        ))}
+                      </div>
+                      <p className="sr-only">
+                        {product.rating} out of 5 stars
+                      </p>
+                      <a
+                        href={"#"}
+                        className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                      >
+                        {117} reviews
+                      </a>
+                    </div>
+                  </div>
+
+                    <ul role="list" className="divide-y divide-gray-100">
+                      {reviews.map((review) => (
+                        <li key={review.id} className="flex justify-between gap-x-6 py-5">
+                          <div className="flex min-w-0 gap-x-4">
+                            <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={shopping} alt="" />
+                            <div className="min-w-0 flex-auto">
+                              <p className="text-sm font-semibold leading-6 text-gray-900">{review.userId}</p>
+                              <p className="mt-1 truncate text-xs leading-5 text-gray-500">{review.content}</p>
+                            </div>
+                          </div>
+                          <div className="flex ">
+                              <div className=" flex items-end flex-col  ">
+                                <p className="mt-1 text-xs leading-5 text-gray-500">
+                                  {review.createdAt}
+                                </p>
+                                
+                                <CheckBadgeIcon className="ri-verified-badge-line h-4 w-4 text-blue-500"/>
+                              </div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
                     <div className="mt-4 space-y-6">
                       <p className="text-sm text-gray-600">{product.details}</p>
                     </div>
