@@ -52,8 +52,8 @@ const Navbar = ({ children }) => {
   };
   const LoggedUser = useSelector((state) => state.auth.user);
   useEffect(() => {
-    dispatch(getAllNotificationsAsync());
     if (LoggedUser) {
+      dispatch(getAllNotificationsAsync(LoggedUser.id));
       dispatch(getCartAsync(LoggedUser.id));
     }
   }, [dispatch]);

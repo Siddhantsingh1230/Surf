@@ -8,8 +8,8 @@ const initialState = {
 
 export const getAllNotificationsAsync = createAsyncThunk(
   'notifications/fetchAll',
-  async () => {
-    const data = await getAllNotifications();
+  async (userId) => {
+    const data = await getAllNotifications(userId);
     return data;
   }
 );
