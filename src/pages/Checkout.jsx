@@ -8,7 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCartAsync } from "../slices/CartSlice";
 import { CRD, COD } from "../app/constants";
 import { getOrderStateAsync } from "../slices/OrderStateSlice";
-
+import { useForm } from "react-hook-form";
 
 const Checkout = ({ setProgress }) => {
   useEffect(() => {
@@ -29,6 +29,13 @@ const Checkout = ({ setProgress }) => {
       };
     }
   }, []);
+  const {
+    register,
+    unregister,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   const dispatch = useDispatch();
   const [paymentMethod, setPaymentMethod] = useState(COD);
   const cart = useSelector((state) => state.cart.cart);
@@ -44,6 +51,14 @@ const Checkout = ({ setProgress }) => {
       dispatch(getOrderStateAsync());
     }
   }, [dispatch]);
+  useEffect(()=>{
+    if(COD){
+      unregister("cardholder");
+      unregister("creditexpiry");
+      unregister("cardcvv");
+      unregister("cardno");
+    }
+  },[paymentMethod]);
   return (
     <>
       <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
@@ -249,7 +264,13 @@ const Checkout = ({ setProgress }) => {
             </div>
           </form>
         </div>
-        <div className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0">
+        <form
+          noValidate
+          onSubmit={handleSubmit((data) => {
+            console.log(data);
+          })}
+          className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0"
+        >
           <p className="text-xl font-medium">Payment Details</p>
           <p className="text-gray-400">
             Complete your order by providing your payment details.
@@ -265,7 +286,13 @@ const Checkout = ({ setProgress }) => {
               <input
                 type="text"
                 id="email"
-                name="email"
+                {...register("email", {
+                  required: "Enter email",
+                  pattern: {
+                    value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
+                    message: "Enter valid email",
+                  },
+                })}
                 className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="your.email@gmail.com"
               />
@@ -286,6 +313,11 @@ const Checkout = ({ setProgress }) => {
                 </svg>
               </div>
             </div>
+            {errors.email && (
+              <p className="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
+                {errors.email.message}
+              </p>
+            )}
             {paymentMethod === CRD ? (
               <>
                 <label
@@ -298,7 +330,13 @@ const Checkout = ({ setProgress }) => {
                   <input
                     type="text"
                     id="card-holder"
-                    name="card-holder"
+                    {...register("cardholder", {
+                      required: "Enter cardholder",
+                      pattern: {
+                        value: /[\S\s]+[\S]+/,
+                        message: "Enter valid cardholder name",
+                      },
+                    })}
                     className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm uppercase shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                     placeholder="Your full name here"
                   />
@@ -319,6 +357,11 @@ const Checkout = ({ setProgress }) => {
                     </svg>
                   </div>
                 </div>
+                {errors.cardholder && (
+                  <p className="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
+                    {errors.cardholder.message}
+                  </p>
+                )}
                 <label
                   htmlFor="card-no"
                   className="mt-4 mb-2 block text-sm font-medium"
@@ -328,9 +371,11 @@ const Checkout = ({ setProgress }) => {
                 <div className="flex">
                   <div className="relative w-7/12 flex-shrink-0">
                     <input
-                      type="text"
+                      type="number"
                       id="card-no"
-                      name="card-no"
+                      {...register("cardno", {
+                        required: "Enter card num",
+                      })}
                       className="w-full rounded-md border border-gray-200 px-2 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                       placeholder="xxxx-xxxx-xxxx-xxxx"
                     />
@@ -349,17 +394,38 @@ const Checkout = ({ setProgress }) => {
                     </div>
                   </div>
                   <input
-                    type="text"
-                    name="credit-expiry"
+                    type="month"
+                    {...register("creditexpiry", {
+                      required: "Enter creditexpiry",
+                    })}
                     className="w-full rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                     placeholder="MM/YY"
                   />
                   <input
-                    type="text"
-                    name="credit-cvc"
+                    type="number"
+                    {...register("cardcvv", {
+                      required: "Enter card cvv",
+                    })}
                     className="w-1/6 flex-shrink-0 rounded-md border border-gray-200 px-2 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
-                    placeholder="CVC"
+                    placeholder="CVV"
                   />
+                </div>
+                <div className="flex  justify-between forErrors">
+                  {errors.cardno && (
+                    <p className="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
+                      {errors.cardno.message}
+                    </p>
+                  )}
+                  {errors.creditexpiry && (
+                    <p className="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
+                      {errors.creditexpiry.message}
+                    </p>
+                  )}
+                  {errors.cardcvv && (
+                    <p className="text-right inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
+                      {errors.cardcvv.message}
+                    </p>
+                  )}
                 </div>
               </>
             ) : null}
@@ -374,7 +440,13 @@ const Checkout = ({ setProgress }) => {
                 <input
                   type="text"
                   id="billing-address"
-                  name="billing-address"
+                  {...register("billingaddress", {
+                    required: "Enter billingaddress",
+                    pattern: {
+                      value: /[\S\s]+[\S]+/,
+                      message: "Enter valid billingaddress",
+                    },
+                  })}
                   className="w-full rounded-md border border-gray-200 px-4 py-3 pl-11 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                   placeholder="Street Address"
                 />
@@ -382,12 +454,16 @@ const Checkout = ({ setProgress }) => {
                   <img className="h-4 w-4 object-contain" src={india} alt="" />
                 </div>
               </div>
+
               <select
                 type="text"
-                name="billing-state"
+                name="billingstate"
+                {...register("billingstate", {
+                  required: "Select billingstate",
+                })}
                 className="w-full rounded-md my-2 border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none focus:z-10 focus:border-blue-500 focus:ring-blue-500"
               >
-                <option value="none">State</option>
+                <option value="">State</option>
                 {states.length > 0
                   ? states.map((elem, idx) => (
                       <option key={idx} value={elem.value}>
@@ -397,11 +473,30 @@ const Checkout = ({ setProgress }) => {
                   : null}
               </select>
               <input
-                type="text"
-                name="billing-zip"
+                type="number"
+                {...register("billingzip", {
+                  required: "Enter billingzip",
+                })}
                 className="flex-shrink-0 my-2 rounded-md border border-gray-200 px-4 py-3 text-sm shadow-sm outline-none sm:w-1/6 focus:z-10 focus:border-blue-500 focus:ring-blue-500"
                 placeholder="ZIP"
               />
+            </div>
+            <div className="flex justify-between forErrors">
+              {errors.billingaddress && (
+                <p className="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
+                  {errors.billingaddress.message}
+                </p>
+              )}
+              {errors.billingstate && (
+                <p className="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
+                  {errors.billingstate.message}
+                </p>
+              )}
+              {errors.billingzip && (
+                <p className="text-right inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
+                  {errors.billingzip.message}
+                </p>
+              )}
             </div>
             <div className="mt-6 border-t border-b py-2">
               <div className="flex items-center justify-between">
@@ -420,10 +515,13 @@ const Checkout = ({ setProgress }) => {
               </p>
             </div>
           </div>
-          <button className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white">
+          <button
+            type="submit"
+            className="mt-4 mb-8 w-full rounded-md bg-gray-900 px-6 py-3 font-medium text-white"
+          >
             Place Order
           </button>
-        </div>
+        </form>
       </div>
     </>
   );
