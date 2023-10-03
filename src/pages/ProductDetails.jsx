@@ -1,5 +1,5 @@
 import { useState,useEffect } from "react";
-import { StarIcon } from "@heroicons/react/20/solid";
+import { CheckBadgeIcon, StarIcon } from "@heroicons/react/20/solid";
 import { RadioGroup } from "@headlessui/react";
 import Navbar from "../components/Navbar";
 import { useSelector, useDispatch } from "react-redux";
@@ -9,59 +9,9 @@ import Spinner from "../components/Spinner";
 import { addToCartAsync } from "../slices/CartSlice";
 import Modal from "../components/Modal";
 import { toast } from "react-toastify";
+import { getAllReviewsByProductIdAsync,createReviewAsync } from "../slices/ReviewSlice";
+import shopping from "../assets/images/shopping.jpg"
 
-// const product = {
-//   name: "Basic Tee 6-Pack",
-//   price: "$192",
-//   href: "#",
-//   breadcrumbs: [
-//     { id: 1, name: "Men", href: "#" },
-//     { id: 2, name: "Clothing", href: "#" },
-//   ],
-//   images: [
-//     {
-//       src: "https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg",
-//       alt: "Two each of gray, white, and black shirts laying flat.",
-//     },
-//     {
-//       src: "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg",
-//       alt: "Model wearing plain black basic tee.",
-//     },
-//     {
-//       src: "https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg",
-//       alt: "Model wearing plain gray basic tee.",
-//     },
-//     {
-//       src: "https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg",
-//       alt: "Model wearing plain white basic tee.",
-//     },
-//   ],
-//   colors: [
-//     { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
-//     { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
-//     { name: "Black", class: "bg-gray-900", selectedClass: "ring-gray-900" },
-//   ],
-//   sizes: [
-//     { name: "XXS", inStock: false },
-//     { name: "XS", inStock: true },
-//     { name: "S", inStock: true },
-//     { name: "M", inStock: true },
-//     { name: "L", inStock: true },
-//     { name: "XL", inStock: true },
-//     { name: "2XL", inStock: true },
-//     { name: "3XL", inStock: true },
-//   ],
-//   description:
-//     'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-//   highlights: [
-//     "Hand cut and sewn locally",
-//     "Dyed with our proprietary colors",
-//     "Pre-washed & pre-shrunk",
-//     "Ultra-soft 100% cotton",
-//   ],
-//   details:
-//     'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-// };
 const colors = [
   { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
   { name: "Gray", class: "bg-gray-200", selectedClass: "ring-gray-400" },
@@ -112,17 +62,33 @@ const ProductDetails = ({setProgress}) => {
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const { id } = useParams();
+  const reviews = useSelector((state) => state.reviewList.reviews);
+  const[reviewText,setReviewText]=useState("");
+
   useEffect(() => {
     dispatch(getProductByIdAsync(id));
+    dispatch(getAllReviewsByProductIdAsync(id));
   }, [dispatch, id]);
 
   const addToCart = (e) =>{
     if(user){
       dispatch(addToCartAsync({...product,quantity:1,userId:user.id}));
       // console.log({...product,quantity:1,userId:user.id})
-      console.log(user);
+      // console.log(user);
       toast.success(product.title+" added",{pauseOnHover:false,theme:"dark"});
     }else{
+      setOpenModal(true);
+    }
+  }
+
+  const createReview =(e)=>{
+    if(user){
+      const date = new Date();
+      let currentDate = String(`${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth()+1).padStart(2,"0")}/${date.getFullYear()}`);
+      dispatch(createReviewAsync({userId:user.id,productId:product.id,content:reviewText,createdAt:currentDate}))
+      toast.success("Review added",{pauseOnHover:false,theme:"dark"});
+    }
+    else{
       setOpenModal(true);
     }
   }
@@ -221,37 +187,7 @@ const ProductDetails = ({setProgress}) => {
                   <p className="text-3xl tracking-tight text-gray-900">₹ {product.price}
                   </p>
 
-                  {/* Reviews */}
                   <div className="mt-6">
-                    <h3 className="sr-only">Reviews</h3>
-                    <div className="flex items-center">
-                      <div className="flex items-center">
-                        {[0, 1, 2, 3, 4].map((rating) => (
-                          <StarIcon
-                            key={rating}
-                            className={classNames(
-                              product.rating > rating
-                                ? "text-gray-900"
-                                : "text-gray-200",
-                              "h-5 w-5 flex-shrink-0"
-                            )}
-                            aria-hidden="true"
-                          />
-                        ))}
-                      </div>
-                      <p className="sr-only">
-                        {product.rating} out of 5 stars
-                      </p>
-                      <a
-                        href={"#"}
-                        className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                      >
-                        {117} reviews
-                      </a>
-                    </div>
-                  </div>
-
-                  <div className="mt-10">
                     {/* Colors */}
                     <div>
                       <h3 className="text-sm font-medium text-gray-900">
@@ -421,10 +357,94 @@ const ProductDetails = ({setProgress}) => {
                   </div>
 
                   <div className="mt-10">
-                    <h2 className="text-sm font-medium text-gray-900">
-                      Details
+                    <h2 className="text-sm font-medium text-gray-900 mb-2">
+                      Write a Review
                     </h2>
+                    <div>
+                      <label htmlFor="OrderNotes" className="sr-only">Order notes</label>
+                      <div
+                        className="overflow-hidden rounded-lg border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
+                        <textarea
+                          className="w-full resize-none border-none align-top focus:ring-0 sm:text-sm"
+                          rows="2"
+                          onChange={(e)=>setReviewText(e.target.value)}
+                          placeholder="Enter any additional order notes..."
+                        >{reviewText}</textarea>
 
+                        <div className="flex items-center justify-end gap-2 bg-white p-3">
+                          <button
+                            type="button"
+                            onClick={()=>setReviewText("")}
+                            className="rounded bg-gray-200 px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-gray-600"
+                          >
+                            Clear
+                          </button>
+
+                          <button
+                            type="button"
+                            className="rounded bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700"
+                            onClick={(e)=>{createReview(e)}}
+                          >
+                            Add
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                    <h2 className="text-sm font-medium text-gray-900 mt-6">
+                      Ratings and Reviews
+                    </h2>
+                    {/* Reviews */}
+                  <div className="mt-4 mb-4">
+                    <h3 className="sr-only">Reviews</h3>
+                    <div className="flex items-center">
+                      <div className="flex items-center">
+                        {[0, 1, 2, 3, 4].map((rating) => (
+                          <StarIcon
+                            key={rating}
+                            className={classNames(
+                              product.rating > rating
+                                ? "text-gray-900"
+                                : "text-gray-200",
+                              "h-5 w-5 flex-shrink-0"
+                            )}
+                            aria-hidden="true"
+                          />
+                        ))}
+                      </div>
+                      <p className="sr-only">
+                        {product.rating} out of 5 stars
+                      </p>
+                      <a
+                        href={"#"}
+                        className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                      >
+                        {117} reviews
+                      </a>
+                    </div>
+                  </div>
+
+                    <ul role="list" className="divide-y divide-gray-100">
+                      {reviews.map((review) => (
+                        <li key={review.id} className="flex justify-between gap-x-6 py-5">
+                          <div className="flex min-w-0 gap-x-4">
+                            <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={shopping} alt="" />
+                            <div className="min-w-0 flex-auto">
+                              <p className="text-sm font-semibold leading-6 text-gray-900">{review.userId}</p>
+                              <p className="mt-1 truncate text-xs leading-5 text-gray-500">{review.content}</p>
+                            </div>
+                          </div>
+                          <div className="flex ">
+                              <div className=" flex items-end flex-col  ">
+                                <p className="mt-1 text-xs leading-5 text-gray-500">
+                                  {review.createdAt}
+                                </p>
+                                
+                                <CheckBadgeIcon className="ri-verified-badge-line h-4 w-4 text-blue-500"/>
+                              </div>
+                          </div>
+                        </li>
+                      ))}
+                    </ul>
                     <div className="mt-4 space-y-6">
                       <p className="text-sm text-gray-600">{product.details}</p>
                     </div>
