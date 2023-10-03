@@ -1,4 +1,4 @@
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import { CheckBadgeIcon, StarIcon } from "@heroicons/react/20/solid";
 import { RadioGroup } from "@headlessui/react";
 import Navbar from "../components/Navbar";
@@ -9,8 +9,11 @@ import Spinner from "../components/Spinner";
 import { addToCartAsync } from "../slices/CartSlice";
 import Modal from "../components/Modal";
 import { toast } from "react-toastify";
-import { getAllReviewsByProductIdAsync,createReviewAsync } from "../slices/ReviewSlice";
-import shopping from "../assets/images/shopping.jpg"
+import {
+  getAllReviewsByProductIdAsync,
+  createReviewAsync,
+} from "../slices/ReviewSlice";
+import shopping from "../assets/images/shopping.jpg";
 
 const colors = [
   { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
@@ -36,7 +39,7 @@ const highlights = [
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-const ProductDetails = ({setProgress}) => {
+const ProductDetails = ({ setProgress }) => {
   useEffect(() => {
     // callback function to call when event triggers
     const onPageLoad = () => {
@@ -56,42 +59,55 @@ const ProductDetails = ({setProgress}) => {
     }
   }, []);
   const [selectedColor, setSelectedColor] = useState(colors[0]);
-  const [openModal,setOpenModal] = useState(false);
+  const [openModal, setOpenModal] = useState(false);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
   const product = useSelector((state) => state.productList.selectedProduct);
   const user = useSelector((state) => state.auth.user);
   const dispatch = useDispatch();
   const { id } = useParams();
   const reviews = useSelector((state) => state.reviewList.reviews);
-  const[reviewText,setReviewText]=useState("");
+  const [reviewText, setReviewText] = useState("");
 
   useEffect(() => {
     dispatch(getProductByIdAsync(id));
     dispatch(getAllReviewsByProductIdAsync(id));
   }, [dispatch, id]);
 
-  const addToCart = (e) =>{
-    if(user){
-      dispatch(addToCartAsync({...product,quantity:1,userId:user.id}));
+  const addToCart = (e) => {
+    if (user) {
+      dispatch(addToCartAsync({ ...product, quantity: 1, userId: user.id }));
       // console.log({...product,quantity:1,userId:user.id})
       // console.log(user);
-      toast.success(product.title+" added",{pauseOnHover:false,theme:"dark"});
-    }else{
+      toast.success(product.title + " added", {
+        pauseOnHover: false,
+        theme: "dark",
+      });
+    } else {
       setOpenModal(true);
     }
-  }
+  };
 
-  const createReview =(e)=>{
-    if(user){
+  const createReview = (e) => {
+    if (user) {
       const date = new Date();
-      let currentDate = String(`${String(date.getDate()).padStart(2, '0')}/${String(date.getMonth()+1).padStart(2,"0")}/${date.getFullYear()}`);
-      dispatch(createReviewAsync({userId:user.id,productId:product.id,content:reviewText,createdAt:currentDate}))
-      toast.success("Review added",{pauseOnHover:false,theme:"dark"});
-    }
-    else{
+      let currentDate = String(
+        `${String(date.getDate()).padStart(2, "0")}/${String(
+          date.getMonth() + 1
+        ).padStart(2, "0")}/${date.getFullYear()}`
+      );
+      dispatch(
+        createReviewAsync({
+          userId: user.id,
+          productId: product.id,
+          content: reviewText,
+          createdAt: currentDate,
+        })
+      );
+      toast.success("Review added", { pauseOnHover: false, theme: "dark" });
+    } else {
       setOpenModal(true);
     }
-  }
+  };
 
   return (
     <>
@@ -184,7 +200,8 @@ const ProductDetails = ({setProgress}) => {
                 {/* Options */}
                 <div className="mt-4 lg:row-span-3 lg:mt-0">
                   <h2 className="sr-only">Product information</h2>
-                  <p className="text-3xl tracking-tight text-gray-900">₹ {product.price}
+                  <p className="text-3xl tracking-tight text-gray-900">
+                    ₹ {product.price}
                   </p>
 
                   <div className="mt-6">
@@ -317,7 +334,9 @@ const ProductDetails = ({setProgress}) => {
 
                     <button
                       type="submit"
-                      onClick={(e)=>{addToCart(e)}}
+                      onClick={(e) => {
+                        addToCart(e);
+                      }}
                       className="mt-10 flex w-full items-center justify-center rounded-md border border-transparent bg-indigo-600 px-8 py-3 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                       Add to Cart
@@ -361,13 +380,14 @@ const ProductDetails = ({setProgress}) => {
                       Write a Review
                     </h2>
                     <div>
-                      <label htmlFor="OrderNotes" className="sr-only">Order notes</label>
-                      <div
-                        className="overflow-hidden rounded-lg border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
+                      <label htmlFor="OrderNotes" className="sr-only">
+                        Order notes
+                      </label>
+                      <div className="overflow-hidden rounded-lg border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
                         <textarea
                           className="w-full resize-none border-none align-top focus:ring-0 sm:text-sm"
                           rows="2"
-                          onChange={(e)=>setReviewText(e.target.value)}
+                          onChange={(e) => setReviewText(e.target.value)}
                           value={reviewText}
                           placeholder="Enter any additional order notes..."
                         />
@@ -375,7 +395,7 @@ const ProductDetails = ({setProgress}) => {
                         <div className="flex items-center justify-end gap-2 bg-white p-3">
                           <button
                             type="button"
-                            onClick={()=>setReviewText("")}
+                            onClick={() => setReviewText("")}
                             className="rounded bg-gray-200 px-3 py-1.5 text-sm font-medium text-gray-700 hover:text-gray-600"
                           >
                             Clear
@@ -384,7 +404,10 @@ const ProductDetails = ({setProgress}) => {
                           <button
                             type="button"
                             className="rounded bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-700"
-                            onClick={(e)=>{createReview(e)}}
+                            onClick={(e) => {
+                              createReview(e);
+                              setReviewText("");
+                            }}
                           >
                             Add
                           </button>
@@ -395,53 +418,64 @@ const ProductDetails = ({setProgress}) => {
                       Ratings and Reviews
                     </h2>
                     {/* Reviews */}
-                  <div className="mt-4 mb-4">
-                    <h3 className="sr-only">Reviews</h3>
-                    <div className="flex items-center">
+                    <div className="mt-4 mb-4">
+                      <h3 className="sr-only">Reviews</h3>
                       <div className="flex items-center">
-                        {[0, 1, 2, 3, 4].map((rating) => (
-                          <StarIcon
-                            key={rating}
-                            className={classNames(
-                              product.rating > rating
-                                ? "text-gray-900"
-                                : "text-gray-200",
-                              "h-5 w-5 flex-shrink-0"
-                            )}
-                            aria-hidden="true"
-                          />
-                        ))}
+                        <div className="flex items-center">
+                          {[0, 1, 2, 3, 4].map((rating) => (
+                            <StarIcon
+                              key={rating}
+                              className={classNames(
+                                product.rating > rating
+                                  ? "text-gray-900"
+                                  : "text-gray-200",
+                                "h-5 w-5 flex-shrink-0"
+                              )}
+                              aria-hidden="true"
+                            />
+                          ))}
+                        </div>
+                        <p className="sr-only">
+                          {product.rating} out of 5 stars
+                        </p>
+                        <a
+                          href={"#"}
+                          className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
+                        >
+                          {117} reviews
+                        </a>
                       </div>
-                      <p className="sr-only">
-                        {product.rating} out of 5 stars
-                      </p>
-                      <a
-                        href={"#"}
-                        className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500"
-                      >
-                        {117} reviews
-                      </a>
                     </div>
-                  </div>
 
                     <ul role="list" className="divide-y divide-gray-100">
                       {reviews.map((review) => (
-                        <li key={review.id} className="flex justify-between gap-x-6 py-5">
+                        <li
+                          key={review.id}
+                          className="flex justify-between gap-x-6 py-5"
+                        >
                           <div className="flex min-w-0 gap-x-4">
-                            <img className="h-12 w-12 flex-none rounded-full bg-gray-50" src={shopping} alt="" />
+                            <img
+                              className="h-12 w-12 flex-none rounded-full bg-gray-50"
+                              src={shopping}
+                              alt=""
+                            />
                             <div className="min-w-0 flex-auto">
-                              <p className="text-sm font-semibold leading-6 text-gray-900">{review.userId}</p>
-                              <p className="mt-1 truncate text-xs leading-5 text-gray-500">{review.content}</p>
+                              <p className="text-sm font-semibold leading-6 text-gray-900">
+                                {review.userId}
+                              </p>
+                              <p className="mt-1 truncate text-xs leading-5 text-gray-500">
+                                {review.content}
+                              </p>
                             </div>
                           </div>
                           <div className="flex ">
-                              <div className=" flex items-end flex-col  ">
-                                <p className="mt-1 text-xs leading-5 text-gray-500">
-                                  {review.createdAt}
-                                </p>
-                                
-                                <CheckBadgeIcon className="ri-verified-badge-line h-4 w-4 text-blue-500"/>
-                              </div>
+                            <div className=" flex items-end flex-col  ">
+                              <p className="mt-1 text-xs leading-5 text-gray-500">
+                                {review.createdAt}
+                              </p>
+
+                              <CheckBadgeIcon className="ri-verified-badge-line h-4 w-4 text-blue-500" />
+                            </div>
                           </div>
                         </li>
                       ))}
@@ -457,7 +491,7 @@ const ProductDetails = ({setProgress}) => {
         ) : (
           <Spinner />
         )}
-        <Modal open={openModal} setOpen={setOpenModal}/>
+        <Modal open={openModal} setOpen={setOpenModal} />
       </Navbar>
     </>
   );
