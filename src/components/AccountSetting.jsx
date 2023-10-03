@@ -1,11 +1,21 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteModal from "./DeleteModal";
+import { changePasswordAsync } from "../slices/AuthSlice";
 
 const AccountSetting = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const user = useSelector((state) => state.auth.user);
+  const [currentPass, setCurrentPass] = useState("");
+  const [newPass, setNewPass] = useState("");
+  const changePassword = () => {
+    if (currentPass.trim().length !== 0 && newPass.trim().length !== 0) {
+      dispatch(changePasswordAsync({ userId: user.id, currentPass, newPass }));
+      setCurrentPass("");
+      setNewPass("")
+    }
+  };
   return (
     <>
       <div className="col-span-8 overflow-hidden rounded-xl sm:bg-gray-50 sm:px-8 sm:shadow">
@@ -36,8 +46,10 @@ const AccountSetting = () => {
               <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
                 <input
                   type="password"
+                  value={currentPass}
                   className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
                   placeholder="***********"
+                  onChange={(e) => setCurrentPass(e.target.value)}
                 />
               </div>
             </label>
@@ -46,8 +58,10 @@ const AccountSetting = () => {
               <div className="relative flex overflow-hidden rounded-md border-2 transition focus-within:border-blue-600">
                 <input
                   type="password"
+                  value={newPass}
                   className="w-full flex-shrink appearance-none border-gray-300 bg-white py-2 px-4 text-base text-gray-700 placeholder-gray-400 focus:outline-none"
                   placeholder="***********"
+                  onChange={(e) => setNewPass(e.target.value)}
                 />
               </div>
             </label>
@@ -62,7 +76,10 @@ const AccountSetting = () => {
             Recover Account
           </a>
         </p>
-        <button className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-white">
+        <button
+          onClick={changePassword}
+          className="mt-4 rounded-lg bg-blue-600 px-4 py-2 text-white"
+        >
           Save Password
         </button>
         <hr className="mt-4 mb-8" />
@@ -89,7 +106,10 @@ const AccountSetting = () => {
             need to get access to your data. We will completely wipe your data.
             There is no way to access your account after this action.
           </p>
-          <button onClick={()=>setOpen(true)} className="ml-auto text-sm font-semibold text-rose-600 underline decoration-2">
+          <button
+            onClick={() => setOpen(true)}
+            className="ml-auto text-sm font-semibold text-rose-600 underline decoration-2"
+          >
             Continue with deletion
           </button>
         </div>
