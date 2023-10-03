@@ -35,3 +35,9 @@ export const changePassword = async (userId,passwordData) => {
   }
   return Promise.reject("Incorrect current password");
 };
+export const deleteUser = async (userId) => {
+  const {data} = await axios.delete(`http://localhost:8080/users/${userId}`);
+  const Msg = "Account deleted";
+  return Msg;
+  
+};

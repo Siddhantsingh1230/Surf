@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createUser, login, updateUser, changePassword } from "../api/Auth_api";
+import { createUser, login, updateUser, changePassword ,deleteUser } from "../api/Auth_api";
 import { toast } from "react-toastify";
 
 const initialState = {
@@ -22,6 +22,13 @@ export const updateUserAsync = createAsyncThunk(
   "Auth/userUpdate",
   async (userId, newData) => {
     const data = await updateUser(userId, newData);
+    return data;
+  }
+);
+export const deleteUserAsync = createAsyncThunk(
+  "Auth/deleteUser",
+  async (userId) => {
+    const data = await deleteUser(userId);
     return data;
   }
 );
@@ -66,12 +73,10 @@ export const authSlice = createSlice({
       })
       .addCase(loginAsync.pending, (state) => {
         state.status = "loading";
-        state.error = null;
       })
       .addCase(loginAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.user = action.payload;
-        state.error = null;
         toast.success("🦄 Login Success", {
           position: "top-right",
           autoClose: 3000,
@@ -98,12 +103,10 @@ export const authSlice = createSlice({
       })
       .addCase(updateUserAsync.pending, (state) => {
         state.status = "loading";
-        state.error = null;
       })
       .addCase(updateUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.user = action.payload;
-        state.error = null;
         toast.success("User Updated", {
           position: "top-right",
           autoClose: 3000,
@@ -117,12 +120,10 @@ export const authSlice = createSlice({
       })
       .addCase(changePasswordAsync.pending, (state) => {
         state.status = "loading";
-        state.error = null;
       })
       .addCase(changePasswordAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.user = action.payload;
-        state.error = null;
         toast.success("Password Changed!", {
           position: "top-right",
           autoClose: 3000,
@@ -137,6 +138,23 @@ export const authSlice = createSlice({
       .addCase(changePasswordAsync.rejected, (state, action) => {
         state.status = "idle";
         toast.error(action.error.message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      })
+      .addCase(deleteUserAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(deleteUserAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.user =  null;
+        toast.success(action.payload, {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,

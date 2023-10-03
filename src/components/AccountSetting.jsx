@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteModal from "./DeleteModal";
-import { changePasswordAsync } from "../slices/AuthSlice";
+import { changePasswordAsync, deleteUserAsync } from "../slices/AuthSlice";
+import { useNavigate } from "react-router-dom";
 
 const AccountSetting = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
   const user = useSelector((state) => state.auth.user);
   const [currentPass, setCurrentPass] = useState("");
@@ -13,8 +15,12 @@ const AccountSetting = () => {
     if (currentPass.trim().length !== 0 && newPass.trim().length !== 0) {
       dispatch(changePasswordAsync({ userId: user.id, currentPass, newPass }));
       setCurrentPass("");
-      setNewPass("")
+      setNewPass("");
     }
+  };
+  const deleteUser = () => {
+    dispatch(deleteUserAsync(user.id));
+    navigate("/");
   };
   return (
     <>
@@ -114,7 +120,7 @@ const AccountSetting = () => {
           </button>
         </div>
       </div>
-      <DeleteModal open={open} setOpen={setOpen} />
+      <DeleteModal open={open} deleteUser={deleteUser} setOpen={setOpen} />
     </>
   );
 };

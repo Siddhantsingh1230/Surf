@@ -2,7 +2,7 @@ import { Fragment, useRef, useState } from "react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 
-const DeleteModal = ({ open, setOpen }) => {
+const DeleteModal = ({ open, setOpen, deleteUser }) => {
   const cancelButtonRef = useRef(null);
 
   return (
@@ -68,7 +68,7 @@ const DeleteModal = ({ open, setOpen }) => {
                     className="inline-flex w-full justify-center rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto"
                     onClick={() => {
                       setOpen(false);
-                      console.log("deleted acc");
+                      deleteUser();
                     }}
                   >
                     Delete
