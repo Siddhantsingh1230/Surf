@@ -368,8 +368,9 @@ const ProductDetails = ({setProgress}) => {
                           className="w-full resize-none border-none align-top focus:ring-0 sm:text-sm"
                           rows="2"
                           onChange={(e)=>setReviewText(e.target.value)}
+                          value={reviewText}
                           placeholder="Enter any additional order notes..."
-                        >{reviewText}</textarea>
+                        />
 
                         <div className="flex items-center justify-end gap-2 bg-white p-3">
                           <button
