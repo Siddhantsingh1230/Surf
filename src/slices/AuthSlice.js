@@ -164,6 +164,19 @@ export const authSlice = createSlice({
           progress: undefined,
           theme: "dark",
         });
+      })
+      .addCase(deleteUserAsync.rejected, (state, action) => {
+        state.status = "idle";
+        toast.error(action.error.message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
       });
   },
 });
