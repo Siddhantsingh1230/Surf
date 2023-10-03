@@ -6,6 +6,7 @@ import notificationListReducer from '../slices/NotificationSlice';
 import authReducer from "../slices/AuthSlice";
 import cartReducer from "../slices/CartSlice";
 import orderStateReducer from "../slices/OrderStateSlice";
+import reviewListReducer from "../slices/ReviewSlice"
 
 export const store = configureStore({
   reducer: {
@@ -16,5 +17,6 @@ export const store = configureStore({
     auth:authReducer,
     cart:cartReducer,
     orderState:orderStateReducer,
+    reviewList:reviewListReducer
   },
 });
