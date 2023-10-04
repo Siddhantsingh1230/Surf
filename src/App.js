@@ -90,7 +90,7 @@ const App = () => {
           />
           <Route
             exact
-            path="/orderSuccess"
+            path="/orderSuccess/:id"
             element={
               <Protected>
                 <OrderSuccess setProgress={setProgress} />

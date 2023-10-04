@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import confetti from "../assets/images/confetti.gif";
-import { Link, Navigate } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import ConfettiExplosion from "react-confetti-explosion";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { resetCurrentOrder } from "../slices/OrdersSlice";
 
 const OrderSuccess = ({ setProgress }) => {
   const [isExploding, setIsExploding] = useState(true);
   const user = useSelector((state) => state.auth.user);
-  const currentOrder = useSelector((state) => state.orders.currentOrder);
+  const dispatch = useDispatch();
   useEffect(() => {
     // callback function to call when event triggers
     const onPageLoad = () => {
@@ -28,19 +29,22 @@ const OrderSuccess = ({ setProgress }) => {
       };
     }
   }, []);
-
+  const {id} = useParams();
+  useEffect(() => {
+    dispatch(resetCurrentOrder());
+  }, [dispatch, user]);
   return (
     <>
-      {!currentOrder && <Navigate replace={true} to="/" />}
-      {currentOrder && isExploding && (
+      {!id && <Navigate replace={true} to="/" />}
+      {id && isExploding && (
         <ConfettiExplosion
-          particleCount={300}
+          particleCount={200}
           duration={3000}
           width={2000}
           force={1}
         />
       )}
-      {currentOrder && (
+      {id && (
         <div className="w-screen h-screen bg-gray-100 flex justify-center items-center">
           <div className="flex flex-col justify-center items-center shadow-lg bg-white rounded-2xl h-[80%] w-[50%] max-sm:h-screen max-sm:w-screen">
             <img className="h-20 w-20" src={confetti} alt="" />
@@ -50,7 +54,7 @@ const OrderSuccess = ({ setProgress }) => {
             <p className=" sm:text-2xl text-lg text-center   mb-3 font-bold">
               Your Order{" "}
               <span className="hover:underline cursor-pointer text-indigo-600">
-                #{currentOrder.id}
+                #{id}
               </span>{" "}
               is Confirmed !
             </p>

@@ -9,7 +9,7 @@ import { emptyCartAsync, getCartAsync } from "../slices/CartSlice";
 import { CRD, COD } from "../app/constants";
 import { getOrderStateAsync } from "../slices/OrderStateSlice";
 import { useForm } from "react-hook-form";
-import { createOrderAsync } from "../slices/OrdersSlice";
+import { createOrderAsync, resetCurrentOrder } from "../slices/OrdersSlice";
 import Spinner from "../components/Spinner";
 
 const Checkout = ({ setProgress }) => {
@@ -65,7 +65,7 @@ const Checkout = ({ setProgress }) => {
   }, [paymentMethod]);
   return (
     <>
-      {currentOrder && <Navigate replace={true} to="/ordersuccess" />}
+      {currentOrder && <Navigate replace={true} to={`/ordersuccess/${currentOrder.id}`} />}
       {loading ? (
         <Spinner />
       ) : (
@@ -292,6 +292,7 @@ const Checkout = ({ setProgress }) => {
                   })
                 );
                 dispatch(emptyCartAsync(user.id));
+                
               })}
               className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0"
             >
