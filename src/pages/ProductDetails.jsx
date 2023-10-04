@@ -89,21 +89,24 @@ const ProductDetails = ({ setProgress }) => {
 
   const createReview = (e) => {
     if (user) {
-      const date = new Date();
-      let currentDate = String(
-        `${String(date.getDate()).padStart(2, "0")}/${String(
-          date.getMonth() + 1
-        ).padStart(2, "0")}/${date.getFullYear()}`
-      );
-      dispatch(
-        createReviewAsync({
-          userId: user.id,
-          productId: product.id,
-          content: reviewText,
-          createdAt: currentDate,
-        })
-      );
-      toast.success("Review added", { pauseOnHover: false, theme: "dark" });
+      if(reviewText.trim().length!=0 ){
+        const date = new Date();
+        let currentDate = String(
+          `${String(date.getDate()).padStart(2, "0")}/${String(
+            date.getMonth() + 1
+          ).padStart(2, "0")}/${date.getFullYear()}`
+        );
+        dispatch(
+          createReviewAsync({
+            userId: user.id,
+            productId: product.id,
+            content: reviewText.trim(),
+            createdAt: currentDate,
+          })
+        );
+        toast.success("Review added", { pauseOnHover: false, theme: "dark" });
+      }
+      
     } else {
       setOpenModal(true);
     }
@@ -383,16 +386,16 @@ const ProductDetails = ({ setProgress }) => {
                       <label htmlFor="OrderNotes" className="sr-only">
                         Order notes
                       </label>
-                      <div className="overflow-hidden rounded-lg border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600">
+                      <div className=" overflow-hidden rounded-lg border border-gray-200 shadow-sm focus-within:border-blue-600 focus-within:ring-1 focus-within:ring-blue-600 p-1">
                         <textarea
-                          className="w-full resize-none border-none align-top focus:ring-0 sm:text-sm"
-                          rows="2"
+                          className="notification w-full resize-none border-none align-top focus:ring-0 sm:text-sm"
+                          rows="5"
                           onChange={(e) => setReviewText(e.target.value)}
                           value={reviewText}
-                          placeholder="Enter any additional order notes..."
-                        />
-
-                        <div className="flex items-center justify-end gap-2 bg-white p-3">
+                          placeholder="Write your review here ..."
+                        />     
+                    </div>
+                    <div className="flex items-center justify-end gap-2 mt-1 bg-white p-3">
                           <button
                             type="button"
                             onClick={() => setReviewText("")}
@@ -413,8 +416,7 @@ const ProductDetails = ({ setProgress }) => {
                           </button>
                         </div>
                       </div>
-                    </div>
-                    <h2 className="text-sm font-medium text-gray-900 mt-6">
+                    <h2 className="text-sm font-medium text-gray-900 mt-2 ">
                       Ratings and Reviews
                     </h2>
                     {/* Reviews */}
@@ -460,11 +462,11 @@ const ProductDetails = ({ setProgress }) => {
                               alt=""
                             />
                             <div className="min-w-0 flex-auto">
-                              <p className="text-sm font-semibold leading-6 text-gray-900">
-                                {review.userId}
+                              <p className="text-sm font-semibold  leading-6 text-gray-900">
+                                {review.content }
                               </p>
-                              <p className="mt-1 truncate text-xs leading-5 text-gray-500">
-                                {review.content}
+                              <p className="mt-1 truncate text-xs leading-5 text-gray-5 00">
+                                {review.userId}
                               </p>
                             </div>
                           </div>
