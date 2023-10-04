@@ -994,34 +994,6 @@
       "content": "",
       "createdAt": "04/10/2023",
       "id": 6
-    },
-    {
-      "userId": "2023-10-01T10:01:46.913Z",
-      "productId": 2,
-      "content": "                ",
-      "createdAt": "04/10/2023",
-      "id": 7
-    },
-    {
-      "userId": "2023-10-01T10:01:46.913Z",
-      "productId": 2,
-      "content": "                                 s",
-      "createdAt": "04/10/2023",
-      "id": 8
-    },
-    {
-      "userId": "2023-10-01T10:01:46.913Z",
-      "productId": 2,
-      "content": "4donkey motu",
-      "createdAt": "04/10/2023",
-      "id": 9
-    },
-    {
-      "userId": "2023-10-01T10:01:46.913Z",
-      "productId": 2,
-      "content": "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Magnam ex, voluptatem animi voluptates harum culpa nostrum id amet molestiae at reiciendis, excepturi ratione sunt cumque eius quidem ducimus rem ad veritatis iure incidunt. Quidem quae inventore esse necessitatibus. Provident quo, temporibus reprehenderit alias odio sint vero itaque id cumque unde.",
-      "createdAt": "04/10/2023",
-      "id": 10
     }
   ],
   "orders": []
