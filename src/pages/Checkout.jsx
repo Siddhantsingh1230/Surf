@@ -51,14 +51,14 @@ const Checkout = ({ setProgress }) => {
       dispatch(getOrderStateAsync());
     }
   }, [dispatch]);
-  useEffect(()=>{
-    if(COD){
+  useEffect(() => {
+    if (COD) {
       unregister("cardholder");
       unregister("creditexpiry");
       unregister("cardcvv");
       unregister("cardno");
     }
-  },[paymentMethod]);
+  }, [paymentMethod]);
   return (
     <>
       <div className="flex flex-col items-center border-b bg-white py-4 sm:flex-row sm:px-10 lg:px-20 xl:px-32">
@@ -203,7 +203,12 @@ const Checkout = ({ setProgress }) => {
           </div>
 
           <p className="mt-8 text-lg font-medium">Shipping Methods</p>
-          <form className="mt-5 grid gap-6">
+          <form
+            className="mt-5 grid gap-6"
+            onSubmit={handleSubmit((data) => {
+              console.log(data);
+            })}
+          >
             <div className="relative cursor-pointer">
               <input
                 className="peer hidden "
@@ -267,7 +272,7 @@ const Checkout = ({ setProgress }) => {
         <form
           noValidate
           onSubmit={handleSubmit((data) => {
-            console.log(data);
+            console.log({ ...data, userId: user.id ,paymentMethod:paymentMethod });
           })}
           className="mt-10 bg-gray-50 px-4 pt-8 lg:mt-0"
         >
