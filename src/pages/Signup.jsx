@@ -40,12 +40,12 @@ const Signup = ({setProgress}) => {
         onSubmit={handleSubmit((data) => {
           dispatch(createUserAsync(data));
         })}
-        className="h-screen bg-blue-100 text-gray-900 flex justify-center overflow-y-hidden "
+        className="h-screen bg-cyan-50 text-gray-900 flex justify-center overflow-y-hidden "
       >
         <div className="max-w-screen-xl max-sm:items-center m-0 sm:my-10 sm:mx-40 bg-white shadow sm:rounded-xl flex justify-center flex-1 h-fi">
           <div className="lg:w-1/2 p-6 sm:p-6 justify-center items-center overflow-hidden overflow-y-auto no-scrollbar">
             <div className="mt-4 flex flex-col items-center">
-              <h1 className="text-xl xl:text-2xl font-bold text-purple-600">
+              <h1 className="text-xl xl:text-2xl font-bold text-[#51c3e6]">
                 Create Account
               </h1>
               <div className="w-full flex-1 mt-2">
@@ -63,7 +63,7 @@ const Signup = ({setProgress}) => {
                         message: "Enter valid username",
                       },})}
                       placeholder="First and last name"
-                      className="w-full rounded-md focus:border-red-600  border-gray-200 pe-10 shadow-sm sm:text-sm"
+                      className="w-full rounded-md   border-gray-200 pe-10 shadow-sm sm:text-sm"
                     />
 
                     <span className="pointer-events-none absolute inset-y-0 end-0 grid w-10 place-content-center text-gray-500">
@@ -103,7 +103,7 @@ const Signup = ({setProgress}) => {
                         },
                       })}
                       placeholder="Mobile number"
-                      className="w-full rounded-md focus:border-red-600 border-gray-200 pe-10 shadow-sm sm:text-sm"
+                      className="w-full rounded-md  border-gray-200 pe-10 shadow-sm sm:text-sm"
                     />
 
                     <span className="pointer-events-none absolute inset-y-0 end-0 grid w-10 place-content-center text-gray-500">
@@ -143,7 +143,7 @@ const Signup = ({setProgress}) => {
                         },
                       })}
                       placeholder="Email"
-                      className="w-full rounded-md focus:border-red-600 border-gray-200 pe-10 shadow-sm sm:text-sm"
+                      className="w-full rounded-md  border-gray-200 pe-10 shadow-sm sm:text-sm"
                     />
 
                     <span className="pointer-events-none absolute inset-y-0 end-0 grid w-10 place-content-center text-gray-500">
@@ -185,7 +185,7 @@ const Signup = ({setProgress}) => {
                         },
                       })}
                       placeholder="Password"
-                      className="w-full rounded-md focus:border-red-600 border-gray-200 pe-10 shadow-sm sm:text-sm"
+                      className="w-full rounded-md  border-gray-200 pe-10 shadow-sm sm:text-sm"
                     />
                     <span className="pointer-events-none absolute inset-y-0 end-0 grid w-10 place-content-center text-gray-500">
                       <svg
@@ -207,7 +207,7 @@ const Signup = ({setProgress}) => {
                       {errors.password.message}
                     </p>
                   )}
-                  <button className="mt-4 tracking-wide font-semibold bg-purple-500 text-gray-100 w-full py-2 rounded-lg hover:bg-purple-700 transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
+                  <button className="mt-4 tracking-wide font-semibold bg-[#51c3e6] text-gray-100 w-full py-2 rounded-lg hover:bg-[#68d1f1] transition-all duration-300 ease-in-out flex items-center justify-center focus:shadow-outline focus:outline-none">
                     <svg
                       className="w-6 h-6 -ml-2"
                       fill="none"
@@ -224,17 +224,17 @@ const Signup = ({setProgress}) => {
                   </button>
                   <p className="mt-4 text-sm text-gray-600 text-center">
                     Already have an account ?{" "}
-                    <Link to="/login" className="text-purple-600 font-bold">
+                    <Link to="/login" className="text-[#51c3e6] font-bold">
                       LogIn
                     </Link>
                   </p>
                   <p className="mt-4 text-xs text-gray-600 text-center">
                     I agree to abide by surf's{" "}
-                    <a href="#" className="text-purple-600 font-bold">
+                    <a href="#" className="text-[#51c3e6] font-bold">
                       Terms of Service{" "}
                     </a>
                     and its{" "}
-                    <a href="#" className="text-purple-600 font-bold">
+                    <a href="#" className="text-[#51c3e6] font-bold">
                       Privacy Policy
                     </a>
                   </p>
@@ -249,7 +249,7 @@ const Signup = ({setProgress}) => {
             <img
               src={shopping}
               className="
-           w-full bg-contain bg-center bg-no-repeat rounded-xl shadow-sm border-purple-300 "
+           w-full object-cover bg-center bg-no-repeat rounded-xl shadow-sm border-purple-300 "
             ></img>
           </div>
         </div>

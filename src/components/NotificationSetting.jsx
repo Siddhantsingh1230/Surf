@@ -4,7 +4,7 @@ function NotificationSetting() {
     return (
         <div className="col-span-8 overflow-hidden rounded-xl bg-gray-50 px-8 shadow">
             <div className="border-b pt-4 pb-8">
-                <h1 className="py-2 text-2xl font-semibold">Notification settings</h1>
+                <h1 className="py-2 text-2xl font-semibold">Manage Notification and Promotions</h1>
                 <p className="font- text-slate-600">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
             </div>
             <div className="grid border-b py-6 sm:grid-cols-2">
