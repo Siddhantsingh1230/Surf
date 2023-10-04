@@ -24,3 +24,14 @@ export const updateCartProduct = async (cartProduct) => {
   });
   return { ...cartProduct };
 };
+
+export const emptyCart = async (userId) => {
+  try {
+    const cart = await getCart(userId);
+    cart.forEach(async (element) => {
+      await removeFromCart(element.id);
+    });
+  } catch (e) {
+    console.log(e);
+  }
+};

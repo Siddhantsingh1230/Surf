@@ -4,6 +4,7 @@ import { createOrder, getOrders } from "../api/Order_api";
 const initialState = {
   orders: [],
   status: "idle",
+  currentOrder: null,
 };
 
 export const createOrderAsync = createAsyncThunk(
@@ -35,6 +36,7 @@ export const ordersSlice = createSlice({
       .addCase(createOrderAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.orders.push(action.payload);
+        state.currentOrder = action.payload;
       })
       .addCase(getOrdersAsync.pending, (state) => {
         state.status = "loading";

@@ -16,6 +16,7 @@
     "embla-carousel-react": "^8.0.0-rc14",
     "jquery": "^3.7.1",
     "react": "^18.2.0",
+    "react-confetti-explosion": "^2.1.2",
     "react-dom": "^18.2.0",
     "react-feather": "^2.0.10",
     "react-hook-form": "^7.46.2",

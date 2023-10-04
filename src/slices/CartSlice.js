@@ -1,5 +1,11 @@
-import { createAsyncThunk, createSlice  } from "@reduxjs/toolkit";
-import { addToCart, getCart ,updateCartProduct ,removeFromCart } from "../api/Cart_api";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import {
+  addToCart,
+  getCart,
+  updateCartProduct,
+  removeFromCart,
+  emptyCart,
+} from "../api/Cart_api";
 
 const initialState = {
   cart: [],
@@ -15,12 +21,22 @@ export const getCartAsync = createAsyncThunk("Cart/get", async (userid) => {
   const data = await getCart(userid);
   return data;
 });
-export const updateCartProductAsync = createAsyncThunk("Cart/update", async (product_cart) => {
-  const data = await updateCartProduct(product_cart);
-  return data;
-});
-export const removeFromCartAsync = createAsyncThunk("Cart/delete", async (product_cart_id) => {
-  const data = await removeFromCart(product_cart_id);
+export const updateCartProductAsync = createAsyncThunk(
+  "Cart/update",
+  async (product_cart) => {
+    const data = await updateCartProduct(product_cart);
+    return data;
+  }
+);
+export const removeFromCartAsync = createAsyncThunk(
+  "Cart/delete",
+  async (product_cart_id) => {
+    const data = await removeFromCart(product_cart_id);
+    return data;
+  }
+);
+export const emptyCartAsync = createAsyncThunk("Cart/empty", async (userId) => {
+  const data = await emptyCart(userId);
   return data;
 });
 
@@ -59,8 +75,10 @@ export const cartSlice = createSlice({
       })
       .addCase(updateCartProductAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        const idx = state.cart.findIndex((item)=>item.id===action.payload.id);
-        state.cart[idx]=action.payload;
+        const idx = state.cart.findIndex(
+          (item) => item.id === action.payload.id
+        );
+        state.cart[idx] = action.payload;
         state.error = null;
       })
       .addCase(removeFromCartAsync.pending, (state) => {
@@ -69,7 +87,16 @@ export const cartSlice = createSlice({
       })
       .addCase(removeFromCartAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.cart = state.cart.filter((elem)=>elem.id!==action.payload);
+        state.cart = state.cart.filter((elem) => elem.id !== action.payload);
+        state.error = null;
+      })
+      .addCase(emptyCartAsync.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
+      .addCase(emptyCartAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.cart = [];
         state.error = null;
       });
   },

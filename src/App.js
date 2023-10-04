@@ -19,6 +19,7 @@ import Protected from "./components/Protected";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingBar from "react-top-loading-bar";
+import OrderSuccess from "./pages/OrderSuccess";
 
 const App = () => {
   const [progress, setProgress] = useState(0);
@@ -39,8 +40,16 @@ const App = () => {
         />
         <Routes>
           <Route exact path="/" element={<Home setProgress={setProgress} />} />
-          <Route exact path="/login" element={<Login setProgress={setProgress} />} />
-          <Route exact path="/signup" element={<Signup setProgress={setProgress} />} />
+          <Route
+            exact
+            path="/login"
+            element={<Login setProgress={setProgress} />}
+          />
+          <Route
+            exact
+            path="/signup"
+            element={<Signup setProgress={setProgress} />}
+          />
           <Route
             exact
             path="/cart"
@@ -50,9 +59,21 @@ const App = () => {
               </Protected>
             }
           />
-          <Route exact path="/about" element={<About setProgress={setProgress} />} />
-          <Route exact path="/deals" element={<Deals setProgress={setProgress} />} />
-          <Route exact path="/category" element={<Category setProgress={setProgress} />} />
+          <Route
+            exact
+            path="/about"
+            element={<About setProgress={setProgress} />}
+          />
+          <Route
+            exact
+            path="/deals"
+            element={<Deals setProgress={setProgress} />}
+          />
+          <Route
+            exact
+            path="/category"
+            element={<Category setProgress={setProgress} />}
+          />
           <Route
             exact
             path="/checkout"
@@ -62,8 +83,20 @@ const App = () => {
               </Protected>
             }
           />
-          <Route exact path="/product/:id" element={<ProductDetails setProgress={setProgress} />} />
-          <Route exact path="*" element={<PageNotFound setProgress={setProgress} />} />
+          <Route
+            exact
+            path="/product/:id"
+            element={<ProductDetails setProgress={setProgress} />}
+          />
+          <Route
+            exact
+            path="/orderSuccess"
+            element={
+              <Protected>
+                <OrderSuccess setProgress={setProgress} />
+              </Protected>
+            }
+          />
           <Route
             exact
             path="/setting"
@@ -81,6 +114,11 @@ const App = () => {
                 <Profile setProgress={setProgress} />
               </Protected>
             }
+          />
+          <Route
+            exact
+            path="*"
+            element={<PageNotFound setProgress={setProgress} />}
           />
         </Routes>
         <ToastContainer />
