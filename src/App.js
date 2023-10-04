@@ -20,6 +20,8 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import LoadingBar from "react-top-loading-bar";
 import OrderSuccess from "./pages/OrderSuccess";
+import Orders from "./pages/Orders";
+import OrderDetail from "./pages/OrderDetail";
 
 const App = () => {
   const [progress, setProgress] = useState(0);
@@ -103,6 +105,24 @@ const App = () => {
             element={
               <Protected>
                 <Setting setProgress={setProgress} />
+              </Protected>
+            }
+          />
+          <Route
+            exact
+            path="/orders"
+            element={
+              <Protected>
+                <Orders setProgress={setProgress} />
+              </Protected>
+            }
+          />
+          <Route
+            exact
+            path="/orders/:id"
+            element={
+              <Protected>
+                <OrderDetail setProgress={setProgress} />
               </Protected>
             }
           />
