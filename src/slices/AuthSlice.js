@@ -1,11 +1,19 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createUser, login, updateUser, changePassword ,deleteUser ,updateNotification } from "../api/Auth_api";
+import {
+  createUser,
+  login,
+  updateUser,
+  changePassword,
+  deleteUser,
+  updateNotification,
+  signout,
+} from "../api/Auth_api";
 import { toast } from "react-toastify";
 
 const initialState = {
   user: null,
   status: "idle",
-  enableNotifications:true,
+  enableNotifications: true,
 };
 
 export const createUserAsync = createAsyncThunk(
@@ -50,6 +58,10 @@ export const updateNotificationAsync = createAsyncThunk(
     return data;
   }
 );
+export const signoutAsync = createAsyncThunk("Auth/signout", async (userId) => {
+  const data = await signout(userId);
+  return data;
+});
 
 export const authSlice = createSlice({
   name: "auth",
@@ -161,7 +173,7 @@ export const authSlice = createSlice({
       })
       .addCase(deleteUserAsync.fulfilled, (state, action) => {
         state.status = "idle";
-        state.user =  null;
+        state.user = null;
         toast.success(action.payload, {
           position: "top-right",
           autoClose: 3000,
@@ -185,13 +197,31 @@ export const authSlice = createSlice({
           progress: undefined,
           theme: "dark",
         });
-      }).addCase(updateNotificationAsync.pending, (state) => {
+      })
+      .addCase(updateNotificationAsync.pending, (state) => {
         state.status = "loading";
       })
       .addCase(updateNotificationAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.enableNotifications = action.payload;
         toast.success("Updated!", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      })
+      .addCase(signoutAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(signoutAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        state.user = null;
+        toast.success(action.payload, {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,

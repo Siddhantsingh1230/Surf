@@ -45,3 +45,7 @@ export const updateNotification = async ({userId, value}) => {
   });
   return value;
 };
+export const signout = async (userId) => {
+  //server part
+  return "Logged out";
+};

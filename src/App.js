@@ -22,6 +22,7 @@ import LoadingBar from "react-top-loading-bar";
 import OrderSuccess from "./pages/OrderSuccess";
 import Orders from "./pages/Orders";
 import OrderDetail from "./pages/OrderDetail";
+import Signout from "./pages/Signout";
 
 const App = () => {
   const [progress, setProgress] = useState(0);
@@ -134,6 +135,11 @@ const App = () => {
                 <Profile setProgress={setProgress} />
               </Protected>
             }
+          />
+          <Route
+            exact
+            path="/signout"
+            element={<Signout />}
           />
           <Route
             exact
