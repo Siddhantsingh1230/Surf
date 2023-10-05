@@ -5,7 +5,7 @@ const ForgotPwd = () => {
   return (
     <>
       <body className="antialiased bg-white h-screen w-screen flex justify-center items-center">
-        <div className="max-w-lg mx-auto w-[80%] bg-white p-8 rounded-xl shadow shadow-slate-400">
+        <div className="max-w-lg mx-auto w-[100%] sm:w-[80%] bg-white p-8 rounded-xl shadow shadow-slate-400">
           <h1 className="text-4xl font-medium">Reset password</h1>
           <p className="text-slate-500">
             Fill up the form to reset the password
