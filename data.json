@@ -829,7 +829,7 @@
       "phone": "9023134084",
       "email": "siddhant@mail.com",
       "password": "Admin12@",
-      "enableNotifications": false
+      "enableNotifications": true
     },
     {
       "id": "2023-10-01T10:01:46.913Z",
