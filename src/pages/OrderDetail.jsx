@@ -4,15 +4,20 @@ import { Link, Navigate, useParams } from "react-router-dom";
 import DangerBadge from "../components/DangerBadge";
 import WarningBadge from "../components/WarningBadge";
 import SuccessBadge from "../components/SuccessBadge";
+import { cancelOrderAsync } from "../slices/OrdersSlice";
 
 const OrderDetail = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.orders);
+  const user = useSelector((state) => state.auth.user);
   const [order, setOrder] = useState([]);
   useEffect(() => {
     setOrder(orders.filter((order) => order.id == id));
-  }, []);
+  }, [dispatch,orders]);
+  const cancelOrder = () => {
+    dispatch(cancelOrderAsync(id));
+  };
   return (
     <>
       {!id && <Navigate to="/orders" replace={true} />}
@@ -22,7 +27,7 @@ const OrderDetail = () => {
             Order <span className="text-blue-800">#{id}</span>
           </h1>
 
-          {order.length>0 && (
+          {order.length > 0 && (
             <div className="w-full flex flex-col sm:flex-row justify-between px-5">
               <div>
                 <p>Checkout Mail : {order[0].checkoutEmail}</p>
@@ -35,16 +40,27 @@ const OrderDetail = () => {
                 <p className="flex gap-2">
                   <span className="font-bold text-lg">Status : </span>
                   {order[0].status == "shipped" ? (
-                    <SuccessBadge text="Shipped" />
+                    <SuccessBadge text={"Shipped"} />
                   ) : order[0].status == "pending" ? (
-                    <WarningBadge text="Pending" />
-                  ) : order[0].status == "canceled" ? (
-                    <DangerBadge text={"Canceled"} />
+                    <WarningBadge text={"Pending"} />
+                  ) : order[0].status == "cancelled" ? (
+                    <DangerBadge text={"Cancelled"} />
                   ) : null}
                 </p>
                 <p className="font-bold text-lg">
-                  Total : <span className="text-blue-500">₹ {order[0].totalAmount}</span>
+                  Total :{" "}
+                  <span className="text-blue-500">
+                    ₹ {order[0].totalAmount}
+                  </span>
                 </p>
+                {order[0].status == "pending"  && (
+                    <div
+                      onClick={cancelOrder}
+                      className="mt-3 select-none hover:bg-red-400 cursor-pointer flex justify-center items-center bg-red-500 text-white rounded-md px-3 py-2"
+                    >
+                      <p>Cancel Order</p>
+                    </div>
+                  )}
               </div>
             </div>
           )}

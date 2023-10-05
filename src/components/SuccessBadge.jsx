@@ -19,7 +19,7 @@ const SuccessBadge = ({text}) => {
           />
         </svg>
 
-        <p className="whitespace-nowrap text-sm">{text}</p>
+        <div className="whitespace-nowrap text-sm">{text}</div>
       </span>
     </>
   );

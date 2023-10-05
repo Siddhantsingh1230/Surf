@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { createOrder, getOrders } from "../api/Order_api";
+import { createOrder, getOrders, cancelOrder } from "../api/Order_api";
 
 const initialState = {
   orders: [],
@@ -18,7 +18,13 @@ export const getOrdersAsync = createAsyncThunk("orders/get", async (userId) => {
   const data = await getOrders(userId);
   return data;
 });
-
+export const cancelOrderAsync = createAsyncThunk(
+  "orders/cancelorder",
+  async (orderId) => {
+    const data = await cancelOrder(orderId);
+    return data;
+  }
+);
 
 export const ordersSlice = createSlice({
   name: "orders",
@@ -45,6 +51,22 @@ export const ordersSlice = createSlice({
       .addCase(getOrdersAsync.fulfilled, (state, action) => {
         state.status = "idle";
         state.orders = action.payload;
+      })
+      .addCase(cancelOrderAsync.pending, (state) => {
+        state.status = "loading";
+      })
+      .addCase(cancelOrderAsync.fulfilled, (state, action) => {
+        state.status = "idle";
+        const orders = state.orders.map((order) => {
+          if (order.id == action.payload) {
+            return { ...order, status: "cancelled" };
+          }
+          return order;
+        });
+        state.orders = orders;
+      })
+      .addCase(cancelOrderAsync.rejected, (state, action) => {
+        state.status = "idle";
       });
   },
 });
