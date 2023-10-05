@@ -1,5 +1,5 @@
 import React,{useEffect} from "react";
-import { useNavigate, Navigate } from "react-router-dom";
+import { useNavigate, Navigate, Link } from "react-router-dom";
 import bg from "../assets/images/bg.jpg";
 import shopping from "../assets/images/shopping.jpg";
 import { useForm } from "react-hook-form";
@@ -57,7 +57,7 @@ const Login = ({ setProgress }) => {
               <div className="w-full flex-1 mt-4">
                 <div className="flex flex-col items-center">
                   <button
-                    className="w-full max-w-xs font-bold shadow-sm rounded-lg py-2 bg-cyan-50 text-[#51c3e6] flex items-center justify-center transition-all duration-300 ease-in-out  hover:bg-[#1ab8e8] hover:text-white  focus:shadow-sm focus:shadow-outline"
+                    className="w-full max-w-xs font-bold shadow-sm rounded-lg py-2 bg-cyan-50 text-[rgb(81,195,230)] flex items-center justify-center transition-all duration-300 ease-in-out  hover:bg-[#1ab8e8] hover:text-white  focus:shadow-sm focus:shadow-outline"
                     onClick={navigateTosignup} 
                   >
                     <span className="ml-4">Create Account</span>
@@ -174,6 +174,13 @@ const Login = ({ setProgress }) => {
                     <a href="#" className="text-[#51c3e6] font-bold">
                       Privacy Policy
                     </a>
+                  </p>
+                  <p className="mt-6 text-xs text-gray-600 text-center">
+                   
+                    <Link to="/forgotpassword" className="w-full text-black-500 rounded-md p-2 text-[rgb(81,195,230)] hover:bg-[#1ab8e8] hover:text-white font-bold">
+                      Forgot Password
+                    </Link>
+                    
                   </p>
                 </div>
               </div>

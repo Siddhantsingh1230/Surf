@@ -23,6 +23,7 @@ import OrderSuccess from "./pages/OrderSuccess";
 import Orders from "./pages/Orders";
 import OrderDetail from "./pages/OrderDetail";
 import Signout from "./pages/Signout";
+import ForgotPwd from "./pages/ForgotPwd";
 
 const App = () => {
   const [progress, setProgress] = useState(0);
@@ -140,6 +141,11 @@ const App = () => {
             exact
             path="/signout"
             element={<Signout />}
+          />
+          <Route
+            exact
+            path="/forgotpassword"
+            element={<ForgotPwd />}
           />
           <Route
             exact
