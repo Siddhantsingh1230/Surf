@@ -12,19 +12,18 @@ const OrderDetail = () => {
   const [order, setOrder] = useState([]);
   useEffect(() => {
     setOrder(orders.filter((order) => order.id == id));
-    console.log(orders.filter((order) => order.id == id));
   }, []);
   return (
     <>
       {!id && <Navigate to="/orders" replace={true} />}
       <div className="h-screen w-screen p-5 bg-white">
         <div className="pt-4">
-          <h1 className="py-2 text-3xl font-semibold">
+          <h1 className="py-2 text-3xl font-semibold text-center sm:text-left ">
             Order <span className="text-blue-800">#{id}</span>
           </h1>
 
           {order.length>0 && (
-            <div className="w-full flex justify-between px-5">
+            <div className="w-full flex flex-col sm:flex-row justify-between px-5">
               <div>
                 <p>Checkout Mail : {order[0].checkoutEmail}</p>
                 <p>Billing Address : {order[0].billingaddress} </p>
@@ -33,7 +32,7 @@ const OrderDetail = () => {
                 <p>Payment Method : {order[0].paymentMethod}</p>
               </div>
               <div>
-                <p className="flex justify-center items-center gap-2">
+                <p className="flex gap-2">
                   <span className="font-bold text-lg">Status : </span>
                   {order[0].status == "shipped" ? (
                     <SuccessBadge text="Shipped" />
