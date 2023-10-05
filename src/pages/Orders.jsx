@@ -36,8 +36,8 @@ const Orders = ({ setProgress }) => {
         <div className="mx-auto grid max-w-screen-xl grid-cols-1 gap-6 p-6 md:grid-cols-2 lg:grid-cols-3">
           {orders.length > 0 ? (
             orders.map((order) =>
-              order.cart.map((item) => (
-                <article className="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
+              order.cart.map((item ,idx) => (
+                <article key={idx} className="rounded-xl bg-white p-3 shadow-lg hover:shadow-xl">
                   <Link to={`/orders/${order.id}`}>
                     <div className="relative flex items-end overflow-hidden rounded-xl">
                       <img src={item.thumbnail} alt="" />
