@@ -1,29 +1,52 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
 
 const ForgotPwd = () => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   return (
     <>
-      <body className="antialiased bg-white h-screen w-screen flex justify-center items-center">
-        <div className="max-w-lg mx-auto w-[100%] sm:w-[80%] bg-white p-8 rounded-xl shadow shadow-slate-400">
+      <div className="antialiased bg-white h-screen w-screen flex justify-center items-center">
+        <div className="max-w-lg mx-auto w-[100%]  sm:w-[80%] bg-white p-8 rounded-xl sm:shadow sm:shadow-slate-400">
           <h1 className="text-4xl font-medium">Reset password</h1>
           <p className="text-slate-500">
             Fill up the form to reset the password
           </p>
 
-          <form action="" className="my-10">
+          <form
+            noValidate
+            onSubmit={handleSubmit((data) => {
+              console.log(data);
+            })}
+            className="my-10"
+          >
             <div className="flex flex-col space-y-5">
               <label for="email">
                 <p className="font-medium text-slate-700 pb-2">Email address</p>
                 <input
                   id="email"
-                  name="email"
                   type="email"
+                  {...register("email", {
+                    required: "Enter email",
+                    pattern: {
+                      value: /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi,
+                      message: "Enter valid email",
+                    },
+                  })}
                   className="w-full py-3 border border-slate-200 rounded-lg px-3 focus:outline-none focus:border-slate-500 hover:shadow"
                   placeholder="Enter email address"
                 />
               </label>
-
+              {errors.email && (
+                <p className="inline-flex items-center rounded-md  px-2 py-0 text-xs font-medium text-red-700 ">
+                  {errors.email.message}
+                </p>
+              )}
               <button className="w-full py-3 font-medium text-white bg-indigo-600 hover:bg-indigo-500 rounded-lg border-indigo-500 hover:shadow inline-flex space-x-2 items-center justify-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -70,7 +93,7 @@ const ForgotPwd = () => {
             </div>
           </form>
         </div>
-      </body>
+      </div>
     </>
   );
 };
