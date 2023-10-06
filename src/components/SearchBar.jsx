@@ -1,9 +1,9 @@
 import React from "react";
 
-const SearchBar = ({classProp ,inputProp}) => {
+const SearchBar = ({classProp ,inputProp,search,setSearch,startsearch,setStartSearch}) => {
+  
   return (
     <>
-
       <div className={`relative ${classProp}`}>
         <label htmlFor="Search" className="sr-only">
           {" "}
@@ -13,13 +13,16 @@ const SearchBar = ({classProp ,inputProp}) => {
         <input
           type="text"
           id="Search"
+          value={search}
           placeholder="Search"
+          onChange={(e)=>{setSearch(e.target.value);}}
           className={`w-full rounded-md border-[1.5px] border-gray-200 py-2.5 pe-10 shadow-sm dark:border-gray-700 dark:bg-gray-800 dark:text-white sm:text-sm ${inputProp}`}
         />
 
         <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
           <button
             type="button"
+            onClick={()=>setStartSearch(true)}
             className="text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
           >
             <span className="sr-only">Search</span>

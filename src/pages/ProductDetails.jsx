@@ -14,6 +14,7 @@ import {
   createReviewAsync,
 } from "../slices/ReviewSlice";
 import shopping from "../assets/images/shopping.jpg";
+import {useNavigate} from "react-router-dom";
 
 const colors = [
   { name: "White", class: "bg-white", selectedClass: "ring-gray-400" },
@@ -39,7 +40,8 @@ const highlights = [
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-const ProductDetails = ({ setProgress }) => {
+const ProductDetails = ({setProgress,search,setSearch,startsearch,setStartSearch}) => {
+  const navigate=useNavigate();
   useEffect(() => {
     // callback function to call when event triggers
     const onPageLoad = () => {
@@ -58,6 +60,16 @@ const ProductDetails = ({ setProgress }) => {
       };
     }
   }, []);
+  useEffect(()=>{
+    if(startsearch  && search!="" ){
+      setSearch(search);
+      setStartSearch(false)
+      navigate("/productpagelist")
+    }
+    else if(startsearch){
+      setStartSearch(false)
+    }
+  },[search,startsearch])
   const [selectedColor, setSelectedColor] = useState(colors[0]);
   const [openModal, setOpenModal] = useState(false);
   const [selectedSize, setSelectedSize] = useState(sizes[2]);
@@ -112,9 +124,16 @@ const ProductDetails = ({ setProgress }) => {
     }
   };
 
+  const navigation =[
+    { name: "Home", href: "/", current: false },
+    { name: "About", href: "/about", current: false },
+    { name: "Products", href: "/productpagelist", current: false },
+    { name: "Category", href: "/category", current: false },
+    { name: "Deals", href: "/deals", current: false },
+  ];
   return (
     <>
-      <Navbar>
+      <Navbar navigation={navigation} search={search} setSearch={setSearch} startsearch={startsearch} setStartSearch={setStartSearch} >
         {product ? (
           <div className="bg-white">
             <div className="pt-6">

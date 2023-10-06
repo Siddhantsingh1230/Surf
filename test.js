@@ -553,6 +553,22 @@ const products= [
 
 const sets = new Set([...products.map(i=>i.category)]); 
 const data = [...sets].map((c)=>({value:c, label: c.split("-").join(" "), checked: false }));
-console.log(data);
+// console.log(data);
 const sets2 = new Set([...products.map(i=>i.brand)]); 
 const data2 = [...sets2].map((c)=>({"value":c, "label": c, "checked": false }));
+
+const set1 =new Set([products[0],products[0]])
+// console.log(set);
+
+const value ="iphone"
+const filteredList = products.filter((item)=>{
+  if (item.title.toLowerCase().includes(value.toLowerCase()))
+  return item
+else if (item.description.toLowerCase().includes(value.toLowerCase()))
+  return item
+else if (item.brand.toLowerCase().includes(value.toLowerCase()))
+  return item;
+else if(item.category.toLowerCase().includes(value.toLowerCase()))
+return item;
+})
+console.log(filteredList);

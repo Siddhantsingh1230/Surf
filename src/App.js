@@ -24,9 +24,12 @@ import Orders from "./pages/Orders";
 import OrderDetail from "./pages/OrderDetail";
 import Signout from "./pages/Signout";
 import ForgotPwd from "./pages/ForgotPwd";
+import ProductPageList from "./pages/ProductPageList";
 
 const App = () => {
   const [progress, setProgress] = useState(0);
+  const [search,setSearch]=useState("");
+  const [startsearch,setStartSearch]=useState(false);
   return (
     <>
       <Router>
@@ -43,11 +46,11 @@ const App = () => {
           component={<ScrollUpBtn />}
         />
         <Routes>
-          <Route exact path="/" element={<Home setProgress={setProgress} />} />
+          <Route exact path="/" element={<Home setProgress={setProgress} search={search} setSearch={setSearch} startsearch={startsearch} setStartSearch={setStartSearch}/>} />
           <Route
             exact
             path="/login"
-            element={<Login setProgress={setProgress} />}
+            element={<Login setProgress={setProgress}  />}
           />
           <Route
             exact
@@ -90,7 +93,7 @@ const App = () => {
           <Route
             exact
             path="/product/:id"
-            element={<ProductDetails setProgress={setProgress} />}
+            element={<ProductDetails setProgress={setProgress} search={search} setSearch={setSearch} startsearch={startsearch} setStartSearch={setStartSearch} />}
           />
           <Route
             exact
@@ -152,6 +155,12 @@ const App = () => {
             path="*"
             element={<PageNotFound setProgress={setProgress} />}
           />
+          <Route
+            exact
+            path="/productpagelist"
+            element={<ProductPageList setProgress={setProgress} search={search} setSearch={setSearch} startsearch={startsearch} setStartSearch={setStartSearch} />}
+          />
+
         </Routes>
         <ToastContainer />
         <LoadingBar
