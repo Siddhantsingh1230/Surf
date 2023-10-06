@@ -22,13 +22,7 @@ const user = {
   imageUrl:
     "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
 };
-const navigation = [
-  { name: "Home", href: "/", current: true },
-  { name: "About", href: "/about", current: false },
-  { name: "Products", href: "/products", current: false },
-  { name: "Category", href: "/category", current: false },
-  { name: "Deals", href: "/deals", current: false },
-];
+
 const userNavigation = [
   { name: "Your Profile", href: "/profile" },
   { name: "Settings", href: "/setting" },
@@ -39,7 +33,8 @@ const userNavigation = [
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-const Navbar = ({ children }) => {
+const Navbar = ({navigation,children,search,setSearch}) => {
+  
   const dispatch = useDispatch();
   const notiItem = useSelector((state) => state.notificationList.notifications);
   const enableNoti = useSelector((state) => state.auth.enableNotifications);
@@ -75,10 +70,11 @@ const Navbar = ({ children }) => {
                     </div>
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
-                        {navigation.map((item) => (
+                        {navigation ? (navigation.length>0 && navigation.map((item) => (
                           <Link
                             key={item.name}
                             to={item.href}
+                            
                             className={classNames(
                               item.current
                                 ? "bg-gray-900 text-white"
@@ -87,15 +83,16 @@ const Navbar = ({ children }) => {
                             )}
                             aria-current={item.current ? "page" : undefined}
                           >
-                            {item.name}
+                            {item.name } 
                           </Link>
-                        ))}
+                        ))) :null
+                        }
                       </div>
                     </div>
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
-                      <SearchBar classProp={"w-72 mr-2 hidden sm:block"} />
+                      <SearchBar classProp={"w-72 mr-2 hidden sm:block"} search={search} setSearch={setSearch} />
                       {LoggedUser ? (
                         <>
                           <button
@@ -191,7 +188,7 @@ const Navbar = ({ children }) => {
                     {/* Mobile menu button */}
                     <SearchBar
                       classProp={"w-60  mr-1"}
-                      inputProp={"border-[1.5px]"}
+                      inputProp={"border-[1.5px]"} search={search} setSearch={setSearch} 
                     />
                     <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:text-white outline-none">
                       <span className="absolute -inset-0.5" />
@@ -215,7 +212,7 @@ const Navbar = ({ children }) => {
 
               <Disclosure.Panel className="md:hidden h-full">
                 <div className="space-y-1 px-2 pb-3 pt-2 sm:px-3">
-                  {navigation.map((item) => (
+                  {navigation ? (navigation.length>0 && navigation.map((item) => (
                     <Disclosure.Button
                       key={item.name}
                       as="a"
@@ -230,7 +227,8 @@ const Navbar = ({ children }) => {
                     >
                       {item.name}
                     </Disclosure.Button>
-                  ))}
+                  ))):null
+                }
                 </div>
                 <div className="border-t border-gray-700 pb-3 pt-4">
                   {LoggedUser ? (
