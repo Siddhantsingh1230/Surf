@@ -48,9 +48,7 @@
       "brand": "Samsung",
       "category": "smartphones",
       "thumbnail": "https://i.dummyjson.com/data/products/3/thumbnail.jpg",
-      "images": [
-        "https://i.dummyjson.com/data/products/3/1.jpg"
-      ]
+      "images": ["https://i.dummyjson.com/data/products/3/1.jpg"]
     },
     {
       "id": 4,
@@ -996,6 +994,15 @@
       "totalAmount": 829,
       "status": "cancelled",
       "id": 1
+    }
+  ],
+  "admin": [
+    {
+      "id": 1,
+      "username": "Siddhant Singh",
+      "email": "siddhant@mail.com",
+      "password": "Admin12@",
+      "profileImgUrl": "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
     }
   ]
 }
