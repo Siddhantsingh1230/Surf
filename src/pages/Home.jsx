@@ -5,7 +5,7 @@ import Promo from "../components/Promo";
 import CarouselHome from "../components/CarouselHome";
 import {useNavigate} from "react-router-dom";
 
-const Home = ({ setProgress ,search,setSearch}) => {
+const Home = ({ setProgress ,search,setSearch,startsearch,setStartSearch}) => {
   const navigate=useNavigate();
   useEffect(() => {
     // callback function to call when event triggers
@@ -25,11 +25,15 @@ const Home = ({ setProgress ,search,setSearch}) => {
     }
   }, []);
   useEffect(()=>{
-    if(search!=""){
+    if(startsearch  && search!="" ){
       setSearch(search);
+      setStartSearch(false)
       navigate("/productpagelist")
     }
-  },[search])
+    else if(startsearch){
+      setStartSearch(false)
+    }
+  },[search,startsearch])
   const navigation = [
     { name: "Home", href: "/", current: true },
     { name: "About", href: "/about", current: false },
@@ -39,7 +43,7 @@ const Home = ({ setProgress ,search,setSearch}) => {
   ];
   return (
     <>
-      <Navbar navigation={navigation} search={search} setSearch={setSearch}>
+      <Navbar navigation={navigation} search={search} setSearch={setSearch} startsearch={startsearch} setStartSearch={setStartSearch}>
         <Promo />
         <CarouselHome />
         <Product />

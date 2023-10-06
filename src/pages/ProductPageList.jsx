@@ -4,7 +4,7 @@ import { useDispatch ,useSelector } from 'react-redux';
 import { getAllProductsAsync, getFilteredProductsAsync } from '../slices/Productpage_slice';
 import {Link} from 'react-router-dom'
 
-const ProductPageList = ({search,setSearch}) => { 
+const ProductPageList = ({search,setSearch ,startsearch,setStartSearch}) => { 
   const dispatch=useDispatch();
   const productList = useSelector(state=>state.productpageList.pageProducts);
   useEffect(()=>{
@@ -26,10 +26,10 @@ const ProductPageList = ({search,setSearch}) => {
   return (
     <div>
         <>
-    <Navbar navigation={navigation} search={search} setSearch={setSearch} />
+    <Navbar navigation={navigation} search={search} setSearch={setSearch} startsearch={startsearch} setStartSearch={setStartSearch} />
   <section className="w-fit mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 mt-10 mb-5">
     {/*   ✅ Product card 1 - Starts Here 👇 */}
-    {productList.length>0 && productList.map((item)=>(
+    {productList.length>0? ( productList.map((item)=>(
         <div key={item.id} className="w-64 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
         <Link to={`/product/${item.id}`}  className="cursor-pointer">
           <img
@@ -37,9 +37,9 @@ const ProductPageList = ({search,setSearch}) => {
             alt="Product"
             className="h-48 w-64 object-cover rounded-t-xl"
           />
-          <div className="px-2 py-1 w-72">
-            <span className="text-gray-400 mr-3 uppercase text-xs">Brand</span>
-            <p className="text-lg font-bold text-black truncate block capitalize">
+          <div className="px-2 py-1 w-56 ">
+            <span className="text-gray-400 mr-3 uppercase text-xs">{item.brand}</span>
+            <p className="text-md font-bold mr-3 text-black truncate block capitalize border-red-600">
             {item.title}
             </p>
             <div className="flex items-center">
@@ -69,7 +69,9 @@ const ProductPageList = ({search,setSearch}) => {
           </div>
         </Link>
       </div>
-    ))};
+    ))):(<div className="col-span-4">
+    <h1 className="text-gray-600 text-center">No results for: {search}</h1>
+  </div>)}
     
   </section>
   

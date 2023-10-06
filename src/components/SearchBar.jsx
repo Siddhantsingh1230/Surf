@@ -1,6 +1,6 @@
 import React from "react";
 
-const SearchBar = ({classProp ,inputProp,search,setSearch}) => {
+const SearchBar = ({classProp ,inputProp,search,setSearch,startsearch,setStartSearch}) => {
   
   return (
     <>
@@ -22,6 +22,7 @@ const SearchBar = ({classProp ,inputProp,search,setSearch}) => {
         <span className="absolute inset-y-0 end-0 grid w-10 place-content-center">
           <button
             type="button"
+            onClick={()=>setStartSearch(true)}
             className="text-gray-600 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300"
           >
             <span className="sr-only">Search</span>

@@ -29,6 +29,7 @@ import ProductPageList from "./pages/ProductPageList";
 const App = () => {
   const [progress, setProgress] = useState(0);
   const [search,setSearch]=useState("");
+  const [startsearch,setStartSearch]=useState(false);
   return (
     <>
       <Router>
@@ -45,7 +46,7 @@ const App = () => {
           component={<ScrollUpBtn />}
         />
         <Routes>
-          <Route exact path="/" element={<Home setProgress={setProgress} search={search} setSearch={setSearch}/>} />
+          <Route exact path="/" element={<Home setProgress={setProgress} search={search} setSearch={setSearch} startsearch={startsearch} setStartSearch={setStartSearch}/>} />
           <Route
             exact
             path="/login"
@@ -92,7 +93,7 @@ const App = () => {
           <Route
             exact
             path="/product/:id"
-            element={<ProductDetails setProgress={setProgress} search={search} setSearch={setSearch} />}
+            element={<ProductDetails setProgress={setProgress} search={search} setSearch={setSearch} startsearch={startsearch} setStartSearch={setStartSearch} />}
           />
           <Route
             exact
@@ -157,7 +158,7 @@ const App = () => {
           <Route
             exact
             path="/productpagelist"
-            element={<ProductPageList setProgress={setProgress} search={search} setSearch={setSearch} />}
+            element={<ProductPageList setProgress={setProgress} search={search} setSearch={setSearch} startsearch={startsearch} setStartSearch={setStartSearch} />}
           />
 
         </Routes>

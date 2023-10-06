@@ -33,7 +33,7 @@ const userNavigation = [
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
-const Navbar = ({navigation,children,search,setSearch}) => {
+const Navbar = ({navigation,children,search,setSearch,startsearch ,setStartSearch}) => {
   
   const dispatch = useDispatch();
   const notiItem = useSelector((state) => state.notificationList.notifications);
@@ -71,10 +71,10 @@ const Navbar = ({navigation,children,search,setSearch}) => {
                     <div className="hidden md:block">
                       <div className="ml-10 flex items-baseline space-x-4">
                         {navigation ? (navigation.length>0 && navigation.map((item) => (
+
                           <Link
                             key={item.name}
                             to={item.href}
-                            
                             className={classNames(
                               item.current
                                 ? "bg-gray-900 text-white"
@@ -92,7 +92,7 @@ const Navbar = ({navigation,children,search,setSearch}) => {
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
-                      <SearchBar classProp={"w-72 mr-2 hidden sm:block"} search={search} setSearch={setSearch} />
+                      <SearchBar classProp={"w-72 mr-2 hidden sm:block"} search={search} setSearch={setSearch} startsearch={startsearch} setStartSearch={setStartSearch} />
                       {LoggedUser ? (
                         <>
                           <button
@@ -188,7 +188,7 @@ const Navbar = ({navigation,children,search,setSearch}) => {
                     {/* Mobile menu button */}
                     <SearchBar
                       classProp={"w-60  mr-1"}
-                      inputProp={"border-[1.5px]"} search={search} setSearch={setSearch} 
+                      inputProp={"border-[1.5px]"} search={search} setSearch={setSearch} startsearch={startsearch} setStartSearch={setStartSearch}  
                     />
                     <Disclosure.Button className="relative inline-flex items-center justify-center rounded-md bg-gray-800 p-2 text-gray-400 hover:text-white outline-none">
                       <span className="absolute -inset-0.5" />
