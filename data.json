@@ -856,7 +856,30 @@
       "enableNotifications": true
     }
   ],
-  "cart": [],
+  "cart": [
+    {
+      "title": "OPPOF19",
+      "description": "OPPO F19 is officially announced on April 2021.",
+      "price": 280,
+      "discountPercentage": 17.91,
+      "rating": 4.3,
+      "stock": 123,
+      "brand": "OPPO",
+      "category": "smartphones",
+      "thumbnail": "https://i.dummyjson.com/data/products/4/thumbnail.jpg",
+      "images": [
+        "https://i.dummyjson.com/data/products/4/1.jpg",
+        "https://i.dummyjson.com/data/products/4/2.jpg",
+        "https://i.dummyjson.com/data/products/4/3.jpg",
+        "https://i.dummyjson.com/data/products/4/4.jpg",
+        "https://i.dummyjson.com/data/products/4/thumbnail.jpg"
+      ],
+      "createdAt": "2023-10-09T17:25:29.473Z",
+      "id": "6524381122489a838f730d84",
+      "quantity": 1,
+      "userId": "2023-10-01T10:01:46.913Z"
+    }
+  ],
   "orderState": [
     {
       "value": "gujarat",

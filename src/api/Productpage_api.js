@@ -1,8 +1,13 @@
 import axios from "axios";
+import { BACKEND_URI } from "../app/constants";
 
 export const getAllProducts = async() =>{
-    const {data}=await axios.get("http://localhost:8080/products");
-    return data;
+    const {data}=await axios.get(
+        // "http://localhost:8080/products"
+        `${BACKEND_URI}/products`
+        );
+        // console.log(data.products)
+    return data.products;
     
 }
 
